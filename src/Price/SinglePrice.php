@@ -4,12 +4,17 @@
 namespace vbpupil\Price;
 
 
+use vbpupil\Exception\InvalidProductException;
+use vbpupil\Price\Validation\PriceValidationTrait;
+
 /**
  * Class SinglePrice
  * @package vbpupil\Price
  */
 class SinglePrice
 {
+
+    use PriceValidationTrait;
 
     /**
      * @var array
@@ -19,7 +24,7 @@ class SinglePrice
     /**
      * @var int
      */
-    protected $exVat = 0;
+    protected $exVat;
 
     /**
      * @var string
@@ -43,7 +48,7 @@ class SinglePrice
     protected $specialPriceActive = false;
 
     /**
-     * @var
+     * @var string
      */
     protected $specialPriceActiveUntil;
 
@@ -84,17 +89,27 @@ class SinglePrice
             $tmpRequired[$r] = 0;
         }
 
+        $err = '';
+
         //2. verify if value is present
         foreach ($this->required as $r) {
             if (isset($this->{$r})) {
+                $b = $this->{$r};
+
+                $this->validateProductPriceAttribute($r, $this->{$r}, $err);
+
                 unset($tmpRequired[$r]);
             }
         }
 
         //3. moan about it if we have to
+        if($err !== ''){
+            throw new InvalidProductException($err);
+        }
+
         if (!empty($tmpRequired)) {
             $err = implode(', ', array_keys($tmpRequired));
-            throw new \Exception("Missing Required Fields: {$err}");
+            throw new InvalidProductException("Missing Required Fields: {$err}");
         }
     }
 
