@@ -4,7 +4,7 @@
 namespace vbpupil\Price;
 
 
-use vbpupil\Exception\InvalidProductException;
+use vbpupil\Exception\InvalidProductSetupException;
 use vbpupil\Price\Validation\PriceValidationTrait;
 
 /**
@@ -19,7 +19,7 @@ class SinglePrice
     /**
      * @var array
      */
-    protected $required = ['exVat', 'currency', 'vatRate', 'specialPrice', 'specialPriceActive', 'specialPriceActiveUntil'];
+    protected $required = ['exVat', 'currency', 'vatRate', 'specialPriceActive'];
 
     /**
      * @var int
@@ -39,7 +39,7 @@ class SinglePrice
     /**
      * @var int
      */
-    protected $specialPrice = 0;
+    protected $specialPrice;
 
 
     /**
@@ -57,6 +57,13 @@ class SinglePrice
      */
     protected $symbol;
 
+    /**
+     * @var string
+     *
+     * used in timestamp calculations such as when comparing dates to see if special price is still valid
+     */
+    protected $timestampNow;
+
 
     /**
      * SinglePrice constructor.
@@ -66,7 +73,7 @@ class SinglePrice
     public function __construct(array $values)
     {
         if (empty($values)) {
-            throw new \Exception('Required Price Values must be provided');
+            throw new InvalidProductSetupException('Required Price Values must be provided');
         }
 
         foreach ($values as $k => $v) {
@@ -75,10 +82,18 @@ class SinglePrice
             $this->{$methodName}($v);
         }
 
+        if (isset($this->specialPriceActive) && $this->specialPriceActive) {
+            $this->required[] = 'specialPriceActiveUntil';
+            $this->required[] = 'specialPrice';
+        }
+
         $this->verifyRequired();
+        $this->timestampNow = strtotime('now');
     }
 
     /**
+     * lets test that we have what we need to proceed
+     *
      * @throws \Exception
      */
     public function verifyRequired()
@@ -94,8 +109,6 @@ class SinglePrice
         //2. verify if value is present
         foreach ($this->required as $r) {
             if (isset($this->{$r})) {
-                $b = $this->{$r};
-
                 $this->validateProductPriceAttribute($r, $this->{$r}, $err);
 
                 unset($tmpRequired[$r]);
@@ -103,13 +116,13 @@ class SinglePrice
         }
 
         //3. moan about it if we have to
-        if($err !== ''){
-            throw new InvalidProductException($err);
+        if ($err !== '') {
+            throw new InvalidProductSetupException($err);
         }
 
         if (!empty($tmpRequired)) {
             $err = implode(', ', array_keys($tmpRequired));
-            throw new InvalidProductException("Missing Required Fields: {$err}");
+            throw new InvalidProductSetupException("Missing Required Fields: {$err}");
         }
     }
 
@@ -121,13 +134,20 @@ class SinglePrice
      */
     public function getPrice(bool $includingVat = false, bool $convertToFloat = true)
     {
-        if (
-            (isset($this->specialPrice) && $this->specialPrice > 0) &&
-            (isset($this->specialPriceActive) && 1 == 1) &&
-            (isset($this->specialPriceActiveUntil) && 1 == 1)
-        ) {
-            $price = $this->getSpecialPrice();
-        } else {
+
+        //check to see if qualifies for the special price
+        if (isset($this->specialPriceActive) && $this->specialPriceActive) {
+            $specialPriceExpiry = strtotime($this->specialPriceActiveUntil);
+
+            if (
+                (isset($specialPriceExpiry) && ($specialPriceExpiry >= $this->timestampNow )) &&
+                (isset($this->specialPrice) && $this->specialPrice > 0)
+            ) {
+                $price = $this->getSpecialPrice();
+            }
+        }
+
+        if(is_null($price)){
             $price = $this->getExVat();
         }
 
@@ -145,7 +165,8 @@ class SinglePrice
     /**
      * @return int
      */
-    public function getExVat(): int
+    public
+    function getExVat(): int
     {
         return $this->exVat;
     }
@@ -153,9 +174,15 @@ class SinglePrice
     /**
      * @param int $exVat
      * @return SinglePrice
+     * @throws InvalidProductSetupException
      */
-    public function setExVat(int $exVat): SinglePrice
+    public
+    function setExVat($exVat): SinglePrice
     {
+        if (is_string($exVat) || is_float($exVat)) {
+            throw new InvalidProductSetupException('ExVat price must be an INT');
+        }
+
         $this->exVat = $exVat;
         return $this;
     }
@@ -163,7 +190,8 @@ class SinglePrice
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public
+    function getCurrency(): string
     {
         return $this->currency;
     }
@@ -174,7 +202,8 @@ class SinglePrice
      * @param string $currency
      * @return SinglePrice
      */
-    public function setCurrency(string $currency): SinglePrice
+    public
+    function setCurrency(string $currency): SinglePrice
     {
         $this->currency = $currency;
 
@@ -186,7 +215,8 @@ class SinglePrice
     /**
      * @return int
      */
-    public function getVatRate(): int
+    public
+    function getVatRate(): int
     {
         return $this->vatRate;
     }
@@ -195,7 +225,8 @@ class SinglePrice
      * @param int $vatRate
      * @return SinglePrice
      */
-    public function setVatRate(int $vatRate): SinglePrice
+    public
+    function setVatRate(int $vatRate): SinglePrice
     {
         $this->vatRate = $vatRate;
         return $this;
@@ -204,7 +235,8 @@ class SinglePrice
     /**
      * @return int
      */
-    public function getSpecialPrice(): int
+    public
+    function getSpecialPrice(): int
     {
         return $this->specialPrice;
     }
@@ -213,7 +245,8 @@ class SinglePrice
      * @param int $specialPrice
      * @return SinglePrice
      */
-    public function setSpecialPrice(int $specialPrice): SinglePrice
+    public
+    function setSpecialPrice(int $specialPrice): SinglePrice
     {
         $this->specialPrice = $specialPrice;
         return $this;
@@ -222,7 +255,8 @@ class SinglePrice
     /**
      * @return bool
      */
-    public function isSpecialPriceActive(): bool
+    public
+    function isSpecialPriceActive(): bool
     {
         return $this->specialPriceActive;
     }
@@ -231,7 +265,8 @@ class SinglePrice
      * @param bool $specialPriceActive
      * @return SinglePrice
      */
-    public function setSpecialPriceActive(bool $specialPriceActive): SinglePrice
+    public
+    function setSpecialPriceActive(bool $specialPriceActive): SinglePrice
     {
         $this->specialPriceActive = $specialPriceActive;
         return $this;
@@ -240,7 +275,8 @@ class SinglePrice
     /**
      * @return mixed
      */
-    public function getSpecialPriceActiveUntil()
+    public
+    function getSpecialPriceActiveUntil()
     {
         return $this->specialPriceActiveUntil;
     }
@@ -249,7 +285,8 @@ class SinglePrice
      * @param mixed $specialPriceActiveUntil
      * @return SinglePrice
      */
-    public function setSpecialPriceActiveUntil($specialPriceActiveUntil)
+    public
+    function setSpecialPriceActiveUntil($specialPriceActiveUntil)
     {
         $this->specialPriceActiveUntil = $specialPriceActiveUntil;
         return $this;
@@ -258,7 +295,8 @@ class SinglePrice
     /**
      * @return string
      */
-    public function getSymbol(): string
+    public
+    function getSymbol(): string
     {
         return $this->symbol;
     }
@@ -267,7 +305,8 @@ class SinglePrice
      * @param string $symbol
      * @return SinglePrice
      */
-    public function setSymbol(string $symbol): SinglePrice
+    public
+    function setSymbol(string $symbol): SinglePrice
     {
         switch ($symbol) {
             case 'GBP':
