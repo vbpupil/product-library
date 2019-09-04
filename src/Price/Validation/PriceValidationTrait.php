@@ -26,17 +26,6 @@ trait PriceValidationTrait
                     $errLog .= "Invalid {$type} Supplied - must be in the format: 2019-01-01 11:42:00<br>";
                 }
                 break;
-//            case 'specialPriceActive':
-//                if (!is_bool(boolval($value))) {
-//                    $errLog .= "Invalid {$type} - must be a Boolean<br>";
-//                }
-//                break;
-//            case 'exVat':
-//                $value=intval($value);
-//                if (!is_int($value)) {
-//                    $errLog .= "Invalid {$type} - must be a Integer<br>";
-//                }
-//                break;
         }
     }
 }

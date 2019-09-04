@@ -1,16 +1,19 @@
 ## Quality Assurance
 
-![PHP 5.6](https://img.shields.io/badge/PHP-5.6-blue.svg)
+![PHP 7.2](https://img.shields.io/badge/PHP-7.2-blue.svg)
 [![Build Status](https://travis-ci.org/vbpupil/product.svg?branch=master)](https://travis-ci.org/vbpupil/product)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 # Base Product
 
 ## What?
-Base product class which return the basis of what a product object is at its core.
+Product Library which will help manage a Product, its Variations and their Prices (Single price aswell as a Price Matrix). It will also **if given sufficient data**
+will review special price info and hand back the appropriate price.
+
+
 
 ## Why?
-This class will form the absolute minimum for what a product is and should be used as the root to build more complex products on top.
+This library is the basis for what is required to manage your products. It should be used as the basis for more complex products.
 
 ## How?
 ```php

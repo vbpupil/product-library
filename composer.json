@@ -1,6 +1,6 @@
 {
   "name": "vbpupil/product",
-  "description": "Base product class",
+  "description": "Product Library",
   "license": "MIT",
   "authors": [
     {
@@ -14,7 +14,9 @@
     }
   },
   "autoload-dev": {
-    "test\\vbpupil\\": "test/src"
+    "psr-4": {
+      "test\\vbpupil\\": "test/src"
+    }
   },
   "require": {
     "php": ">=7.2",
