@@ -140,4 +140,52 @@ Special Price Active: true<br>
 *******************************',
                 $p->toString());
     }
+
+    public function testSettingExVatWithIncorrectFormat()
+    {
+        try {
+            $p = new SinglePrice([
+                'vatRate' => 20,
+                'exVat' => '1200',
+                'currency' => 'GBP',
+                'specialPriceActive' => true,
+                'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+                'specialPrice' => 500
+            ]);
+        } catch (InvalidProductSetupException $e) {
+            $this->assertEquals('ExVat price must be an INT', $e->getMessage());
+        }
+
+        try {
+            $p = new SinglePrice([
+                'vatRate' => 20,
+                'exVat' => 12.00,
+                'currency' => 'GBP',
+                'specialPriceActive' => true,
+                'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+                'specialPrice' => 500
+            ]);
+        } catch (InvalidProductSetupException $e) {
+            $this->assertEquals('ExVat price must be an INT', $e->getMessage());
+        }
+    }
+
+    public function testGettingVariousVars()
+    {
+            $p = new SinglePrice([
+                'vatRate' => 20,
+                'exVat' => 1200,
+                'currency' => 'GBP',
+                'specialPriceActive' => true,
+                'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+                'specialPrice' => 500
+            ]);
+
+            $this->assertEquals('2070-09-09 11:41:00', $p->getSpecialPriceActiveUntil());
+            $this->assertEquals('&pound;', $p->getSymbol());
+            $this->assertEquals(500, $p->getSpecialPrice());
+            $this->assertEquals(20, $p->getVatRate());
+            $this->assertEquals(1200, $p->getExVat());
+            $this->assertEquals('GBP', $p->getCurrency());
+    }
 }

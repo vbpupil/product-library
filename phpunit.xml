@@ -21,4 +21,16 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <logging>
+        <log type="coverage-html" target="./Report" lowUpperBound="35"
+             highLowerBound="70"/>
+        <!--<log type="coverage-clover" target="./Reports/coverage.xml"/>-->
+        <!--<log type="coverage-php" target="./Reports/coverage.serialized"/>-->
+        <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>-->
+        <!--<log type="junit" target="./Reports/logfile.xml"/>-->
+        <!--<log type="testdox-html" target="./Reports/testdox.html"/>-->
+        <!--<log type="testdox-text" target="./Reports/testdox.txt"/>-->
+    </logging>
+
 </phpunit>
