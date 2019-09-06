@@ -1,15 +1,11 @@
 ## Quality Assurance
 
 ![PHP 7.2](https://img.shields.io/badge/PHP-7.2-blue.svg)
-[![Build Status](https://travis-ci.org/vbpupil/product.svg?branch=master)](https://travis-ci.org/vbpupil/product)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# A Simple Collection Library
-Here we have a simple Collection library which helps to store your objects in a way that is convenient as well as offering an easy way to interrogate.
-
+# Product Library
 A Product Object can have many components based on how complicated your requirements are. Below outlines the general configurations:
 
-### Simple Simple Product - Without Prices
+### Simple Product - Without Prices
 A SimpleProduct does NOT have any prices. Below shows how a SimpleProduct can be initiated:
 
 ```php
