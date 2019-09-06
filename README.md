@@ -4,31 +4,39 @@
 [![Build Status](https://travis-ci.org/vbpupil/product.svg?branch=master)](https://travis-ci.org/vbpupil/product)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# Base Product
+# A Simple Collection Library
+Here we have a simple Collection library which helps to store your objects in a way that is convenient as well as offering an easy way to interrogate.
 
-## What?
-Product Library which will help manage a Product, its Variations and their Prices (Single price aswell as a Price Matrix). It will also **if given sufficient data**
-will review special price info and hand back the appropriate price.
+A Product Object can have many components based on how complicated your requirements are. Below outlines the general configurations:
 
+### Simple Simple Product - Without Prices
+A SimpleProduct does NOT have any prices. Below shows how a SimpleProduct can be initiated:
 
-
-## Why?
-This library is the basis for what is required to manage your products. It should be used as the basis for more complex products.
-
-## How?
 ```php
-use vbpupil\Product\Product;
+$sp = new SimpleProduct(
+    'Iphone X',
+    new Collection()
+);
 
-$ball = new Product('ball');
-$ball
-    ->setId(176)
-    ->setDescription('intro','This ball is amazing!')
-    ->setDescription('short','I am a short description.')
-    
-echo $ball->getName();
-echo $ball->getId();
-echo $ball->getDescription('intro');
-echo $ball->getDescription('short');
+$sp->setLive(true);
 
-$descriptions = $ball->getDescription(); //array of all descriptions returned
+$sp->setDescription(
+    '<p>The iPhone X, pronounced "iPhone 10," was introduced at Apple\'s September 2017 event as a classic "One more thing..." addition to the iPhone 8 and 8 Plus product lineup. The iPhone X has since been replaced by the iPhone XR, iPhone XS, and iPhone XS Max, and Apple has discontinued the device to focus on the newer iPhones.</p>
+<p>Apple\'s aim with the iPhone X was to create an iPhone that\'s all display, blurring the line between physical object and experience. The 5.8-inch front screen melts into a highly polished curved-edge stainless steel band encircling a durable all-glass body available in two pearlescent finishes: Space Gray and Silver. Both feature a black front panel.</p>',
+    'long_description');
+``` 
+
+#### Get Description
+
+```php
+echo $sp->getDescription('long_description');
 ```
+
+#### Get Descriptions
+
+```php
+foreach ($sp->getDescriptions() as $desc) {
+    echo $desc;
+}
+```
+
