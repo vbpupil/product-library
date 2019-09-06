@@ -5,6 +5,9 @@ namespace vbpupil\Variation;
 
 
 
+use vbpupil\Exception\InvalidVariationSetupException;
+use vbpupil\Price\PriceInterface;
+
 /**
  * Class SimpleVariation
  * @package vbpupil\Product
@@ -27,25 +30,60 @@ class SimpleVariation
     protected $title;
 
     /**
-     * SimpleVariation constructor.
-     * @param array $required
+     * @var PriceInterface
      */
-    public function __construct($required = [])
+    protected $price;
+
+    /**
+     * SimpleVariation constructor.
+     * @param array $values
+     * @throws \Exception
+     */
+    public function __construct(array $values)
     {
-        if (!empty($required)) {
-            $this->required = $required;
+        if (empty($values)) {
+            throw new InvalidVariationSetupException('Required Values must be provided');
         }
+
+        foreach ($values as $k => $v) {
+            $k = ucfirst($k);
+            $methodName = "set{$k}";
+            $this->{$methodName}($v);
+        }
+
+        $this->verifyRequired();
     }
 
     /**
-     * @throws \Exception
+     *
      */
     public function verifyRequired()
     {
-        foreach ($this->required as $r){
-            if(!isset($this->{$r})){
-                throw new \Exception("Property {$r} is required");
+        //1. create the tmp array
+        $tmpRequired = [];
+        foreach ($this->required as $r) {
+            $tmpRequired[$r] = 0;
+        }
+
+        $err = '';
+
+        //2. verify if value is present
+        foreach ($this->required as $r) {
+            if (isset($this->{$r})) {
+                $this->validateVariantAttribute($r, $this->{$r}, $err);
+
+                unset($tmpRequired[$r]);
             }
+        }
+
+        //3. moan about it if we have to
+        if ($err !== '') {
+            throw new InvalidVariationSetupException($err);
+        }
+
+        if (!empty($tmpRequired)) {
+            $err = implode(', ', array_keys($tmpRequired));
+            throw new InvalidVariationSetupException("Missing Required Fields: {$err}");
         }
     }
 
@@ -91,6 +129,24 @@ class SimpleVariation
     }
 
 
+    /**
+     * @param PriceInterface $price
+     */
+    public function setPrice(PriceInterface $price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @param bool $includingVat
+     * @param bool $convertToFloat
+     * @param int $qty
+     * @return mixed
+     */
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
+    {
+        return $this->price->getPrice($includingVat, $convertToFloat, $qty);
+    }
 
 
 }

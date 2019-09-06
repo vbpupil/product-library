@@ -12,7 +12,7 @@ use vbpupil\Price\Validation\PriceValidationTrait;
  * Class SinglePrice
  * @package vbpupil\Price
  */
-class SinglePrice
+class SinglePrice implements PriceInterface
 {
 
     use PriceValidationTrait, PriceTrait;
@@ -133,10 +133,11 @@ class SinglePrice
      * filters down what we know about he price and throws out the final price
      * @param bool $includingVat
      * @param bool $convertToFloat
-     * @return float|int
+     * @param int $qty
+     * @return float|int|null
      * @throws \Exception
      */
-    public function getPrice(bool $includingVat = false, bool $convertToFloat = true)
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
     {
         $price = null;
 

@@ -10,6 +10,7 @@
 namespace test\vbpupil\Product;
 
 use PHPUnit\Framework\TestCase;
+use Vbpupil\Collection\Collection;
 use vbpupil\Product\Product;
 
 class ProductTest extends TestCase
@@ -20,7 +21,10 @@ class ProductTest extends TestCase
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new Product('ball');
+            $this->sut = new Product(
+                'ball',
+                new Collection()
+            );
             $this->assertTrue($this->sut instanceof Product);
 
 
