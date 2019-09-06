@@ -2,14 +2,14 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /var/www/html/productLibrary/src/Variation</title>
+  <title>Dashboard for /var/www/html/productLibrary/src/Product/Validation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/nv.d3.min.css" rel="stylesheet">
-  <link href="../css/style.css" rel="stylesheet">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
   <!--[if lt IE 9]>
-  <script src="../js/html5shiv.min.js"></script>
-  <script src="../js/respond.min.js"></script>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
   <![endif]-->
  </head>
  <body>
@@ -18,8 +18,9 @@
     <div class="row">
      <div class="col-md-12">
       <ol class="breadcrumb">
-        <li><a href="../index.html">/var/www/html/productLibrary/src</a></li>
-        <li><a href="index.html">Variation</a></li>
+        <li><a href="../../index.html">/var/www/html/productLibrary/src</a></li>
+        <li><a href="../index.html">Product</a></li>
+        <li><a href="index.html">Validation</a></li>
         <li class="active">(Dashboard)</li>
 
       </ol>
@@ -59,7 +60,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="SimpleVariation.php.html#15">SimpleVariation</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VariantValidationTrait.php.html#13">PriceValidationTrait</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -76,7 +77,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="SimpleVariation.php.html#15">SimpleVariation</a></td><td class="text-right">306</td></tr>
+       <tr><td><a href="VariantValidationTrait.php.html#13">PriceValidationTrait</a></td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -114,14 +115,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="SimpleVariation.php.html#42"><abbr title="SimpleVariation::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#60"><abbr title="SimpleVariation::verifyRequired">verifyRequired</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#93"><abbr title="SimpleVariation::getProductCode">getProductCode</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#103"><abbr title="SimpleVariation::setProductCode">setProductCode</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#116"><abbr title="SimpleVariation::getTitle">getTitle</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#125"><abbr title="SimpleVariation::setTitle">setTitle</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#135"><abbr title="SimpleVariation::setPrice">setPrice</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#146"><abbr title="SimpleVariation::getPrice">getPrice</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="VariantValidationTrait.php.html#21"><abbr title="PriceValidationTrait::validateVariantAttribute">validateVariantAttribute</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -138,9 +132,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="SimpleVariation.php.html#60"><abbr title="SimpleVariation::verifyRequired">verifyRequired</abbr></a></td><td class="text-right">42</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#42"><abbr title="SimpleVariation::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
-       <tr><td><a href="SimpleVariation.php.html#103"><abbr title="SimpleVariation::setProductCode">setProductCode</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="VariantValidationTrait.php.html#21"><abbr title="PriceValidationTrait::validateVariantAttribute">validateVariantAttribute</abbr></a></td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -154,11 +146,11 @@
     </p>
    </footer>
   </div>
-  <script src="../js/jquery.min.js" type="text/javascript"></script>
-  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="../js/holder.min.js" type="text/javascript"></script>
-  <script src="../js/d3.min.js" type="text/javascript"></script>
-  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.min.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
   <script type="text/javascript">
 $(document).ready(function() {
   nv.addGraph(function() {
@@ -189,7 +181,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([8,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -239,7 +231,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[0,17,"<a href=\"SimpleVariation.php.html#15\">SimpleVariation<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[0,3,"<a href=\"VariantValidationTrait.php.html#13\">PriceValidationTrait<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -263,7 +255,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[0,3,"<a href=\"SimpleVariation.php.html#42\">SimpleVariation::__construct<\/a>"],[0,6,"<a href=\"SimpleVariation.php.html#60\">SimpleVariation::verifyRequired<\/a>"],[0,1,"<a href=\"SimpleVariation.php.html#93\">SimpleVariation::getProductCode<\/a>"],[0,3,"<a href=\"SimpleVariation.php.html#103\">SimpleVariation::setProductCode<\/a>"],[0,1,"<a href=\"SimpleVariation.php.html#116\">SimpleVariation::getTitle<\/a>"],[0,1,"<a href=\"SimpleVariation.php.html#125\">SimpleVariation::setTitle<\/a>"],[0,1,"<a href=\"SimpleVariation.php.html#135\">SimpleVariation::setPrice<\/a>"],[0,1,"<a href=\"SimpleVariation.php.html#146\">SimpleVariation::getPrice<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[0,3,"<a href=\"VariantValidationTrait.php.html#21\">PriceValidationTrait::validateVariantAttribute<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

@@ -23,8 +23,7 @@
     </filter>
 
     <logging>
-        <log type="coverage-html" target="./Report" lowUpperBound="35"
-             highLowerBound="70"/>
+        <log type="coverage-html" target="./Report" lowUpperBound="35" highLowerBound="70"/>
         <!--<log type="coverage-clover" target="./Reports/coverage.xml"/>-->
         <!--<log type="coverage-php" target="./Reports/coverage.serialized"/>-->
         <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>-->
