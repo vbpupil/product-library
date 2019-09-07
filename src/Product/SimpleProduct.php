@@ -18,7 +18,7 @@ class SimpleProduct
     /**
      * @var Collection
      */
-    protected $descriptions;
+    public $descriptions;
 
     /**
      * @var bool
@@ -62,14 +62,6 @@ class SimpleProduct
     }
 
     /**
-     * @return array
-     */
-    public function getDescriptions()
-    {
-        return $this->descriptions->getItems();
-    }
-
-    /**
      * @param Collection $descriptions
      * @return SimpleProduct
      */
@@ -77,32 +69,6 @@ class SimpleProduct
     {
         $this->descriptions = $descriptions;
         return $this;
-    }
-
-    /**
-     * @param $obj
-     * @param null $key
-     */
-    public function setDescription($obj, $key = null)
-    {
-        try {
-            $this->descriptions->addItem($obj, $key);
-        } catch (KeyInUseException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    /**
-     * @param null $key
-     * @return mixed
-     */
-    public function getDescription($key = null)
-    {
-        try {
-            return $this->descriptions->getItem($key);
-        } catch (CollectionException $e) {
-            echo $e->getMessage();
-        }
     }
 
     /**

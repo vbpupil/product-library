@@ -13,16 +13,16 @@ $sp = new SimpleProduct(
 
 $sp->setLive(true);
 
-$sp->setDescription(
+$sp->descriptions->addItem(
     '<p>The iPhone X, pronounced "iPhone 10," was introduced at Apple\'s September 2017 event as a classic "One more thing..." addition to the iPhone 8 and 8 Plus product lineup. The iPhone X has since been replaced by the iPhone XR, iPhone XS, and iPhone XS Max, and Apple has discontinued the device to focus on the newer iPhones.</p>
 <p>Apple\'s aim with the iPhone X was to create an iPhone that\'s all display, blurring the line between physical object and experience. The 5.8-inch front screen melts into a highly polished curved-edge stainless steel band encircling a durable all-glass body available in two pearlescent finishes: Space Gray and Silver. Both feature a black front panel.</p>',
     'long_description');
 
-$sp->setDescription(
+$sp->descriptions->addItem(
     '<p>The iPhone X was Apple\'s flagship 10th anniversary iPhone featuring a 5.8-inch OLED display, facial recognition and 3D camera functionality, a glass body, and an A11 Bionic processor. Launched November 3, 2017, discontinued with the launch of the iPhone XR, XS, and XS Max.</p>',
     'short_description');
 
-foreach ($sp->getDescriptions() as $desc) {
+foreach ($sp->descriptions->getItems() as $desc) {
     echo $desc;
 }
 

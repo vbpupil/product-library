@@ -34,5 +34,31 @@ class ProductTest extends TestCase
         }
     }
 
+    public function testGetAndSetName()
+    {
+        $this->sut = new SimpleProduct(
+            'ball',
+            new Collection()
+        );
+
+        $this->assertEquals('ball', $this->sut->getName());
+
+        $this->sut->setName('Bike');
+        $this->assertEquals('Bike', $this->sut->getName());
+    }
+
+    public function testLive()
+    {
+        $this->sut = new SimpleProduct(
+            'ball',
+            new Collection()
+        );
+
+        $this->assertEquals(false, $this->sut->isLive());
+
+        $this->sut->setLive(true);
+        $this->assertEquals(true, $this->sut->isLive());
+    }
+
 
 }
