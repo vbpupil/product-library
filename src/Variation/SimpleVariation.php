@@ -7,6 +7,7 @@ namespace vbpupil\Variation;
 
 use vbpupil\Exception\InvalidVariationSetupException;
 use vbpupil\Price\PriceInterface;
+use vbpupil\Variation\Validation\PriceValidationTrait;
 
 /**
  * Class SimpleVariation
@@ -14,6 +15,7 @@ use vbpupil\Price\PriceInterface;
  */
 class SimpleVariation
 {
+    use PriceValidationTrait;
 
     /**
      * @var array
@@ -33,6 +35,7 @@ class SimpleVariation
      * @var PriceInterface
      */
     protected $price;
+
 
     /**
      * SimpleVariation constructor.
@@ -55,7 +58,7 @@ class SimpleVariation
     }
 
     /**
-     *
+     *lets loop through the attributes we have and test that they match the $required array;
      */
     public function verifyRequired()
     {
@@ -143,7 +146,7 @@ class SimpleVariation
      * @param int $qty
      * @return mixed
      */
-    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
+    public function getPrice(bool $includingVat, bool $convertToFloat = true, int $qty = 1)
     {
         return $this->price->getPrice($includingVat, $convertToFloat, $qty);
     }

@@ -1,0 +1,4 @@
+set product image in simple product
+
+set variation images
+

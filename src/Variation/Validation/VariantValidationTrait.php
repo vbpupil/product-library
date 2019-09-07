@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vbpupil\Price\Validation;
+namespace vbpupil\Variation\Validation;
 
 
 /**
