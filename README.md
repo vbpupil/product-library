@@ -9,30 +9,41 @@ A Product Object can have many components based on how complicated your requirem
 A SimpleProduct does NOT have any prices. Below shows how a SimpleProduct can be initiated:
 
 ```php
-$sp = new SimpleProduct(
+$prod = new SimpleProduct(
     'Iphone X',
     new Collection()
 );
 
-$sp->setLive(true);
+$prod->setLive(true);
 
-$sp->setDescription(
-    '<p>The iPhone X, pronounced "iPhone 10," was introduced at Apple\'s September 2017 event as a classic "One more thing..." addition to the iPhone 8 and 8 Plus product lineup. The iPhone X has since been replaced by the iPhone XR, iPhone XS, and iPhone XS Max, and Apple has discontinued the device to focus on the newer iPhones.</p>
-<p>Apple\'s aim with the iPhone X was to create an iPhone that\'s all display, blurring the line between physical object and experience. The 5.8-inch front screen melts into a highly polished curved-edge stainless steel band encircling a durable all-glass body available in two pearlescent finishes: Space Gray and Silver. Both feature a black front panel.</p>',
+$prod->setDescription(
+    '<p>The iPhone X, pronounced "iPhone 10," was introduced at Apple\'s September 2017 event as a classic "One more thing...".</p>',
     'long_description');
 ``` 
 
 #### Get Description
 
 ```php
-echo $sp->getDescription('long_description');
+echo $prod->getItem('long_description');
 ```
 
 #### Get Descriptions
 
 ```php
-foreach ($sp->getDescriptions() as $desc) {
+foreach ($prod->getItems() as $desc) {
     echo $desc;
 }
 ```
 
+### General Product
+On the face of it a General Product is the same as a Simple Product except it has a concept of Variations which itself offers some interesting additions.
+
+To add an empty Collection:
+
+```php
+$prod->setVariations(
+        new Collection()
+    );
+    ```
+
+Once you have created the Collection simply use it as you would any other Collection object (the above descriptions functionality in Simple Product uses the same functionality).

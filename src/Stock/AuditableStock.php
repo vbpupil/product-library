@@ -1,0 +1,89 @@
+<?php
+
+
+/**
+ * AuditableStock.php.
+ * Version: 1.0.0 (09/09/19)
+ * Copyright: Freetimers Internet
+ * Author:   Dean Haines
+ */
+
+namespace vbpupil\Stock;
+
+use Vbpupil\Collection\Collection;
+
+
+/**
+ * Class AuditableStock
+ * @package vbpupil\Stock
+ */
+class AuditableStock extends SimpleStock
+{
+    /**
+     * @var Collection
+     */
+    protected $audits;
+
+
+    /**
+     * @var int
+     */
+    protected $verifiedStockFigure;
+
+
+    /**
+     * AuditableStock constructor.
+     * @param int $stock
+     * @param Collection $audits
+     */
+    public function __construct(int $stock, Collection $audits)
+    {
+        parent::__construct($stock);
+        $this->audits = $audits;
+    }
+
+
+    /**
+     * @param $obj
+     * @param null $key
+     * @return AuditableStock
+     * @throws \Vbpupil\Collection\KeyInUseException
+     */
+    public function addItem($obj, $key = null):AuditableStock
+    {
+        if(!is_a($obj, Auditable::class)){
+            throw new \Exception('Incompatible type, Must be of Type Auditable');
+        }
+
+        $this->audits->addItem($obj, $key);
+
+        return $this;
+    }
+
+
+    /**
+     *
+     */
+    public function audit()
+    {
+        /*
+        1. get the opening stock figure
+        2. loop though all audits which includes book in, book out, stock takes figures accounted for etc and returns
+        a story of: how many on order, how many in stock how many being sold how many are taken already etc
+        */
+        foreach($this->audits->getItems() as $a){
+            switch($a->getDirection()){
+                case 'IN':
+                    $tmpSTock = ($a->getQty());
+                    $this->verifiedStockFigure += $tmpSTock;
+                    break;
+                case 'OUT':
+                    $tmpSTock = ($a->getQty());
+                    $this->verifiedStockFigure -= $tmpSTock;
+                    break;
+            }
+        }
+
+
+    }
+}
