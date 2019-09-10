@@ -85,5 +85,13 @@ class Auditable
         return $this->direction;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
 
 }
