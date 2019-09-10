@@ -4,6 +4,7 @@ use Vbpupil\Collection\Collection;
 use vbpupil\Product\GeneralProduct;
 use vbpupil\Product\SimpleProduct;
 use vbpupil\Stock\Auditable;
+use vbpupil\Stock\AuditableAssociatedDocumentType;
 use vbpupil\Stock\AuditableStock;
 use vbpupil\Stock\AuditableType;
 
@@ -16,28 +17,26 @@ try {
 
     $as->addItem(
         new Auditable(
-            5,
-            AuditableType::BOOK_IN(),
-            'booked in from Stock X',
-            '2019-08-22 14:42:20'
-        )
-    )->addItem(
-        new Auditable(
-            1,
-            AuditableType::BOOK_OUT(),
-            'For Internal use',
-            '2019-08-22 14:42:20'
+            2,
+            AuditableType::SALE(),
+            'Sold',
+            '2019-08-22 14:42:20',
+            AuditableAssociatedDocumentType::SALES_ORDER(),
+            115
         )
     )->addItem(
         new Auditable(
             2,
-            AuditableType::REJECTED(),
-            'Damaged stock',
-            '2019-08-22 14:42:20'
+            AuditableType::RETURN_DAMAGED(),
+            'Surplus to requirements',
+            '2019-08-22 14:42:20',
+            null,
+            null
         )
     );
 
     $as->audit();
+    echo $as->auditToString();
 
 } catch (Exception $e) {
     echo $e->getMessage();

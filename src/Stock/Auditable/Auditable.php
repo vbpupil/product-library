@@ -20,6 +20,7 @@ use vbpupil\Traits\DateTrait;
 class Auditable
 {
     use DateTrait;
+
     /**
      * @var int
      */
@@ -41,14 +42,31 @@ class Auditable
     protected $direction;
 
     /**
+     * @var string
+     */
+    protected $date;
+
+    /**
+     * @var AuditableAssociatedDocumentType|null
+     */
+    protected $associatedDocType;
+
+    /**
+     * @var int|null
+     */
+    protected $associatedDocID;
+
+    /**
      * Auditable constructor.
-     * @param int $qty
-     * @param AuditableType $type
-     * @param string $description
-     * @param $date
+     * @param int $qty - the amount being booked in/out
+     * @param AuditableType $type - the type of transaction book in/book out etc
+     * @param string $description - any additional info offered by the end user
+     * @param $date - the date and time of the event
+     * @param AuditableAssociatedDocumentType|null $associatedDocType - the type of document supporting this transaction ie SALES ORDER this info is optional
+     * @param int|null $associatedDocID - the ID of the SALES ORDER this info is optional
      * @throws \Exception
      */
-    public function __construct(int $qty, AuditableType $type, string $description = '', $date)
+    public function __construct(int $qty, AuditableType $type, string $description = '', $date, ?AuditableAssociatedDocumentType $associatedDocType, ?int $associatedDocID)
     {
         if (!$this->isDateTimeString($date)) {
             throw new \Exception('Invalid Date Format - requires 2019-01-01 14:22:00');
@@ -56,9 +74,43 @@ class Auditable
 
         $this->qty = $qty;
         $this->type = $type->getKey();
-        $this->direction = $type->getValue();
+
+        $this->direction = $this->decideDirection();
+
         $this->description = $description;
         $this->date = $date;
+
+        if ($associatedDocType) {
+            $this->associatedDocType = $associatedDocType->getKey();
+        }
+
+        if ($associatedDocID) {
+            $this->associatedDocID = $associatedDocID;
+        }
+    }
+
+    protected function decideDirection()
+    {
+        switch ($this->type) {
+            case 'BOOK_IN':
+            case 'RETURN_NOT_REQUIRED':
+                return 'IN';
+                break;
+            case 'SALE':
+            case 'BOOK_OUT':
+                return 'OUT';
+                break;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeValue(): string
+    {
+        return $this->type;
     }
 
     /**
@@ -93,5 +145,20 @@ class Auditable
         return $this->date;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getAssociatedDocType(): ?string
+    {
+        return $this->associatedDocType;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAssociatedDocID(): ?int
+    {
+        return $this->associatedDocID;
+    }
 
 }

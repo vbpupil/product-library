@@ -29,6 +29,8 @@ class SimpleStock
     }
 
     /**
+     * returns the current stock qty
+     *
      * @return int
      */
     public function getStock(): int
@@ -37,6 +39,8 @@ class SimpleStock
     }
 
     /**
+     * sets the current stock qty
+     *
      * @param int $stock
      * @return $this
      */

@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * AuditableStock.php.
  * Version: 1.0.0 (09/09/19)
@@ -49,9 +47,9 @@ class AuditableStock extends SimpleStock
      * @return AuditableStock
      * @throws \Vbpupil\Collection\KeyInUseException
      */
-    public function addItem($obj, $key = null):AuditableStock
+    public function addItem($obj, $key = null): AuditableStock
     {
-        if(!is_a($obj, Auditable::class)){
+        if (!is_a($obj, Auditable::class)) {
             throw new \Exception('Incompatible type, Must be of Type Auditable');
         }
 
@@ -62,7 +60,8 @@ class AuditableStock extends SimpleStock
 
 
     /**
-     *
+     * this will loop through the entire history of the products audit logs and return a true breakdown of stock availability
+     * could be heavy so really only be used to sure up stored stock figures and probably best not to run all of the time.
      */
     public function audit()
     {
@@ -71,8 +70,8 @@ class AuditableStock extends SimpleStock
         2. loop though all audits which includes book in, book out, stock takes figures accounted for etc and returns
         a story of: how many on order, how many in stock how many being sold how many are taken already etc
         */
-        foreach($this->audits->getItems() as $a){
-            switch($a->getDirection()){
+        foreach ($this->audits->getItems() as $a) {
+            switch ($a->getDirection()) {
                 case 'IN':
                     $tmpSTock = ($a->getQty());
                     $this->verifiedStockFigure += $tmpSTock;
@@ -83,7 +82,29 @@ class AuditableStock extends SimpleStock
                     break;
             }
         }
-
-
     }
+
+    /**
+     *
+     */
+    public function auditToString()
+    {
+        $str = '';
+
+        foreach ($this->audits->getItems() as $a) {
+            $str .= <<<EOD
+Type: {$a->getTypeValue()}<br>
+Qty: {$a->getQty()}<br>
+Description: {$a->getDescription()}<br>
+Direction: {$a->getDirection()}<br>
+Associated Document Type: {$a->getAssociatedDocType()}<br>
+Associated Document ID: {$a->getAssociatedDocID()}<br><br>
+********************<br><br>
+EOD;
+        }
+
+        return $str;
+    }
+
+
 }

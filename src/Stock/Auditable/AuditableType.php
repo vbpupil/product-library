@@ -12,9 +12,11 @@ namespace vbpupil\Stock;
 use MyCLabs\Enum\Enum;
 
 /**
+ * an AuditableType is the reason for the stock movement change so book in/out, return of damaged stock etc etc.
+ *
+ * @method static self SALE()
  * @method static self BOOK_IN()
  * @method static self BOOK_OUT()
- * @method static self REJECTED()
  * @method static self RETURN_FAULTY()
  * @method static self RETURN_DAMAGED()
  * @method static self RETURN_NOT_REQUIRED()
@@ -22,13 +24,10 @@ use MyCLabs\Enum\Enum;
 class AuditableType extends Enum
 {
     //PLACE BACK INTO STOCK
-    private const BOOK_IN = 'IN';
-    private const RETURN_NOT_REQUIRED = 'IN';
-
-    private const BOOK_OUT = 'OUT';
-    private const REJECTED = 'OUT';
-
-    //NOT PLACED BACK INTO STOCK
-    private const RETURN_FAULTY = '';
-    private const RETURN_DAMAGED = '';
+    private const SALE = 'SALE'; //sold to customer
+    private const BOOK_IN = 'BOOK_IN'; //booked in from supplier
+    private const BOOK_OUT = 'BOOK_OUT'; //booked out
+    private const RETURN_FAULTY = 'RETURN_FAULTY'; //customer returned - faulty item
+    private const RETURN_DAMAGED = 'RETURN_DAMAGED'; //customer returned - damaged item
+    private const RETURN_NOT_REQUIRED = 'RETURN_NOT_REQUIRED'; //surplus to requirements
 }
