@@ -89,6 +89,9 @@ class Auditable
         }
     }
 
+    /**
+     * @return string
+     */
     protected function decideDirection()
     {
         switch ($this->type) {
@@ -100,9 +103,10 @@ class Auditable
             case 'BOOK_OUT':
                 return 'OUT';
                 break;
+            default:
+                return '';
+                break;
         }
-
-        return '';
     }
 
     /**

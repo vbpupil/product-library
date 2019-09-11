@@ -85,7 +85,7 @@ class AuditableStock extends SimpleStock
     }
 
     /**
-     *
+     *loops through an audit list and compiles a text representation of the results
      */
     public function auditToString()
     {
@@ -105,6 +105,15 @@ EOD;
 
         return $str;
     }
+
+    /**
+     * @return int
+     */
+    public function getVerifiedStockFigure(): ?int
+    {
+        return $this->verifiedStockFigure;
+    }
+
 
 
 }
