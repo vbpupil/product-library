@@ -24,7 +24,7 @@ class AuditableStockTest extends TestCase
     public function setUp()
     {
         $this->collection = $this->getMockBuilder(Collection::class)
-            ->disableOriginalConstructor()
+//            ->disableOriginalConstructor()
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
@@ -37,16 +37,8 @@ class AuditableStockTest extends TestCase
 
         $this->auditable = $this->getMockBuilder(Auditable::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getDirection', 'getQty'])
+            ->setMethods(['getDirection', 'getDescription', 'getQty', 'getItems', 'getTypeValue', 'getAssociatedDocType', 'getAssociatedDocID'])
             ->getMock();
-
-        $this->auditable
-            ->expects($this->once())
-            ->method('getItems')
-            ->will($this->returnValue(
-                ''
-                ));
-
 
         $this->collection->addItem(
             $this->auditable
@@ -74,10 +66,69 @@ class AuditableStockTest extends TestCase
     public function testTopStringOutput()
     {
         //ANDREA - THIS IS THE TEST
+        $this->collection
+            ->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue(
+                [$this->auditable]
+            ));
 
+        $this->auditable
+            ->expects($this->once())
+            ->method('getTypeValue')
+            ->will($this->returnValue(
+                'SALE'
+            ));
 
-        var_dump($this->sut->auditToString());
-        $this->assertEquals('', $this->sut->auditToString());
+        $this->auditable
+            ->expects($this->once())
+            ->method('getQty')
+            ->will($this->returnValue(
+                2
+            ));
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getDescription')
+            ->will($this->returnValue(
+                'Sold'
+            ));
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getDirection')
+            ->will($this->returnValue(
+                'OUT'
+            ));
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getAssociatedDocType')
+            ->will($this->returnValue(
+                'SALES_ORDER'
+            ));
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getAssociatedDocID')
+            ->will($this->returnValue(
+                '115'
+            ));
+
+        $expectedOutput = <<<EOD
+Type: SALE<br>
+Qty: 2<br>
+Description: Sold<br>
+Direction: OUT<br>
+Associated Document Type: SALES_ORDER<br>
+Associated Document ID: 115<br><br>
+********************<br><br>
+EOD;
+
+        $this->assertEquals(
+            $expectedOutput,
+            $this->sut->auditToString()
+        );
     }
 
 //    public function testAudit()
