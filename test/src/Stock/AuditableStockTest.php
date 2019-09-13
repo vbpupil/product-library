@@ -25,12 +25,32 @@ class AuditableStockTest extends TestCase
     {
         $this->collection = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
-            ->setMethods(['addItem'])
+            ->setMethods(['addItem', 'getItems'])
             ->getMock();
+
+        $this->collection
+            ->expects($this->once())
+            ->method('addItem')
+            ->will($this->returnValue(
+                ''
+            ));
+
         $this->auditable = $this->getMockBuilder(Auditable::class)
             ->disableOriginalConstructor()
-            ->setMethods(['addItem', 'getDirection', 'getQty'])
+            ->setMethods(['getDirection', 'getQty'])
             ->getMock();
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue(
+                ''
+                ));
+
+
+        $this->collection->addItem(
+            $this->auditable
+        );
 
         $this->sut = new AuditableStock(
             55, $this->collection
@@ -46,14 +66,23 @@ class AuditableStockTest extends TestCase
     {
         try {
             $this->sut->addItem('test');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $this->assertEquals('Incompatible type, Must be of Type Auditable', $e->getMessage());
         }
     }
 
+    public function testTopStringOutput()
+    {
+        //ANDREA - THIS IS THE TEST
+
+
+        var_dump($this->sut->auditToString());
+        $this->assertEquals('', $this->sut->auditToString());
+    }
+
 //    public function testAudit()
 //    {
-        //complicated - need to put a mock audit inside a mock collection
+    //complicated - need to put a mock audit inside a mock collection
 //        $this->auditable
 //            ->expects($this->once())
 //            ->method('getDirection')
