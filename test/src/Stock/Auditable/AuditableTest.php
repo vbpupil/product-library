@@ -27,7 +27,7 @@ class AuditableTest extends TestCase
 
         $this->assocDocType = $this->getMockBuilder(AuditableAssociatedDocumentType::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getKey', 'getAssociatedDocType'])
+            ->setMethods(['getKey','getAssociatedDocType'])
             ->getMock();
     }
 
@@ -53,7 +53,7 @@ class AuditableTest extends TestCase
     {
         $this->assocDocType
             ->expects($this->once())
-            ->method('getAssociatedDocType')
+            ->method('getKey')
             ->will($this->returnValue('SALES_ORDER'))
         ;
 
@@ -66,11 +66,28 @@ class AuditableTest extends TestCase
             155
         );
 
-        echo 'TYPE: '.$autid->getAssociatedDocType();
-
-
         $this->assertEquals(155, $autid->getAssociatedDocID());
-//        $this->assertEquals('SALES_ORDER', $autid->getAssociatedDocType());
+        $this->assertEquals('SALES_ORDER', $autid->getAssociatedDocType());
+    }
+
+    public function testGetTypeValue()
+    {
+        $this->aType
+            ->expects($this->once())
+            ->method('getKey')
+            ->will($this->returnValue('SALE'))
+        ;
+
+        $autid = new Auditable(
+            5,
+            $this->aType,
+            'test desc',
+            '2019-08-22 14:42:24',
+            $this->assocDocType,
+            155
+        );
+
+        $this->assertEquals('SALE', $autid->getTypeValue());
     }
 
     public function testGettingMembers()
