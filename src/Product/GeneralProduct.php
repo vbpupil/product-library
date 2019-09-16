@@ -28,8 +28,4 @@ class GeneralProduct extends SimpleProduct
 
         $this->variations = $variations;
     }
-
-
-
-
 }

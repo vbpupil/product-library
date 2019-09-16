@@ -24,16 +24,9 @@ class AuditableStockTest extends TestCase
     public function setUp()
     {
         $this->collection = $this->getMockBuilder(Collection::class)
-//            ->disableOriginalConstructor()
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->collection
-            ->expects($this->once())
-            ->method('addItem')
-            ->will($this->returnValue(
-                ''
-            ));
 
         $this->auditable = $this->getMockBuilder(Auditable::class)
             ->disableOriginalConstructor()
@@ -65,7 +58,6 @@ class AuditableStockTest extends TestCase
 
     public function testTopStringOutput()
     {
-        //ANDREA - THIS IS THE TEST
         $this->collection
             ->expects($this->once())
             ->method('getItems')
@@ -131,24 +123,73 @@ EOD;
         );
     }
 
-//    public function testAudit()
-//    {
-    //complicated - need to put a mock audit inside a mock collection
-//        $this->auditable
-//            ->expects($this->once())
-//            ->method('getDirection')
-//            ->will($this->returnValue('IN'))
-//        ;
-//
-//        $this->auditable
-//            ->expects($this->once())
-//            ->method('getQty')
-//            ->will($this->returnValue(17))
-//        ;
-//
-//        $this->sut->addItem($this->auditable);
-//        $this->sut->audit();
+    public function testAuditIN()
+    {
+        $this->collection
+            ->expects($this->once())
+            ->method('addItem')
+            ->will($this->returnValue(
+                ''
+            ));
 
-//        $this->assertEquals(17, $this->sut->getVerifiedStockFigure());
-//    }
+        $this->collection
+            ->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue(
+                [$this->auditable]
+            ));
+
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getDirection')
+            ->will($this->returnValue('IN'))
+        ;
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getQty')
+            ->will($this->returnValue(17))
+        ;
+
+        $this->sut->addItem($this->auditable);
+        $this->sut->audit();
+
+        $this->assertEquals(17, $this->sut->getVerifiedStockFigure());
+    }
+
+    public function testAuditOUT()
+    {
+        $this->collection
+            ->expects($this->once())
+            ->method('addItem')
+            ->will($this->returnValue(
+                ''
+            ));
+
+        $this->collection
+            ->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue(
+                [$this->auditable]
+            ));
+
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getDirection')
+            ->will($this->returnValue('OUT'))
+        ;
+
+        $this->auditable
+            ->expects($this->once())
+            ->method('getQty')
+            ->will($this->returnValue(15))
+        ;
+
+        $this->sut->addItem($this->auditable);
+        $this->sut->audit();
+
+        $this->assertEquals(-15, $this->sut->getVerifiedStockFigure());
+    }
 }
