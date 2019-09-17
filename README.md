@@ -111,6 +111,6 @@ $a = new Auditable(
         )
 ```
 
-An **AuditableAssociatedDocumentType::SALES_ORDER()** is passed into to represent a SALES_ORDER. This class is governed by Enums which outlines what 
+An **AuditableAssociatedDocumentType::SALES_ORDER()** is passed in to represent a SALES_ORDER. This class is governed by Enums which outlines what 
 supporting document types are available.
 
