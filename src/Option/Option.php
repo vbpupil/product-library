@@ -6,6 +6,8 @@
  * Author:   Dean Haines
  */
 
+namespace vbpupil\Option;
+
 
 class Option
 {

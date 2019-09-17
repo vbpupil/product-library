@@ -1,7 +1,4 @@
 <?php
-
-use Vbpupil\Collection\Collection;
-
 /**
  * OptionCategory.php.
  * Version: 1.0.0 (17/09/19)
@@ -9,6 +6,9 @@ use Vbpupil\Collection\Collection;
  * Author:   Dean Haines
  */
 
+namespace vbpupil\Option;
+
+use Vbpupil\Collection\Collection;
 
 class OptionCategory
 {
