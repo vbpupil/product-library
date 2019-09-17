@@ -73,7 +73,7 @@ Simple stock offers a simple holding of a stock figure and passes back whenever 
 
 
 ### AuditableStock
-Auditable stock has the ability to verify what the current stock figure has on hand by performing a full check if its inventry history and spitting out its findings.
+Auditable stock has the ability to verify what the current stock figure has on hand by performing a retrospective check of its inventory history and spitting out its findings.
 
 
 ### Auditable
@@ -81,13 +81,36 @@ The auditable class is on hand to offer an explanation of why an items stock fig
 
 
 ### AuditableType
-This class simply defines what can be accepted as a valid reason.
+This class simply defines what can be accepted as a valid reason. For instance when newing up an Auditable:
+```php
+$a = new Auditable(
+            2,
+            AuditableType::SALE(),
+            'Sold',
+            '2019-08-22 14:42:20',
+            AuditableAssociatedDocumentType::SALES_ORDER(),
+            115
+        )
+```
+
+A **AuditableType::SALE()** is passed into to represent a SALE item. This class is governed by Enums which outlines what type is available.
 
 
 ### AuditableAssociatesDocumentType
-This class simply defines what can be accepted as a valid document type to support the above.
+This class allows you to specify what supporting document accompanies the stock change, for instance a SALES_ORDER (with 
+accompanying SALES ORDER ID) would support a sale which resulted in the stock being reduced by 1. Below shows this code in action.
 
+```php
+$a = new Auditable(
+            2,
+            AuditableType::SALE(),
+            'Sold',
+            '2019-08-22 14:42:20',
+            AuditableAssociatedDocumentType::SALES_ORDER(),
+            115
+        )
+```
 
-
-
+An **AuditableAssociatedDocumentType::SALES_ORDER()** is passed into to represent a SALES_ORDER. This class is governed by Enums which outlines what 
+supporting document types are available.
 
