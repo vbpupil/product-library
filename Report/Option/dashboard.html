@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /var/www/html/productLibrary/src/Traits</title>
+  <title>Dashboard for /var/www/html/productLibrary/src/Option</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../.css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../.css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -20,7 +20,7 @@
      <div class="col-md-12">
       <ol class="breadcrumb">
         <li><a href="../index.html">/var/www/html/productLibrary/src</a></li>
-        <li><a href="index.html">Traits</a></li>
+        <li><a href="index.html">Option</a></li>
         <li class="active">(Dashboard)</li>
 
       </ol>
@@ -159,7 +159,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,1], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,2], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -177,7 +177,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,1], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,25], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -227,7 +227,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"DateTrait.php.html#15\">DateTrait<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,35,"<a href=\"Option.php.html#12\">vbpupil\\Option\\Option<\/a>"],[100,8,"<a href=\"OptionCategory.php.html#17\">vbpupil\\Option\\OptionCategory<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -251,7 +251,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"DateTrait.php.html#22\">DateTrait::isDateTimeString<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,7,"<a href=\"Option.php.html#68\">vbpupil\\Option\\Option::__construct<\/a>"],[100,1,"<a href=\"Option.php.html#86\">vbpupil\\Option\\Option::getId<\/a>"],[100,2,"<a href=\"Option.php.html#95\">vbpupil\\Option\\Option::setId<\/a>"],[100,1,"<a href=\"Option.php.html#104\">vbpupil\\Option\\Option::getTitle<\/a>"],[100,1,"<a href=\"Option.php.html#113\">vbpupil\\Option\\Option::setTitle<\/a>"],[100,1,"<a href=\"Option.php.html#122\">vbpupil\\Option\\Option::getPriceExVat<\/a>"],[100,1,"<a href=\"Option.php.html#131\">vbpupil\\Option\\Option::setPriceExVat<\/a>"],[100,2,"<a href=\"Option.php.html#140\">vbpupil\\Option\\Option::getCostExVat<\/a>"],[100,2,"<a href=\"Option.php.html#149\">vbpupil\\Option\\Option::setCostExVat<\/a>"],[100,2,"<a href=\"Option.php.html#158\">vbpupil\\Option\\Option::getRrpExVat<\/a>"],[100,2,"<a href=\"Option.php.html#167\">vbpupil\\Option\\Option::setRrpExVat<\/a>"],[100,2,"<a href=\"Option.php.html#176\">vbpupil\\Option\\Option::getWeight<\/a>"],[100,2,"<a href=\"Option.php.html#185\">vbpupil\\Option\\Option::setWeight<\/a>"],[100,1,"<a href=\"Option.php.html#194\">vbpupil\\Option\\Option::getProductCode<\/a>"],[100,2,"<a href=\"Option.php.html#203\">vbpupil\\Option\\Option::setProductCode<\/a>"],[100,2,"<a href=\"Option.php.html#212\">vbpupil\\Option\\Option::getEan<\/a>"],[100,2,"<a href=\"Option.php.html#221\">vbpupil\\Option\\Option::setEan<\/a>"],[100,1,"<a href=\"Option.php.html#230\">vbpupil\\Option\\Option::getQty<\/a>"],[100,1,"<a href=\"Option.php.html#239\">vbpupil\\Option\\Option::setQty<\/a>"],[100,1,"<a href=\"OptionCategory.php.html#40\">vbpupil\\Option\\OptionCategory::__construct<\/a>"],[100,2,"<a href=\"OptionCategory.php.html#50\">vbpupil\\Option\\OptionCategory::getId<\/a>"],[100,2,"<a href=\"OptionCategory.php.html#59\">vbpupil\\Option\\OptionCategory::setId<\/a>"],[100,1,"<a href=\"OptionCategory.php.html#68\">vbpupil\\Option\\OptionCategory::getTitle<\/a>"],[100,1,"<a href=\"OptionCategory.php.html#77\">vbpupil\\Option\\OptionCategory::setTitle<\/a>"],[100,1,"<a href=\"OptionCategory.php.html#86\">vbpupil\\Option\\OptionCategory::setOptions<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

@@ -10,6 +10,10 @@ namespace vbpupil\Option;
 
 use Vbpupil\Collection\Collection;
 
+/**
+ * Class OptionCategory
+ * @package vbpupil\Option
+ */
 class OptionCategory
 {
     /**
@@ -20,7 +24,7 @@ class OptionCategory
     /**
      * @var string
      */
-    protected $name;
+    protected $title;
 
     /**
      * @var Collection
@@ -30,20 +34,20 @@ class OptionCategory
     /**
      * OptionCategory constructor.
      * @param int $id
-     * @param string $name
+     * @param string $title
      * @param Collection $options
      */
-    public function __construct(int $id, string $name, Collection $options)
+    public function __construct(int $id, string $title, Collection $options)
     {
         $this->setId($id);
-        $this->setName($name);
+        $this->setTitle($title);
         $this->setOptions($options);
     }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId():?int
     {
         return $this->id;
     }
@@ -52,7 +56,7 @@ class OptionCategory
      * @param mixed $id
      * @return OptionCategory
      */
-    protected function setId($id)
+    protected function setId(?int $id)
     {
         $this->id = $id;
         return $this;
@@ -61,18 +65,18 @@ class OptionCategory
     /**
      * @return mixed
      */
-    public function getName()
+    public function getTitle():string
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $title
      * @return OptionCategory
      */
-    public function setName($name)
+    public function setTitle(string $title)
     {
-        $this->name = $name;
+        $this->title = $title;
         return $this;
     }
 

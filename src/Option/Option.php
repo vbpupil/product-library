@@ -60,15 +60,24 @@ class Option
 
     /**
      * Option constructor.
+     * @param int|null $id
      * @param string $title
      * @param int $price
      * @param int $qty
      */
-    public function __construct(string $title, int $price, int $qty)
+    public function __construct(?int $id, string $title, int $price, int $qty, ?int $cost_ex_vat,
+                                ?int $rrp_ex_vat, ?int $weight, ?string $prod_code, ?int $ean
+    )
     {
+        $this->setId($id);
         $this->setTitle($title);
         $this->setPriceExVat($price);
         $this->setQty($qty);
+        $this->setCostExVat($cost_ex_vat);
+        $this->setRrpExVat($rrp_ex_vat);
+        $this->setWeight($weight);
+        $this->setProductCode($prod_code);
+        $this->setEan($ean);
     }
 
     /**
@@ -83,7 +92,7 @@ class Option
      * @param int $id
      * @return Option
      */
-    protected function setId(int $id): Option
+    protected function setId(?int $id): Option
     {
         $this->id = $id;
         return $this;
@@ -128,7 +137,7 @@ class Option
     /**
      * @return int
      */
-    public function getCostExVat(): int
+    public function getCostExVat(): ?int
     {
         return $this->cost_ex_vat;
     }
@@ -137,7 +146,7 @@ class Option
      * @param int $cost_ex_vat
      * @return Option
      */
-    public function setCostExVat(int $cost_ex_vat): Option
+    public function setCostExVat(?int $cost_ex_vat): Option
     {
         $this->cost_ex_vat = $cost_ex_vat;
         return $this;
@@ -146,7 +155,7 @@ class Option
     /**
      * @return int
      */
-    public function getRrpExVat(): int
+    public function getRrpExVat(): ?int
     {
         return $this->rrp_ex_vat;
     }
@@ -155,7 +164,7 @@ class Option
      * @param int $rrp_ex_vat
      * @return Option
      */
-    public function setRrpExVat(int $rrp_ex_vat): Option
+    public function setRrpExVat(?int $rrp_ex_vat): Option
     {
         $this->rrp_ex_vat = $rrp_ex_vat;
         return $this;
@@ -164,7 +173,7 @@ class Option
     /**
      * @return int
      */
-    public function getWeight(): int
+    public function getWeight(): ?int
     {
         return $this->weight;
     }
@@ -173,25 +182,25 @@ class Option
      * @param int $weight
      * @return Option
      */
-    public function setWeight(int $weight): Option
+    public function setWeight(?int $weight): Option
     {
         $this->weight = $weight;
         return $this;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getProductCode(): int
+    public function getProductCode(): string
     {
         return $this->product_code;
     }
 
     /**
-     * @param int $product_code
+     * @param null|string $product_code
      * @return Option
      */
-    public function setProductCode(int $product_code): Option
+    public function setProductCode(?string $product_code): Option
     {
         $this->product_code = $product_code;
         return $this;
@@ -200,7 +209,7 @@ class Option
     /**
      * @return int
      */
-    public function getEan(): int
+    public function getEan(): ?int
     {
         return $this->ean;
     }
@@ -209,7 +218,7 @@ class Option
      * @param int $ean
      * @return Option
      */
-    public function setEan(int $ean): Option
+    public function setEan(?int $ean): Option
     {
         $this->ean = $ean;
         return $this;

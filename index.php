@@ -10,39 +10,110 @@ use vbpupil\Stock\AuditableType;
 
 require_once 'vendor/autoload.php';
 
-//AUDITABLE START
 
+//OPTION START
 try {
-    $as = new AuditableStock(55, new Collection());
-
-    $as->addItem(
-        new Auditable(
-            2,
-            AuditableType::SALE(),
-            'Sold',
-            '2019-08-22 14:42:20',
-            AuditableAssociatedDocumentType::SALES_ORDER(),
-            115
-        )
-    )->addItem(
-        new Auditable(
-            2,
-            AuditableType::RETURN_DAMAGED(),
-            'Surplus to requirements',
-            '2019-08-22 14:42:20',
-            null,
-            null
-        )
+    $opCat = new \vbpupil\Option\OptionCategory(
+        12,
+        'HDD Size',
+        (new Collection())
+            ->addItem(
+                new \vbpupil\Option\Option(
+                    1,
+                    '500GB SATA HDD',
+                    4000,
+                    1,
+                    1000,
+                    4900,
+                    100,
+                    'myprod123',
+                    '012345678910'
+                )
+            )
+            ->addItem(
+                new \vbpupil\Option\Option(
+                    1,
+                    '1TB SATA HDD',
+                    5500,
+                    1,
+                    1000,
+                    4900,
+                    100,
+                    'myprod123',
+                    '012345678910'
+                )
+            )
+            ->addItem(
+                new \vbpupil\Option\Option(
+                    1,
+                    '2TB SATA HDD',
+                    7900,
+                    1,
+                    1000,
+                    4900,
+                    100,
+                    'myprod123',
+                    '012345678910'
+                )
+            )
+            ->addItem(
+                new \vbpupil\Option\Option(
+                    1,
+                    '4TB SATA HDD',
+                    8900,
+                    1,
+                    1000,
+                    4900,
+                    100,
+                    'myprod123',
+                    '012345678910'
+                )
+            )
     );
 
-    $as->audit();
-    echo $as->auditToString();
 
+    dump($opCat);
 } catch (Exception $e) {
-    echo $e->getMessage();
+
 }
 
-dump($as);
+
+//OPTION END
+
+
+//AUDITABLE START
+//
+//try {
+//    $as = new AuditableStock(55, new Collection());
+//
+//    $as->addItem(
+//        new Auditable(
+//            2,
+//            AuditableType::SALE(),
+//            'Sold',
+//            '2019-08-22 14:42:20',
+//            AuditableAssociatedDocumentType::SALES_ORDER(),
+//            115
+//        )
+//    )->addItem(
+//        new Auditable(
+//            2,
+//            AuditableType::RETURN_DAMAGED(),
+//            'Surplus to requirements',
+//            '2019-08-22 14:42:20',
+//            null,
+//            null
+//        )
+//    );
+//
+//    $as->audit();
+//    echo $as->auditToString();
+//
+//} catch (Exception $e) {
+//    echo $e->getMessage();
+//}
+//
+//dump($as);
 //AUDITABLE END
 
 
