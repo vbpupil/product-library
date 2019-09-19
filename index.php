@@ -37,7 +37,7 @@ try {
                     5500,
                     1,
                     1000,
-                    4900,
+                    6900,
                     100,
                     'myprod123',
                     '1111122222333'
@@ -50,7 +50,7 @@ try {
                     7900,
                     1,
                     1000,
-                    4900,
+                    8900,
                     100,
                     'myprod123',
                     '1111122222333'
@@ -63,7 +63,7 @@ try {
                     8900,
                     1,
                     1000,
-                    4900,
+                    9900,
                     100,
                     'myprod123',
                     '1111122222333'
@@ -73,7 +73,13 @@ try {
 
 
     dump($opCat);
-} catch (Exception $e) {
+
+    $opCat->options->sort('price_ex_vat');
+    dump($opCat->options->getItems());
+
+} catch (\Exception $e) {
+    echo $e->getMessage();
+} catch (\vbpupil\Exception\InvalidSortMember $e) {
     echo $e->getMessage();
 }
 

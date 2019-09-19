@@ -28,9 +28,9 @@ class OptionCategory
     protected $title;
 
     /**
-     * @var Collection
+     * @var OptionCollection
      */
-    protected $options;
+    public $options;
 
     /**
      * OptionCategory constructor.
@@ -88,4 +88,6 @@ class OptionCategory
     {
         $this->options = $options;
     }
+
+
 }
