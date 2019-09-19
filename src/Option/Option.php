@@ -9,8 +9,12 @@
 namespace vbpupil\Option;
 
 
+use vbpupil\Traits\CodeTypes;
+
 class Option
 {
+
+    use CodeTypes;
 
     /**
      * @var int
@@ -64,6 +68,12 @@ class Option
      * @param string $title
      * @param int $price
      * @param int $qty
+     * @param int|null $cost_ex_vat
+     * @param int|null $rrp_ex_vat
+     * @param int|null $weight
+     * @param null|string $prod_code
+     * @param int|null $ean
+     * @throws \Exception
      */
     public function __construct(?int $id, string $title, int $price, int $qty, ?int $cost_ex_vat,
                                 ?int $rrp_ex_vat, ?int $weight, ?string $prod_code, ?int $ean
@@ -215,11 +225,16 @@ class Option
     }
 
     /**
-     * @param int $ean
+     * @param null|string $ean
      * @return Option
+     * @throws \Exception
      */
-    public function setEan(?int $ean): Option
+    public function setEan(?string $ean): Option
     {
+        if(!$this->isEan($ean)){
+            throw new \Exception('Invalid EAN.');
+        }
+
         $this->ean = $ean;
         return $this;
     }

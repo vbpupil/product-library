@@ -11,7 +11,7 @@ namespace src\Option;
 
 
 use PHPUnit\Framework\TestCase;
-use Vbpupil\Collection\Collection;
+use vbpupil\Collections\OptionCollection;
 use vbpupil\Option\OptionCategory;
 
 class OptionCategoryTest extends TestCase
@@ -21,7 +21,7 @@ class OptionCategoryTest extends TestCase
 
     public function setUp()
     {
-        $this->collection = $this->getMockBuilder(Collection::class)
+        $this->collection = $this->getMockBuilder(OptionCollection::class)
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 

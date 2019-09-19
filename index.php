@@ -1,6 +1,7 @@
 <?php
 
 use Vbpupil\Collection\Collection;
+use vbpupil\Collections\OptionCollection;
 use vbpupil\Product\GeneralProduct;
 use vbpupil\Product\SimpleProduct;
 use vbpupil\Stock\Auditable;
@@ -10,13 +11,12 @@ use vbpupil\Stock\AuditableType;
 
 require_once 'vendor/autoload.php';
 
-
 //OPTION START
 try {
     $opCat = new \vbpupil\Option\OptionCategory(
         12,
         'HDD Size',
-        (new Collection())
+        (new OptionCollection())
             ->addItem(
                 new \vbpupil\Option\Option(
                     1,
@@ -27,7 +27,7 @@ try {
                     4900,
                     100,
                     'myprod123',
-                    '012345678910'
+                    '1111122222333'
                 )
             )
             ->addItem(
@@ -40,7 +40,7 @@ try {
                     4900,
                     100,
                     'myprod123',
-                    '012345678910'
+                    '1111122222333'
                 )
             )
             ->addItem(
@@ -53,7 +53,7 @@ try {
                     4900,
                     100,
                     'myprod123',
-                    '012345678910'
+                    '1111122222333'
                 )
             )
             ->addItem(
@@ -66,7 +66,7 @@ try {
                     4900,
                     100,
                     'myprod123',
-                    '012345678910'
+                    '1111122222333'
                 )
             )
     );
@@ -74,7 +74,7 @@ try {
 
     dump($opCat);
 } catch (Exception $e) {
-
+    echo $e->getMessage();
 }
 
 
@@ -84,7 +84,7 @@ try {
 //AUDITABLE START
 //
 //try {
-//    $as = new AuditableStock(55, new Collection());
+//    $as = new AuditableStock(55, new Collections());
 //
 //    $as->addItem(
 //        new Auditable(
@@ -155,7 +155,7 @@ try {
 //SIMPLE PRODUCT START
 //$sp = new SimpleProduct(
 //    'Iphone X',
-//    new Collection()
+//    new Collections()
 //);
 //
 //$sp->setLive(true);

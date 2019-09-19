@@ -29,7 +29,7 @@ class OptionTest extends TestCase
             4900,
             150,
             'myprod123',
-            '012345678910'
+            '111111111111'
         );
     }
 
@@ -102,10 +102,29 @@ class OptionTest extends TestCase
 
     public function testGetEan()
     {
-        $this->assertEquals('012345678910', $this->sut->getEan());
+        $this->assertEquals('111111111111', $this->sut->getEan());
 
         $this->sut->setEan('5555555555555');
 
         $this->assertEquals('5555555555555', $this->sut->getEan());
+    }
+
+    public function testInvalidEan()
+    {
+        try {
+            //12 digit
+            $this->sut->setEan('555559999988');
+            $this->assertEquals('555559999988', $this->sut->getEan());
+
+            //13 digit
+            $this->sut->setEan('7777755555444');
+            $this->assertEquals('7777755555444', $this->sut->getEan());
+
+            //invalid ean
+            $this->sut->setEan('myean');
+
+        }catch(\Exception $e){
+            $this->assertEquals('Invalid EAN.', $e->getMessage());
+        }
     }
 }

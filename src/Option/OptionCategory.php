@@ -8,7 +8,8 @@
 
 namespace vbpupil\Option;
 
-use Vbpupil\Collection\Collection;
+
+use vbpupil\Collections\OptionCollection;
 
 /**
  * Class OptionCategory
@@ -35,9 +36,9 @@ class OptionCategory
      * OptionCategory constructor.
      * @param int $id
      * @param string $title
-     * @param Collection $options
+     * @param \vbpupil\Option\OptionCollection $options
      */
-    public function __construct(int $id, string $title, Collection $options)
+    public function __construct(int $id, string $title, OptionCollection $options)
     {
         $this->setId($id);
         $this->setTitle($title);
@@ -81,9 +82,9 @@ class OptionCategory
     }
 
     /**
-     * @param \Vbpupil\Collection\Collection $options
+     * @param OptionCollection $options
      */
-    protected function setOptions($options)
+    protected function setOptions(OptionCollection $options)
     {
         $this->options = $options;
     }
