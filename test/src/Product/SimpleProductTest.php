@@ -11,7 +11,7 @@ namespace test\vbpupil\Product;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\SimpleProduct;
+use vbpupil\Product\Product;
 
 class ProductTest extends TestCase
 {
@@ -21,14 +21,14 @@ class ProductTest extends TestCase
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new SimpleProduct(
+            $this->sut = new Product(
                 'ball',
                 new Collection()
             );
-            $this->assertTrue($this->sut instanceof SimpleProduct);
+            $this->assertTrue($this->sut instanceof Product);
 
 
-            $this->sut = new SimpleProduct(null, new Collection());
+            $this->sut = new Product(null, new Collection());
         } catch (\Exception $e) {
             $this->assertEquals('Product name required.', $e->getMessage());
         }
@@ -36,7 +36,7 @@ class ProductTest extends TestCase
 
     public function testGetAndSetName()
     {
-        $this->sut = new SimpleProduct(
+        $this->sut = new Product(
             'ball',
             new Collection()
         );
@@ -49,7 +49,7 @@ class ProductTest extends TestCase
 
     public function testLive()
     {
-        $this->sut = new SimpleProduct(
+        $this->sut = new Product(
             'ball',
             new Collection()
         );

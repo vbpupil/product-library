@@ -5,15 +5,14 @@ namespace vbpupil\Product;
 
 
 use Vbpupil\Collection\Collection;
-use Vbpupil\Collection\CollectionException;
-use Vbpupil\Collection\KeyInUseException;
+use vbpupil\Variation\SimpleVariation;
 
-class SimpleProduct
+class Product
 {
     /**
      * @var string
      */
-    protected $name;
+    protected $name = null;
 
     /**
      * @var Collection
@@ -23,10 +22,16 @@ class SimpleProduct
     /**
      * @var bool
      */
-    protected $live;
+    protected $live = false;
 
     /**
-     * SimpleProduct constructor.
+     * @var Collection
+     */
+    public $variations;
+
+
+    /**
+     * Product constructor.
      * @param null $name
      * @param Collection $descriptions
      * @param bool $live
@@ -53,9 +58,9 @@ class SimpleProduct
 
     /**
      * @param string $name
-     * @return SimpleProduct
+     * @return Product
      */
-    public function setName(string $name): SimpleProduct
+    public function setName(string $name): Product
     {
         $this->name = $name;
         return $this;
@@ -63,12 +68,27 @@ class SimpleProduct
 
     /**
      * @param Collection $descriptions
-     * @return SimpleProduct
+     * @return Product
      */
-    protected function setDescriptions(Collection $descriptions): SimpleProduct
+    protected function setDescriptions(Collection $descriptions): Product
     {
         $this->descriptions = $descriptions;
         return $this;
+    }
+
+    /**
+     * @param Collection $variations
+     * @throws \Exception
+     */
+    public function setVariations(Collection $variations): void
+    {
+        foreach ($variations->getItems() as $v) {
+            if (!is_a($v, SimpleVariation::class)) {
+                throw new \Exception('Incompatible type, must be/extend from SimpleVariation');
+            }
+        }
+
+        $this->variations = $variations;
     }
 
     /**
@@ -81,9 +101,9 @@ class SimpleProduct
 
     /**
      * @param bool $live
-     * @return SimpleProduct
+     * @return Product
      */
-    public function setLive(bool $live): SimpleProduct
+    public function setLive(bool $live): Product
     {
         $this->live = $live;
         return $this;

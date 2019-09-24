@@ -3,13 +3,57 @@
 use Vbpupil\Collection\Collection;
 use vbpupil\Collections\OptionCollection;
 use vbpupil\Product\GeneralProduct;
-use vbpupil\Product\SimpleProduct;
+use vbpupil\Product\Product;
 use vbpupil\Stock\Auditable;
 use vbpupil\Stock\AuditableAssociatedDocumentType;
 use vbpupil\Stock\AuditableStock;
 use vbpupil\Stock\AuditableType;
 
 require_once 'vendor/autoload.php';
+
+
+//BUILDER START
+
+$director = new \vbpupil\Builder\ProductDirector();
+
+$descriptions = (new Collection())
+    ->addItem('i am the long desc', 'long')
+    ->addItem('i am the short desc', 'short');
+
+$simple = $director->buildSimpleProduct(
+    new \vbpupil\Builder\SimpleProductBuilder(
+        'testproduct name',
+        $descriptions,
+        true
+    )
+);
+
+
+
+$descriptions = (new Collection())
+    ->addItem('i am the long desc', 'long')
+    ->addItem('i am the short desc', 'short');
+
+$variations = new \vbpupil\Variation\SimpleVariation(
+        [
+            'title' => 'FFF',
+            'productCode' => 'MYPRODCODE-01'
+        ]
+    );
+
+
+
+$simple = $director->buildSimpleProduct(
+    new \vbpupil\Builder\SimpleProductBuilder(
+        'testproduct name',
+        $descriptions,
+        true
+    )
+);
+
+dump($simple);
+//BUILDER END
+
 
 //OPTION START
 //try {
@@ -122,53 +166,53 @@ require_once 'vendor/autoload.php';
 
 
 //GENERAL PRODUCT START
-try {
-    $gp = new GeneralProduct(
-        'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB',
-        new Collection()
-    );
-
-    $gp->setLive(true);
-
-    $gp->descriptions->addItem(
-        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console.',
-        'short_description'
-    );
-
-    $gp->descriptions->addItem(
-        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console 30% smaller and lighter than the previous model and more energy efficient.',
-        'long_description'
-    );
-
-    foreach ($gp->descriptions->getItems() as $desc) {
-        echo $desc . '<br><br>';
-    }
-
-    $gp->setVariations(
-        new Collection()
-    );
-
-    $v = new \vbpupil\Variation\SimpleVariation(
-        [
-            'title' => 'FFF',
-            'productCode' => 'MYPRODCODE-01'
-        ]
-    );
-
-    $gp->variations->addItem($v);
-
-
-
-    dump($gp);
-
-} catch (Exception $e) {
-
-}
+//try {
+//    $gp = new GeneralProduct(
+//        'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB',
+//        new Collection()
+//    );
+//
+//    $gp->setLive(true);
+//
+//    $gp->descriptions->addItem(
+//        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console.',
+//        'short_description'
+//    );
+//
+//    $gp->descriptions->addItem(
+//        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console 30% smaller and lighter than the previous model and more energy efficient.',
+//        'long_description'
+//    );
+//
+//    foreach ($gp->descriptions->getItems() as $desc) {
+//        echo $desc . '<br><br>';
+//    }
+//
+//    $gp->setVariations(
+//        new Collection()
+//    );
+//
+//    $v = new \vbpupil\Variation\SimpleVariation(
+//        [
+//            'title' => 'FFF',
+//            'productCode' => 'MYPRODCODE-01'
+//        ]
+//    );
+//
+//    $gp->variations->addItem($v);
+//
+//
+//
+//    dump($gp);
+//
+//} catch (Exception $e) {
+//
+//}
 //GENERAL PRODUCT END
 
 
 //SIMPLE PRODUCT START
-//$sp = new SimpleProduct(
+//$sp = new Product(
 //    'Iphone X',
 //    new Collections()
 //);
