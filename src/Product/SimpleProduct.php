@@ -88,5 +88,4 @@ class SimpleProduct
         $this->live = $live;
         return $this;
     }
-
 }

@@ -38,7 +38,7 @@ foreach ($prod->getItems() as $desc) {
 ### GeneralProduct
 On the face of it a General Product is the same as a Simple Product except it has a concept of Variations which itself offers some interesting additions.
 
-To add an empty Collection:
+To add Variations simplly start by passig in an empty Collection:
 
 ```php
 $prod->setVariations(
@@ -47,6 +47,21 @@ $prod->setVariations(
 ```
 
 Once you have created the Collection simply use it as you would any other Collection object (the above descriptions functionality in Simple Product uses the same functionality).
+
+
+To add a Variation:
+
+```php
+    $myVariation = new \vbpupil\Variation\SimpleVariation(
+            [
+                'title' => 'FFF',
+                'productCode' => 'MYPRODCODE-01'
+            ]
+        );
+    
+    $prod->variations->addItem($v);
+```
+
 
 
 ## Pricing

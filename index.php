@@ -12,78 +12,76 @@ use vbpupil\Stock\AuditableType;
 require_once 'vendor/autoload.php';
 
 //OPTION START
-try {
-    $opCat = new \vbpupil\Option\OptionCategory(
-        12,
-        'HDD Size',
-        (new OptionCollection())
-            ->addItem(
-                new \vbpupil\Option\Option(
-                    1,
-                    '500GB SATA HDD',
-                    4000,
-                    1,
-                    1000,
-                    4900,
-                    100,
-                    'myprod123',
-                    '1111122222333'
-                )
-            )
-            ->addItem(
-                new \vbpupil\Option\Option(
-                    1,
-                    '1TB SATA HDD',
-                    5500,
-                    1,
-                    1000,
-                    6900,
-                    100,
-                    'myprod123',
-                    '1111122222333'
-                )
-            )
-            ->addItem(
-                new \vbpupil\Option\Option(
-                    1,
-                    '2TB SATA HDD',
-                    7900,
-                    1,
-                    1000,
-                    8900,
-                    100,
-                    'myprod123',
-                    '1111122222333'
-                )
-            )
-            ->addItem(
-                new \vbpupil\Option\Option(
-                    1,
-                    '4TB SATA HDD',
-                    8900,
-                    1,
-                    1000,
-                    9900,
-                    100,
-                    'myprod123',
-                    '1111122222333'
-                )
-            )
-    );
-
-
-    dump($opCat);
-
-    $opCat->options->sort('price_ex_vat');
-    dump($opCat->options->getItems());
-
-} catch (\Exception $e) {
-    echo $e->getMessage();
-} catch (\vbpupil\Exception\InvalidSortMember $e) {
-    echo $e->getMessage();
-}
-
-
+//try {
+//    $opCat = new \vbpupil\Option\OptionCategory(
+//        12,
+//        'HDD Size',
+//        (new OptionCollection())
+//            ->addItem(
+//                new \vbpupil\Option\Option(
+//                    1,
+//                    '500GB SATA HDD',
+//                    4000,
+//                    1,
+//                    1000,
+//                    4900,
+//                    100,
+//                    'myprod123',
+//                    '1111122222333'
+//                )
+//            )
+//            ->addItem(
+//                new \vbpupil\Option\Option(
+//                    1,
+//                    '1TB SATA HDD',
+//                    5500,
+//                    1,
+//                    1000,
+//                    6900,
+//                    100,
+//                    'myprod123',
+//                    '1111122222333'
+//                )
+//            )
+//            ->addItem(
+//                new \vbpupil\Option\Option(
+//                    1,
+//                    '2TB SATA HDD',
+//                    7900,
+//                    1,
+//                    1000,
+//                    8900,
+//                    100,
+//                    'myprod123',
+//                    '1111122222333'
+//                )
+//            )
+//            ->addItem(
+//                new \vbpupil\Option\Option(
+//                    1,
+//                    '4TB SATA HDD',
+//                    8900,
+//                    1,
+//                    1000,
+//                    9900,
+//                    100,
+//                    'myprod123',
+//                    '1111122222333'
+//                )
+//            )
+//    );
+//
+//
+//    dump($opCat);
+//
+//    $opCat->options->sort('price_ex_vat');
+//    dump($opCat->options->getItems());
+//
+//} catch (\Exception $e) {
+//    echo $e->getMessage();
+//} catch (\vbpupil\Exception\InvalidSortMember $e) {
+//    echo $e->getMessage();
+//}
 //OPTION END
 
 
@@ -149,6 +147,17 @@ try {
     $gp->setVariations(
         new Collection()
     );
+
+    $v = new \vbpupil\Variation\SimpleVariation(
+        [
+            'title' => 'FFF',
+            'productCode' => 'MYPRODCODE-01'
+        ]
+    );
+
+    $gp->variations->addItem($v);
+
+
 
     dump($gp);
 
