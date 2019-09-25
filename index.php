@@ -15,31 +15,37 @@ require_once 'vendor/autoload.php';
 //BUILDER START
 
 $director = new \vbpupil\Builder\ProductDirector();
+$simpleData = [];
+$generalData = [];
+
+$simpleData['descriptions'] = [
+    'long' => 'i am the long desc',
+    'short' => 'i am the short desc'
+];
 
 $simple = $director->buildSimpleProduct(
-    new \vbpupil\Builder\SimpleProductBuilder()
+    new \vbpupil\Builder\SimpleProductBuilder(),
+    $simpleData
 );
 
-$simple->descriptions
-    ->addItem('i am the long desc', 'long')
-    ->addItem('i am the short desc', 'short');
 
+$generalData['descriptions'] = [
+    'long' => 'i am the long desc',
+    'short' => 'i am the short desc'
+];
 
-$general = $director->buildGeneralProduct(
-    new \vbpupil\Builder\GeneralProductBuilder()
-);
-
-$general->descriptions
-    ->addItem('i am the long desc', 'long')
-    ->addItem('i am the short desc', 'short');
-
-
-$general->variations->addItem(new \vbpupil\Variation\SimpleVariation(
+$generalData['variations'] = [
     [
         'title' => 'FFF',
         'productCode' => 'MYPRODCODE-01'
     ]
-));
+];
+
+$general = $director->buildGeneralProduct(
+    new \vbpupil\Builder\GeneralProductBuilder(),
+    $generalData
+);
+
 
 dump($simple);
 dump($general);
