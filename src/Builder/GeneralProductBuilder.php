@@ -22,25 +22,18 @@ class GeneralProductBuilder implements ProductBuilderInterface
 
     /**
      * GeneralProductBuilder constructor.
-     * @param null $name
-     * @param Collection $descriptions
-     * @param bool $live
-     * @throws \Exception
      */
-    public function __construct($name = null, Collection $descriptions, $live = false)
+    public function __construct()
     {
-        $this->reset($name, $descriptions, $live);
+        $this->reset();
     }
 
     /**
-     * @param $name
-     * @param $descriptions
-     * @param $live
-     * @throws \Exception
+     *
      */
-    public function reset($name, $descriptions, $live)
+    public function reset()
     {
-        $this->product = new Product($name, $descriptions, $live);
+        $this->product = new Product();
     }
 
     /**
@@ -51,7 +44,7 @@ class GeneralProductBuilder implements ProductBuilderInterface
     {
         try {
             $result = $this->product;
-//            $this->reset();
+            $this->reset();
 
             return $result;
         } catch (\Exception $e) {

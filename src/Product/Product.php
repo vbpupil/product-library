@@ -31,24 +31,6 @@ class Product
 
 
     /**
-     * Product constructor.
-     * @param null $name
-     * @param Collection $descriptions
-     * @param bool $live
-     * @throws \Exception
-     */
-    public function __construct($name = null, Collection $descriptions, $live = false)
-    {
-        if (is_null($name) || !is_string($name)) {
-            throw new \Exception("Product name required.");
-        }
-
-        $this->setName($name);
-        $this->setDescriptions($descriptions);
-        $this->setLive($live);
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
@@ -70,7 +52,7 @@ class Product
      * @param Collection $descriptions
      * @return Product
      */
-    protected function setDescriptions(Collection $descriptions): Product
+    public function setDescriptions(Collection $descriptions): Product
     {
         $this->descriptions = $descriptions;
         return $this;

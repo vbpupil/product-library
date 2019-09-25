@@ -5,17 +5,27 @@ namespace vbpupil\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
 
 class ProductDirector
 {
     public function buildSimpleProduct(SimpleProductBuilder $product)
     {
-        return $product->getProduct();
+        $p = $product->getProduct();
+        $p->setName('Simple Product');
+        $p->setDescriptions(new Collection());
+
+        unset($p->variations);
+
+        return $p;
     }
 
-    public function buildGeneralProduct(Product $product)
+    public function buildGeneralProduct(GeneralProductBuilder $product)
     {
-        return $product->getProduct();
+        $p = $product->getProduct();
+        $p->setName('General Product');
+        $p->setDescriptions(new Collection());
+        $p->setVariations(new Collection());
+
+        return $p;
     }
 }
