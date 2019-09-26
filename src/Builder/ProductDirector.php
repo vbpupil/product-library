@@ -58,5 +58,27 @@ class ProductDirector
         }
 
 
+        if(!empty($data['options'])){
+            foreach ($data['options'] as $k => $v){
+                $p->descriptions->addItem($v, $k);
+            }
+        }
+
+
+
+//        (new OptionCollection())
+//            ->addItem(
+//                new \vbpupil\Option\Option(
+//                    1,
+//                    '500GB SATA HDD',
+//                    4000,
+//                    1,
+//                    1000,
+//                    4900,
+//                    100,
+//                    'myprod123',
+//                    '1111122222333'
+//                )
+//            )
     }
 }
