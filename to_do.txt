@@ -1,3 +1,0 @@
-Questions:
-    1. POA - currently this is done on the product, seems to me that it should be on the variation. But is this the way to go?
-    2.

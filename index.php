@@ -18,10 +18,14 @@ $director = new \vbpupil\Builder\ProductDirector();
 $simpleData = [];
 $generalData = [];
 
-$simpleData['descriptions'] = [
-    'long' => 'i am the long desc',
-    'short' => 'i am the short desc'
-];
+$simpleData =
+    [
+        'product_name' => 'PS4 1st edition',
+        'descriptions' => [
+            'long' => 'i am the long desc',
+            'short' => 'i am the short desc'
+        ]
+    ];
 
 $simple = $director->buildSimpleProduct(
     new \vbpupil\Builder\SimpleProductBuilder(),
@@ -29,22 +33,35 @@ $simple = $director->buildSimpleProduct(
 );
 
 
-$generalData['descriptions'] = [
-    'long' => 'i am the long desc',
-    'short' => 'i am the short desc'
-];
-
-$generalData['variations'] = [
+$generalData =
     [
-        'title' => 'FFF',
-        'productCode' => 'MYPRODCODE-01'
-    ]
-];
+        'product_name' => 'PS4 v5',
+        'descriptions' => [
+            'long' => 'i am the long desc',
+            'short' => 'i am the short desc'
+        ],
+        'variations' => [
+            'title' => 'FFF',
+            'productCode' => 'MYPRODCODE-01'
+        ]
+    ];
 
 $general = $director->buildGeneralProduct(
     new \vbpupil\Builder\GeneralProductBuilder(),
     $generalData
 );
+
+$v = new \vbpupil\Variation\SimpleVariation(
+    [
+        'title' => 'FFF',
+        'productCode' => 'MYPRODCODE-01',
+    ]
+);
+$general->variations->addItem($v);
+
+
+//
+//    $gp->variations->addItem($v);
 
 
 dump($simple);
@@ -241,13 +258,20 @@ dump($general);
 //        'exVat' => 1200,
 //        'currency' => 'GBP',
 //        'specialPriceActive' => true,
-//        'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+//        'specialPriceActiveUntil' => '2000-09-09 11:41:00',
 //        'specialPrice' => 500
 //    ]);
 //
 //
 //    dump($p);
 //    $price = number_format($p->getPrice(true), 2, '.', '.');
+//    $exvat = number_format(($p->getExVat() / 100), 2, '.', '.');
+//
+//    echo <<<EOD
+//EX VAT: {$p->formatPrice('getExVat')}<br>
+//Price: {$p->getSymbol()}{$price}<br>
+//Ex Vat (non dynamic): {$p->getSymbol()}{$exvat}<br>
+//EOD;
 //
 //
 //    echo $p->toString();

@@ -11,7 +11,7 @@ class ProductDirector
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
-        $p->setName('Simple Product');
+        $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
 
         $this->populateData($p, $data);
@@ -24,7 +24,7 @@ class ProductDirector
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
-        $p->setName('General Product');
+        $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
 
