@@ -138,6 +138,28 @@ Vat Element: 1.00<br>
 Price (Inc VAT): 6.00<br><br>
 Special Price Active: true<br>
 *******************************',
+
+                $p->toString());
+
+            $p = new \vbpupil\Price\SinglePrice([
+                'vatRate' => 20,
+                'exVat' => 1200,
+                'currency' => 'GBP',
+                'specialPriceActive' => true,
+                'specialPriceActiveUntil' => '2000-09-09 11:41:00',
+                'specialPrice' => 500
+            ]);
+
+            $this->assertEquals(
+                '*******************************<br>
+Currency: GBP<br>
+Symbol: &pound;<br>
+Vat Rate: 20<br><br>
+Price (Ex VAT): 12.00<br>
+Vat Element: 2.40<br>
+Price (Inc VAT): 14.40<br><br>
+Special Price Active: false<br>
+*******************************',
                 $p->toString());
     }
 
@@ -185,7 +207,34 @@ Special Price Active: true<br>
             $this->assertEquals('&pound;', $p->getSymbol());
             $this->assertEquals(500, $p->getSpecialPrice());
             $this->assertEquals(20, $p->getVatRate());
-            $this->assertEquals(1200, $p->getExVat());
+            $this->assertEquals(1200, $p->getExVat(false));
+            $this->assertEquals(100, $p->getExVat(true));
             $this->assertEquals('GBP', $p->getCurrency());
+    }
+
+    public function testIsOnSepcial()
+    {
+        $p = new SinglePrice([
+            'vatRate' => 20,
+            'exVat' => 1200,
+            'currency' => 'GBP',
+            'specialPriceActive' => true,
+            'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+            'specialPrice' => 500
+        ]);
+
+        $this->assertTrue($p->isOnSpecial());
+
+        $p = new SinglePrice([
+            'vatRate' => 20,
+            'exVat' => 1200,
+            'currency' => 'GBP',
+            'specialPriceActive' => true,
+            'specialPriceActiveUntil' => '1990-09-09 11:41:00',
+            'specialPrice' => 500
+        ]);
+
+        $this->assertFalse($p->isOnSpecial());
+
     }
 }

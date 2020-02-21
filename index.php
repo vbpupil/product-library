@@ -3,13 +3,73 @@
 use Vbpupil\Collection\Collection;
 use vbpupil\Collections\OptionCollection;
 use vbpupil\Product\GeneralProduct;
-use vbpupil\Product\SimpleProduct;
+use vbpupil\Product\Product;
 use vbpupil\Stock\Auditable;
 use vbpupil\Stock\AuditableAssociatedDocumentType;
 use vbpupil\Stock\AuditableStock;
 use vbpupil\Stock\AuditableType;
 
 require_once 'vendor/autoload.php';
+
+
+//BUILDER START
+
+$director = new \vbpupil\Builder\ProductDirector();
+$simpleData = [];
+$generalData = [];
+
+$simpleData =
+    [
+        'product_name' => 'PS4 1st edition',
+        'descriptions' => [
+            'long' => 'i am the long desc',
+            'short' => 'i am the short desc'
+        ]
+    ];
+
+$simple = $director->buildSimpleProduct(
+    new \vbpupil\Builder\SimpleProductBuilder(),
+    $simpleData
+);
+
+
+$generalData =
+    [
+        'product_name' => 'PS4 v5',
+        'descriptions' => [
+            'long' => 'i am the long desc',
+            'short' => 'i am the short desc'
+        ],
+        'variations' => [
+            'title' => 'FFF',
+            'productCode' => 'MYPRODCODE-01'
+        ]
+    ];
+
+$general = $director->buildGeneralProduct(
+    new \vbpupil\Builder\GeneralProductBuilder(),
+    $generalData
+);
+
+$v = new \vbpupil\Variation\SimpleVariation(
+    [
+        'title' => 'FFF',
+        'productCode' => 'MYPRODCODE-01',
+    ]
+);
+$general->variations->addItem($v);
+
+dump($general->variations->getItem(1));
+
+
+//
+//    $gp->variations->addItem($v);
+
+
+dump($simple);
+dump($general);
+//BUILDER END
+
 
 //OPTION START
 //try {
@@ -122,53 +182,53 @@ require_once 'vendor/autoload.php';
 
 
 //GENERAL PRODUCT START
-try {
-    $gp = new GeneralProduct(
-        'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB',
-        new Collection()
-    );
-
-    $gp->setLive(true);
-
-    $gp->descriptions->addItem(
-        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console.',
-        'short_description'
-    );
-
-    $gp->descriptions->addItem(
-        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console 30% smaller and lighter than the previous model and more energy efficient.',
-        'long_description'
-    );
-
-    foreach ($gp->descriptions->getItems() as $desc) {
-        echo $desc . '<br><br>';
-    }
-
-    $gp->setVariations(
-        new Collection()
-    );
-
-    $v = new \vbpupil\Variation\SimpleVariation(
-        [
-            'title' => 'FFF',
-            'productCode' => 'MYPRODCODE-01'
-        ]
-    );
-
-    $gp->variations->addItem($v);
-
-
-
-    dump($gp);
-
-} catch (Exception $e) {
-
-}
+//try {
+//    $gp = new GeneralProduct(
+//        'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB',
+//        new Collection()
+//    );
+//
+//    $gp->setLive(true);
+//
+//    $gp->descriptions->addItem(
+//        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console.',
+//        'short_description'
+//    );
+//
+//    $gp->descriptions->addItem(
+//        'Sony PlayStation 4 - 500 GB Discover a revamped PlayStation console 30% smaller and lighter than the previous model and more energy efficient.',
+//        'long_description'
+//    );
+//
+//    foreach ($gp->descriptions->getItems() as $desc) {
+//        echo $desc . '<br><br>';
+//    }
+//
+//    $gp->setVariations(
+//        new Collection()
+//    );
+//
+//    $v = new \vbpupil\Variation\SimpleVariation(
+//        [
+//            'title' => 'FFF',
+//            'productCode' => 'MYPRODCODE-01'
+//        ]
+//    );
+//
+//    $gp->variations->addItem($v);
+//
+//
+//
+//    dump($gp);
+//
+//} catch (Exception $e) {
+//
+//}
 //GENERAL PRODUCT END
 
 
 //SIMPLE PRODUCT START
-//$sp = new SimpleProduct(
+//$sp = new Product(
 //    'Iphone X',
 //    new Collections()
 //);
@@ -200,13 +260,20 @@ try {
 //        'exVat' => 1200,
 //        'currency' => 'GBP',
 //        'specialPriceActive' => true,
-//        'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+//        'specialPriceActiveUntil' => '2000-09-09 11:41:00',
 //        'specialPrice' => 500
 //    ]);
 //
 //
 //    dump($p);
 //    $price = number_format($p->getPrice(true), 2, '.', '.');
+//    $exvat = number_format(($p->getExVat() / 100), 2, '.', '.');
+//
+//    echo <<<EOD
+//EX VAT: {$p->formatPrice('getExVat')}<br>
+//Price: {$p->getSymbol()}{$price}<br>
+//Ex Vat (non dynamic): {$p->getSymbol()}{$exvat}<br>
+//EOD;
 //
 //
 //    echo $p->toString();

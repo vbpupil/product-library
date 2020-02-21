@@ -12,7 +12,7 @@ namespace src\Product;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\GeneralProduct;
+use vbpupil\Product\Product;
 use vbpupil\Variation\SimpleVariation;
 
 class GeneralProductTest extends TestCase
@@ -36,7 +36,7 @@ class GeneralProductTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new GeneralProduct(
+        $this->sut = new Product(
             'Sony PS4 With 1 Controller',
             $this->description,
             true
@@ -45,7 +45,7 @@ class GeneralProductTest extends TestCase
 
     public function testNewingUpAProduct()
     {
-        $this->assertTrue($this->sut instanceof GeneralProduct);
+        $this->assertTrue($this->sut instanceof Product);
     }
 
     public function testAddingVariations()
