@@ -59,6 +59,8 @@ $v = new \vbpupil\Variation\SimpleVariation(
 );
 $general->variations->addItem($v);
 
+dump($general->variations->getItem(1));
+
 
 //
 //    $gp->variations->addItem($v);
