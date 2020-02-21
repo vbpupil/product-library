@@ -31,6 +31,22 @@ class Product
 
 
     /**
+     * @var bool
+     */
+    protected $featured = false;
+
+
+    /**
+     * @var bool
+     */
+    protected $best_seller = false;
+
+    /**
+     * @var bool
+     */
+    protected $new_product = false;
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -90,4 +106,54 @@ class Product
         $this->live = $live;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @param bool $featured
+     */
+    public function setFeatured(bool $featured): void
+    {
+        $this->featured = $featured;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBestSeller(): bool
+    {
+        return $this->best_seller;
+    }
+
+    /**
+     * @param bool $best_seller
+     */
+    public function setBestSeller(bool $best_seller): void
+    {
+        $this->best_seller = $best_seller;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNewProduct(): bool
+    {
+        return $this->new_product;
+    }
+
+    /**
+     * @param bool $new_product
+     */
+    public function setNewProduct(bool $new_product): void
+    {
+        $this->new_product = $new_product;
+    }
+
+
 }

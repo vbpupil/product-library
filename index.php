@@ -24,7 +24,11 @@ $simpleData =
         'descriptions' => [
             'long' => 'i am the long desc',
             'short' => 'i am the short desc'
-        ]
+        ],
+        'live' => true,
+        'featured' => true,
+        'best_seller' => true,
+        'new_product' => true,
     ];
 
 $simple = $director->buildSimpleProduct(
@@ -59,7 +63,7 @@ $v = new \vbpupil\Variation\SimpleVariation(
 );
 $general->variations->addItem($v);
 
-dump($general->variations->getItem(1));
+//dump($general->variations->getItem(1));
 
 
 //
@@ -67,7 +71,7 @@ dump($general->variations->getItem(1));
 
 
 dump($simple);
-dump($general);
+//dump($general);
 //BUILDER END
 
 

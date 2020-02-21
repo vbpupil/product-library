@@ -38,14 +38,30 @@ class ProductDirector
 
     protected function populateData(&$p, $data)
     {
-        if(!empty($data['descriptions'])){
-            foreach ($data['descriptions'] as $k => $v){
+        if (isset($data['live']) && is_bool($data['live'])) {
+            $p->setLive($data['live']);
+        }
+
+        if (isset($data['featured']) && is_bool($data['featured'])) {
+            $p->setFeatured($data['featured']);
+        }
+
+        if (isset($data['best_seller']) && is_bool($data['best_seller'])) {
+            $p->setBestSeller($data['best_seller']);
+        }
+
+        if (isset($data['new_product']) && is_bool($data['new_product'])) {
+            $p->setNewProduct($data['new_product']);
+        }
+
+        if (!empty($data['descriptions'])) {
+            foreach ($data['descriptions'] as $k => $v) {
                 $p->descriptions->addItem($v, $k);
             }
         }
 
-        if(!empty($data['variations'])){
-            foreach ($data['variations'] as $v){
+        if (!empty($data['variations'])) {
+            foreach ($data['variations'] as $v) {
 
                 $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
                     [
@@ -58,12 +74,11 @@ class ProductDirector
         }
 
 
-        if(!empty($data['options'])){
-            foreach ($data['options'] as $k => $v){
+        if (!empty($data['options'])) {
+            foreach ($data['options'] as $k => $v) {
                 $p->descriptions->addItem($v, $k);
             }
         }
-
 
 
 //        (new OptionCollection())
