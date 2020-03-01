@@ -66,7 +66,7 @@ class ProductDirector
                 $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
                     [
                         'title' => $v['title'],
-                        'productCode' => $v['productCode']
+                        'product_code' => $v['product_code']
                     ]
                 ));
 
