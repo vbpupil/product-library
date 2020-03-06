@@ -20,12 +20,12 @@ class SimpleVariation
     /**
      * @var array
      */
-    protected $required = ['productCode', 'title'];
+    protected $required = ['product_code', 'title'];
 
     /**
      * @var string
      */
-    protected $productCode;
+    protected $product_code;
     /**
      * @var string
      */
@@ -93,23 +93,23 @@ class SimpleVariation
     /**
      * @return string
      */
-    public function getProductCode(): string
+    public function getproduct_code(): string
     {
-        return $this->productCode;
+        return $this->product_code;
     }
 
     /**
-     * @param string $productCode
+     * @param string $product_code
      * @return SimpleVariation
      * @throws \Exception
      */
-    public function setProductCode(string $productCode): SimpleVariation
+    public function setproduct_code(string $product_code): SimpleVariation
     {
-        if(is_null($productCode) || $productCode == ''){
+        if(is_null($product_code) || $product_code == ''){
             throw new \Exception('Product code cannot be empty.');
         }
 
-        $this->productCode = $productCode;
+        $this->product_code = $product_code;
         return $this;
     }
 
