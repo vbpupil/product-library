@@ -54,6 +54,10 @@ class ProductDirector
             $p->setNewProduct($data['new_product']);
         }
 
+        if (isset($data['slug']) && is_bool($data['slug'])) {
+            $p->setSlug($data['slug']);
+        }
+
         if (!empty($data['descriptions'])) {
             foreach ($data['descriptions'] as $k => $v) {
                 $p->descriptions->addItem($v, $k);
