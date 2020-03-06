@@ -24,6 +24,8 @@ class Product
      */
     protected $live = false;
 
+    protected $slug = '';
+
     /**
      * @var Collection
      */
@@ -105,6 +107,22 @@ class Product
     {
         $this->live = $live;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 
     /**
