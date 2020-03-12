@@ -12,6 +12,7 @@ namespace test\vbpupil\Product;
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
 use vbpupil\Product\Product;
+use vbpupil\Variation\SimpleVariation;
 
 class ProductTest extends TestCase
 {
@@ -71,6 +72,106 @@ class ProductTest extends TestCase
         $this->assertEquals(true, $this->sut->isLive());
     }
 
+    public function testSlug()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        $this->sut->setSlug('my-ball-1');
+        $this->assertEquals('my-ball-1', $this->sut->getSlug());
+
+        $this->sut->setSlug('');
+        $this->assertEquals('', $this->sut->getSlug());
+    }
+
+    public function testFeatured()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        $this->assertFalse($this->sut->isFeatured());
+
+        $this->sut->setFeatured(true);
+        $this->assertTrue($this->sut->isFeatured());
+    }
+
+    public function testIsBestSeller()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        $this->assertFalse($this->sut->isBestSeller());
+
+        $this->sut->setBestSeller(true);
+        $this->assertTrue($this->sut->isBestSeller());
+    }
+
+    public function testIsNewProduct()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        $this->assertFalse($this->sut->isNewProduct());
+
+        $this->sut->setNewProduct(true);
+        $this->assertTrue($this->sut->isNewProduct());
+    }
+
+    public function testSettingAndGettingDescriptions()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        //create a new collection object
+        $this->sut->setDescriptions(new Collection());
+
+        //delete some descriptions
+        $this->sut->descriptions->addItem('i am testing long description', 'long');
+        $this->sut->descriptions->addItem('i am testing shorty description', 'shorty');
+
+        $this->assertEquals('i am testing shorty description', $this->sut->descriptions->getItem('shorty'));
+        $this->assertEquals(2, $this->sut->descriptions->getLength());
+
+        //delete a description
+        $this->sut->descriptions->deleteItem('shorty');
+        $this->assertEquals(1, $this->sut->descriptions->getLength());
+
+        $this->assertTrue($this->sut->descriptions->keyExists('long'));
+    }
+    public function testProductImages()
+    {
+        $this->sut = new Product(
+            'ball',
+            new Collection()
+        );
+
+        //create a new collection object
+        $this->sut->setProductImages(new Collection());
+
+        //delete some descriptions
+        $this->sut->product_images->addItem('cat.jpg');
+        $this->sut->product_images->addItem('doggy.png');
+
+        $this->assertEquals('doggy.png', $this->sut->product_images->getItem(1));
+        $this->assertEquals(2, $this->sut->product_images->getLength());
+
+        //delete a description
+        $this->sut->product_images->deleteItem(0);
+        $this->assertEquals(1, $this->sut->product_images->getLength());
+
+//        $this->assertTrue($this->sut->descriptions->keyExists('long'));
+    }
+
 
 //    public function testAddingVariations()
 //    {
@@ -100,7 +201,6 @@ class ProductTest extends TestCase
                 $this->variations
             );
         }catch(\Exception $e){
-//            echo $e->getMessage();
             $this->assertEquals('Incompatible type, must be/extend from SimpleVariation', $e->getMessage());
         }
     }

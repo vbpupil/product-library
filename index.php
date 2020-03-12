@@ -29,6 +29,10 @@ $simpleData =
         'featured' => true,
         'best_seller' => true,
         'new_product' => true,
+        'product_images' => [
+            ['path' => 'kitty.jpg'],
+            ['path' => 'dog.jpg']
+        ]
     ];
 
 $simple = $director->buildSimpleProduct(

@@ -7,12 +7,21 @@ namespace vbpupil\Product;
 use Vbpupil\Collection\Collection;
 use vbpupil\Variation\SimpleVariation;
 
+/**
+ * Class Product
+ * @package vbpupil\Product
+ */
 class Product
 {
     /**
      * @var string
      */
     protected $name = null;
+
+    /**
+     * @var Collection
+     */
+    public $product_images;
 
     /**
      * @var Collection
@@ -24,6 +33,9 @@ class Product
      */
     protected $live = false;
 
+    /**
+     * @var string
+     */
     protected $slug = '';
 
     /**
@@ -31,12 +43,10 @@ class Product
      */
     public $variations;
 
-
     /**
      * @var bool
      */
     protected $featured = false;
-
 
     /**
      * @var bool
@@ -73,6 +83,16 @@ class Product
     public function setDescriptions(Collection $descriptions): Product
     {
         $this->descriptions = $descriptions;
+        return $this;
+    }
+
+    /**
+     * @param Collection $product_images
+     * @return Product
+     */
+    public function setProductImages(Collection $product_images): Product
+    {
+        $this->product_images = $product_images;
         return $this;
     }
 

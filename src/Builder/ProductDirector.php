@@ -13,6 +13,7 @@ class ProductDirector
         $p = $product->getProduct();
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
+        $p->setProductImages(new Collection());
 
         $this->populateData($p, $data);
 
@@ -27,6 +28,7 @@ class ProductDirector
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
+        $p->setProductImages(new Collection());
 
 
         $this->populateData($p, $data);
@@ -54,7 +56,7 @@ class ProductDirector
             $p->setNewProduct($data['new_product']);
         }
 
-        if (isset($data['slug']) && is_bool($data['slug'])) {
+        if (isset($data['slug']) && $data['slug'] !== '') {
             $p->setSlug($data['slug']);
         }
 
@@ -64,16 +66,21 @@ class ProductDirector
             }
         }
 
+        //
+        if (!empty($data['product_images'])) {
+            foreach ($data['product_images'] as $k => $v) {
+                $p->product_images->addItem($v['path']);
+            }
+        }
+
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $v) {
-
                 $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
                     [
                         'title' => $v['title'],
                         'product_code' => $v['product_code']
                     ]
                 ));
-
             }
         }
 
@@ -83,21 +90,5 @@ class ProductDirector
                 $p->descriptions->addItem($v, $k);
             }
         }
-
-
-//        (new OptionCollection())
-//            ->addItem(
-//                new \vbpupil\Option\Option(
-//                    1,
-//                    '500GB SATA HDD',
-//                    4000,
-//                    1,
-//                    1000,
-//                    4900,
-//                    100,
-//                    'myprod123',
-//                    '1111122222333'
-//                )
-//            )
     }
 }

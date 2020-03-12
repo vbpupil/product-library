@@ -16,6 +16,8 @@ $prod = new SimpleProduct(
 
 $prod->setLive(true);
 
+$prod->setSlug('iphone-x'); //defines urls safe string
+
 $prod->setDescription(
     '<p>The iPhone X, pronounced "iPhone 10," was introduced at Apple\'s September 2017 event as a classic "One more thing...".</p>',
     'long_description');

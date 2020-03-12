@@ -174,10 +174,6 @@ class SinglePrice implements PriceInterface
             $price = $this->addVatByRate($price, $this->getVatRate());
         }
 
-        if (is_null($price)) {
-            throw new \Exception('Invalid Price Error');
-        }
-
         //leave as int or return human readable float?
         if ($convertToFloat) {
             return ($price / 100);
