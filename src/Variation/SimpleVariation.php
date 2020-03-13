@@ -20,7 +20,7 @@ class SimpleVariation
     /**
      * @var array
      */
-    protected $required = ['product_code', 'title'];
+    protected $required = ['title'];
 
     /**
      * @var string
