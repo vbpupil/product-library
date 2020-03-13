@@ -22,7 +22,7 @@ class SimpleVariationTest extends TestCase
     {
         $this->sut = new SimpleVariation(
             [
-                'product_code' => '532095',
+                'ProductCode' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
             ]
         );
@@ -41,26 +41,26 @@ class SimpleVariationTest extends TestCase
     {
         $this->sut = new SimpleVariation(
             [
-                'product_code' => '532095',
+                'ProductCode' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
             ]
         );
 
-        $this->assertEquals('532095', $this->sut->getproduct_code());
+        $this->assertEquals('532095', $this->sut->getProductCode());
         $this->assertEquals('SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB', $this->sut->getTitle());
 
         $this->sut->setTitle('XBOX 1');
         $this->assertEquals('XBOX 1', $this->sut->getTitle());
 
-        $this->sut->setproduct_code('XBX001');
-        $this->assertEquals('XBX001', $this->sut->getproduct_code());
+        $this->sut->setProductCode('XBX001');
+        $this->assertEquals('XBX001', $this->sut->getProductCode());
     }
 
-    public function testproduct_codeSettingThrowsAnException()
+    public function testProductCodeSettingThrowsAnException()
     {
         try {
             $sv = new SimpleVariation([
-                'product_code' => '',
+                'ProductCode' => '',
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
@@ -72,7 +72,7 @@ class SimpleVariationTest extends TestCase
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
-            $this->assertEquals('Missing Required Fields: product_code', $e->getMessage());
+            $this->assertEquals('Missing Required Fields: ProductCode', $e->getMessage());
         }
 
     }

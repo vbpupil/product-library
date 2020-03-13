@@ -74,13 +74,33 @@ class ProductDirector
         }
 
         if (!empty($data['variations'])) {
-            foreach ($data['variations'] as $v) {
-                $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
+            foreach ($data['variations'] as $k => $v) {
+                $tmpVariation = new \vbpupil\Variation\SimpleVariation(
                     [
                         'title' => $v['title'],
-                        'product_code' => $v['product_code']
                     ]
-                ));
+                );
+                $tmpVariation->setPrice(
+                    new \vbpupil\Price\SinglePrice([
+                            'vatRate' => 20,
+                            'exVat' => $v['price'],
+                            'currency' => 'GBP',
+                            'specialPriceActive' => $v['special_price_active'],
+                            'specialPriceActiveUntil' => $v['special_price_expiry'],
+                            'specialPrice' => $v['special_price']
+                        ])
+                );
+
+                $p->variations->addItem($tmpVariation);
+
+//                $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
+//                    [
+//                        'title' => $v['title'],
+//
+//                    ]
+//                ));
+
+
             }
         }
 

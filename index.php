@@ -50,7 +50,6 @@ $generalData =
         ],
         'variations' => [
             'title' => 'FFF',
-            'product_code' => 'MYPRODCODE-01'
         ]
     ];
 
@@ -62,7 +61,6 @@ $general = $director->buildGeneralProduct(
 $v = new \vbpupil\Variation\SimpleVariation(
     [
         'title' => 'FFF',
-        'product_code' => 'MYPRODCODE-01',
     ]
 );
 $general->variations->addItem($v);
@@ -74,8 +72,10 @@ $general->variations->addItem($v);
 //    $gp->variations->addItem($v);
 
 
-dump($simple);
-//dump($general);
+//dump($simple);
+dump($general);
+$b = $general->variations->getItem('0');
+var_dump($b);
 //BUILDER END
 
 
@@ -219,7 +219,7 @@ dump($simple);
 //    $v = new \vbpupil\Variation\SimpleVariation(
 //        [
 //            'title' => 'FFF',
-//            'product_code' => 'MYPRODCODE-01'
+//            'ProductCode' => 'MYPRODCODE-01'
 //        ]
 //    );
 //
