@@ -131,6 +131,46 @@ class SimpleVariation
         return $this;
     }
 
+    /**
+     * @param string $packQty
+     * @return SimpleVariation
+     */
+    public function setPackQty(int $packQty): SimpleVariation
+    {
+        $this->packQty = $packQty;
+        return $this;
+    }
+
+    /**
+     * @param string $reorderLevel
+     * @return SimpleVariation
+     */
+    public function setReorderLevel(int $reorderLevel): SimpleVariation
+    {
+        $this->reorderLevel = $reorderLevel;
+        return $this;
+    }
+
+    /**
+     * @param string $boxQty
+     * @return SimpleVariation
+     */
+    public function setBoxQty(int $boxQty): SimpleVariation
+    {
+        $this->boxQty = $boxQty;
+        return $this;
+    }
+
+    /**
+     * @param string $minOrderQty
+     * @return SimpleVariation
+     */
+    public function setMinOrderQty(int $minOrderQty): SimpleVariation
+    {
+        $this->minOrderQty = $minOrderQty;
+        return $this;
+    }
+
 
     /**
      * @param PriceInterface $price

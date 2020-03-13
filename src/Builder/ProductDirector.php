@@ -78,6 +78,10 @@ class ProductDirector
                 $tmpVariation = new \vbpupil\Variation\SimpleVariation(
                     [
                         'title' => $v['title'],
+                        'packQty' => intval($v['pack_qty']),
+                        'boxQty' => intval($v['box_qty']),
+                        'reorderLevel' => intval($v['reorder_level']),
+                        'minOrderQty' => intval($v['min_order_qty']),
                     ]
                 );
                 $tmpVariation->setPrice(
@@ -92,15 +96,6 @@ class ProductDirector
                 );
 
                 $p->variations->addItem($tmpVariation);
-
-//                $p->variations->addItem(new \vbpupil\Variation\SimpleVariation(
-//                    [
-//                        'title' => $v['title'],
-//
-//                    ]
-//                ));
-
-
             }
         }
 
