@@ -49,7 +49,28 @@ $generalData =
             'short' => 'i am the short desc'
         ],
         'variations' => [
-            'title' => 'FFF',
+            [
+                'title' => 'VARIATION 1',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ],[
+                'title' => 'VARIATION 2',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ],[
+                'title' => 'VARIATION 3',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ]
         ]
     ];
 
@@ -58,12 +79,51 @@ $general = $director->buildGeneralProduct(
     $generalData
 );
 
-$v = new \vbpupil\Variation\SimpleVariation(
+
+$generalSimpleData =
     [
-        'title' => 'FFF',
-    ]
+        'product_name' => 'PS4 v5',
+        'descriptions' => [
+            'long' => 'i am the long desc',
+            'short' => 'i am the short desc'
+        ],
+        'variations' => [
+            [
+                'title' => 'VARIATION 1',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ],[
+                'title' => 'VARIATION 2',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ],[
+                'title' => 'VARIATION 3',
+                'price' => 150,
+                'special_price'=>100,
+                'special_price_expiry'=>'2020-03-14 11:53:22',
+                'special_price_active'=>false,
+                'vat'=>20,
+            ]
+        ]
+    ];
+
+$generalSimple = $director->buildGeneralProduct(
+    new \vbpupil\Builder\GeneralSimpleProductBuilder(),
+    $generalSimpleData
 );
-$general->variations->addItem($v);
+
+//$v = new \vbpupil\Variation\SimpleVariation(
+//    [
+//        'title' => 'FFF',
+//    ]
+//);
+//$general->variations->addItem($v);
 
 //dump($general->variations->getItem(1));
 
@@ -74,8 +134,7 @@ $general->variations->addItem($v);
 
 //dump($simple);
 dump($general);
-$b = $general->variations->getItem('0');
-var_dump($b);
+dump($generalSimple);
 //BUILDER END
 
 
