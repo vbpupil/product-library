@@ -8,6 +8,8 @@ use Vbpupil\Collection\Collection;
 use vbpupil\Product\Product;
 
 /**
+ * A SIMPLE PRODUCT IS JUST THE PRODUCT - IE NO VARIANTS
+ *
  * Class SimpleProductBuilder
  * @package vbpupil\Builder
  */
@@ -73,7 +75,8 @@ class SimpleProductBuilder implements ProductBuilderInterface
      */
     public function setVariations(Collection $variations)
     {
-        $this->product->setVariations($variations);
+        //no variations exist for a simple product
+//        $this->product->setVariations($variations);
     }
 
     /**
