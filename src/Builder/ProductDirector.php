@@ -25,7 +25,7 @@ class ProductDirector
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
 
-        $this->populateData($p, $data);
+        $this->populateData($p, $data, $product);
 
         unset($p->variations);
 
@@ -47,19 +47,15 @@ class ProductDirector
         $p->setProductImages(new Collection());
 
 
-        $this->populateData($p, $data);
+        $this->populateData($p, $data, $product);
 
 
         return $p;
     }
 
 
-    /**
-     * @param $p
-     * @param $data
-     * @throws \Exception
-     */
-    protected function populateData(&$p, $data)
+
+    protected function populateData(&$p, $data, $originalObject)
     {
         if (isset($data['id']) && $data['id'] !== '') {
             $p->setId($data['id']);
@@ -111,14 +107,19 @@ class ProductDirector
                 );
                 $tmpVariation->setPrice(
                     new \vbpupil\Price\SinglePrice([
-                            'vatRate' => 20,
-                            'exVat' => intval($v['price']),
-                            'currency' => 'GBP',
-                            'specialPriceActive' => $v['special_price_active'],
-                            'specialPriceActiveUntil' => $v['special_price_expiry'],
-                            'specialPrice' => intval($v['special_price'])
-                        ])
+                        'vatRate' => 20,
+                        'exVat' => intval($v['price']),
+                        'currency' => 'GBP',
+                        'specialPriceActive' => $v['special_price_active'],
+                        'specialPriceActiveUntil' => $v['special_price_expiry'],
+                        'specialPrice' => intval($v['special_price'])
+                    ])
                 );
+
+                if ($originalObject instanceof GeneralSimpleProductBuilder) {
+                    $p->variations->addItem($tmpVariation);
+                    break;
+                }
 
                 $p->variations->addItem($tmpVariation);
             }

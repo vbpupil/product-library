@@ -8,6 +8,8 @@ use Vbpupil\Collection\Collection;
 use vbpupil\Product\Product;
 
 /**
+ * A GENERAL PRODUCT IS A PRODUCT WITH MULTIPLE VARIATIONS
+ *
  * Class GeneralProductBuilder
  * @package vbpupil\Builder
  */
