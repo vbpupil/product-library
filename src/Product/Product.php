@@ -59,6 +59,11 @@ class Product
     protected $new_product = false;
 
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -193,5 +198,19 @@ class Product
         $this->new_product = $new_product;
     }
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 }

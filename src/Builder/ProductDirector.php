@@ -6,8 +6,18 @@ namespace vbpupil\Builder;
 
 use Vbpupil\Collection\Collection;
 
+/**
+ * Class ProductDirector
+ * @package vbpupil\Builder
+ */
 class ProductDirector
 {
+    /**
+     * @param SimpleProductBuilder $product
+     * @param array $data
+     * @return \vbpupil\Product\Product
+     * @throws \Exception
+     */
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
@@ -22,6 +32,12 @@ class ProductDirector
         return $p;
     }
 
+    /**
+     * @param GeneralProductBuilder $product
+     * @param array $data
+     * @return \vbpupil\Product\Product
+     * @throws \Exception
+     */
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
@@ -38,8 +54,17 @@ class ProductDirector
     }
 
 
+    /**
+     * @param $p
+     * @param $data
+     * @throws \Exception
+     */
     protected function populateData(&$p, $data)
     {
+        if (isset($data['id']) && $data['id'] !== '') {
+            $p->setId($data['id']);
+        }
+
         if (isset($data['live']) && is_bool($data['live'])) {
             $p->setLive($data['live']);
         }
