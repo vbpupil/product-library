@@ -7,7 +7,7 @@ namespace vbpupil\Variation;
 
 use vbpupil\Exception\InvalidVariationSetupException;
 use vbpupil\Price\PriceInterface;
-use vbpupil\Variation\Validation\PriceValidationTrait;
+use vbpupil\Variation\Validation\VariantValidationTrait;
 
 /**
  * Class SimpleVariation
@@ -15,7 +15,7 @@ use vbpupil\Variation\Validation\PriceValidationTrait;
  */
 class SimpleVariation
 {
-    use PriceValidationTrait;
+    use VariantValidationTrait;
 
     /**
      * @var array

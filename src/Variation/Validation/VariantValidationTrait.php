@@ -5,12 +5,12 @@ namespace vbpupil\Variation\Validation;
 
 
 /**
- * Trait PriceValidationTrait
+ * Trait VariantValidationTrait
  * @package vbpupil\Price\Validation
  *
  * This trait is responsible for validating variation attributes
  */
-trait PriceValidationTrait
+trait VariantValidationTrait
 {
     /**
      * @param string $type

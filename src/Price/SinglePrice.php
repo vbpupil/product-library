@@ -6,7 +6,7 @@ namespace vbpupil\Price;
 
 use vbpupil\Exception\InvalidProductSetupException;
 use vbpupil\Price\Traits\PriceTrait;
-use vbpupil\Price\Validation\PriceValidationTrait;
+use vbpupil\Price\Validation\VariantValidationTrait;
 
 /**
  * Class SinglePrice
@@ -15,7 +15,7 @@ use vbpupil\Price\Validation\PriceValidationTrait;
 class SinglePrice implements PriceInterface
 {
 
-    use PriceValidationTrait, PriceTrait;
+    use VariantValidationTrait, PriceTrait;
 
     /**
      * @var array
