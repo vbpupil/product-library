@@ -10,9 +10,9 @@ namespace src\Stock;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Stock\Auditable;
-use vbpupil\Stock\AuditableAssociatedDocumentType;
-use vbpupil\Stock\AuditableType;
+use vbpupil\Stock\Auditables\Auditable;
+use vbpupil\Stock\Auditables\AuditableAssociatedDocumentType;
+use vbpupil\Stock\Auditables\AuditableType;
 
 class AuditableTest extends TestCase
 {

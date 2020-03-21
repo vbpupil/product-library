@@ -2,12 +2,11 @@
 /**
  * AuditableType.php
  * Version: 1.0.0 (09/09/19)
-
  * Author:   Dean Haines
  */
 
 
-namespace vbpupil\Stock\Auditable;
+namespace vbpupil\Stock\Auditables;
 
 use MyCLabs\Enum\Enum;
 

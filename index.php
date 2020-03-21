@@ -218,7 +218,7 @@ dump($generalSimple);
 //    $as = new AuditableStock(55, new Collections());
 //
 //    $as->addItem(
-//        new Auditable(
+//        new Auditables(
 //            2,
 //            AuditableType::SALE(),
 //            'Sold',
@@ -227,7 +227,7 @@ dump($generalSimple);
 //            115
 //        )
 //    )->addItem(
-//        new Auditable(
+//        new Auditables(
 //            2,
 //            AuditableType::RETURN_DAMAGED(),
 //            'Surplus to requirements',

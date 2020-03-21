@@ -9,6 +9,7 @@
 namespace vbpupil\Stock;
 
 use Vbpupil\Collection\Collection;
+use vbpupil\Stock\Auditables\Auditable;
 
 
 /**
@@ -50,7 +51,7 @@ class AuditableStock extends SimpleStock
     public function addItem($obj, $key = null): AuditableStock
     {
         if (!is_a($obj, Auditable::class)) {
-            throw new \Exception('Incompatible type, Must be of Type Auditable');
+            throw new \Exception('Incompatible type, Must be of Type Auditables');
         }
 
         $this->audits->addItem($obj, $key);

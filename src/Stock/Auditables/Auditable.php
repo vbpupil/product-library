@@ -1,12 +1,12 @@
 <?php
 
-namespace vbpupil\Stock\Auditable;
+namespace vbpupil\Stock\Auditables;
 
 
 use vbpupil\Traits\DateTrait;
 
 /**
- * Class Auditable
+ * Class Auditables
  * @package vbpupil\Stock
  *
  * An auditable is an object which is to be used to explain stock in both directions.
@@ -57,7 +57,7 @@ class Auditable
     protected $associatedDocID;
 
     /**
-     * Auditable constructor.
+     * Auditables constructor.
      * @param int $qty - the amount being booked in/out
      * @param AuditableType $type - the type of transaction book in/book out etc
      * @param string $description - any additional info offered by the end user

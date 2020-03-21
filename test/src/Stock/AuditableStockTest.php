@@ -12,7 +12,7 @@ namespace src\Stock;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Stock\Auditable;
+use vbpupil\Stock\Auditables\Auditable;
 use vbpupil\Stock\AuditableStock;
 
 class AuditableStockTest extends TestCase
@@ -52,7 +52,7 @@ class AuditableStockTest extends TestCase
         try {
             $this->sut->addItem('test');
         } catch (\Exception $e) {
-            $this->assertEquals('Incompatible type, Must be of Type Auditable', $e->getMessage());
+            $this->assertEquals('Incompatible type, Must be of Type Auditables', $e->getMessage());
         }
     }
 

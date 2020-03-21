@@ -7,7 +7,7 @@
  */
 
 
-namespace vbpupil\Stock\Auditable;
+namespace vbpupil\Stock\Auditables;
 
 use MyCLabs\Enum\Enum;
 
