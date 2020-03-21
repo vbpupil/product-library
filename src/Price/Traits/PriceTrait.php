@@ -2,7 +2,6 @@
 /**
  * PriceTrait.php.
  * Version: 1.0.0 (04/09/19)
- * Copyright: Freetimers Internet
  * Author:   Dean Haines
  */
 
@@ -58,5 +57,22 @@ trait PriceTrait
         }
 
         return $formatted;
+    }
+
+    /**
+     * @param string $type
+     * @param string $value
+     * @param $errLog
+     * @return string
+     */
+    protected function validateProductPriceAttribute(string $type, $value, string &$errLog)
+    {
+        switch ($type) {
+            case 'specialPriceActiveUntil':
+                if (!preg_match('~^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$~', $value)) {
+                    $errLog .= "Invalid {$type} Supplied - must be in the format: 2019-01-01 11:42:00<br>";
+                }
+                break;
+        }
     }
 }

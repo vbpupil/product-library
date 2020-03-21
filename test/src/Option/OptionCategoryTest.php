@@ -2,7 +2,7 @@
 /**
  * OptionCategoryTest.php.
  * Version: 1.0.0 (18/09/19)
- * Copyright: Freetimers Internet
+
  * Author:   Dean Haines
  */
 

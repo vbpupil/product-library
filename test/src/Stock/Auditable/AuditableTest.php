@@ -1,7 +1,7 @@
 <?php
 /**
  * AuditableTest.phpVersion: 1.0.0 (10/09/19)
- * Copyright: Freetimers Internet
+
  * Author:   Dean Haines
  */
 

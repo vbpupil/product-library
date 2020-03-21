@@ -6,7 +6,7 @@ namespace vbpupil\Price;
 
 use vbpupil\Exception\InvalidProductSetupException;
 use vbpupil\Price\Traits\PriceTrait;
-use vbpupil\Price\Validation\VariantValidationTrait;
+use vbpupil\Variation\Validation\VariantValidationTrait;
 
 /**
  * Class SinglePrice

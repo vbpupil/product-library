@@ -1,6 +1,7 @@
 ## Quality Assurance
 
 ![PHP 7.2](https://img.shields.io/badge/PHP-7.2-blue.svg)
+[![Build Status](https://travis-ci.org/vbpupil/product-library.svg?branch=master)](https://travis-ci.org/vbpupil/product-library)
 
 # ProductLibrary
 A Product Object can have many components based on how complicated your requirements are. Below outlines the general configurations:

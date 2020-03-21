@@ -1,7 +1,7 @@
 <?php
 /**
  * SimpleStock.phprsion: 1.0.0 (09/09/19)
- * Copyright: Freetimers Internet
+
  * Author:   Dean Haines
  */
 

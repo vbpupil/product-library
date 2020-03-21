@@ -2,7 +2,7 @@
 /**
  * SinglePriceTest.php.
  * Version: 1.0.0 (04/09/19)
- * Copyright: Freetimers Internet
+
  * Author:   Dean Haines
  */
 
