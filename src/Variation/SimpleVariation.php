@@ -5,7 +5,9 @@ namespace vbpupil\Variation;
 
 
 
+use Vbpupil\Collection\Collection;
 use vbpupil\Exception\InvalidVariationSetupException;
+use vbpupil\Option\OptionCategory;
 use vbpupil\Price\PriceInterface;
 use vbpupil\Variation\Validation\VariantValidationTrait;
 
@@ -35,6 +37,11 @@ class SimpleVariation
      * @var PriceInterface
      */
     protected $price;
+
+    /**
+     * @var Collection
+     */
+    public $options;
 
 
     /**
@@ -190,6 +197,24 @@ class SimpleVariation
     {
         return $this->price->getPrice($includingVat, $convertToFloat, $qty);
     }
+
+    /**
+     * @return Collection
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param Collection $options
+     */
+    public function setOptions(Collection $options): void
+    {
+        $this->options = $options;
+    }
+
+
 
 
 }
