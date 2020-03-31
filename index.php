@@ -52,32 +52,32 @@ $generalData =
             [
                 'title' => 'VARIATION 1',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
-            ],[
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
+            ], [
                 'title' => 'VARIATION 2',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
-            ],[
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
+            ], [
                 'title' => 'VARIATION 3',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
             ]
         ]
     ];
 
-$general = $director->buildGeneralProduct(
-    new \vbpupil\Builder\GeneralProductBuilder(),
-    $generalData
-);
+//$general = $director->buildGeneralProduct(
+//    new \vbpupil\Builder\GeneralProductBuilder(),
+//    $generalData
+//);
 
 
 $generalSimpleData =
@@ -91,24 +91,54 @@ $generalSimpleData =
             [
                 'title' => 'VARIATION 1',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
-            ],[
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
+                'option_categories' => [
+                    [
+                        'id' => 12,
+                        'title' => 'Colour',
+                        'options' => [
+                            [
+                                'id' => 74,
+                                'title' => 'red',
+                                'price_ex_vat' => 500,
+                                'qty' => 1,
+                                'cost_ex_vat' => 100,
+                                'rrp_ex_vat' => 700,
+                                'weight' => 75,
+                                'product_code' => 'test_prod_code_123X',
+                                'ean' => '1111122222333'
+                            ],
+                            [
+                                'id' => 77,
+                                'title' => 'blue',
+                                'price_ex_vat' => 1000,
+                                'qty' => 1,
+                                'cost_ex_vat' => 200,
+                                'rrp_ex_vat' => 1400,
+                                'weight' => 150,
+                                'product_code' => 'second_test_prod_code_123X',
+                                'ean' => '5558889997777'
+                            ],
+                        ]
+                    ]
+                ]
+            ], [
                 'title' => 'VARIATION 2',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
-            ],[
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
+            ], [
                 'title' => 'VARIATION 3',
                 'price' => 150,
-                'special_price'=>100,
-                'special_price_expiry'=>'2020-03-14 11:53:22',
-                'special_price_active'=>false,
-                'vat'=>20,
+                'special_price' => 100,
+                'special_price_expiry' => '2020-03-14 11:53:22',
+                'special_price_active' => false,
+                'vat' => 20,
             ]
         ]
     ];
@@ -133,7 +163,7 @@ $generalSimple = $director->buildGeneralProduct(
 
 
 //dump($simple);
-dump($general);
+//dump($general);
 dump($generalSimple);
 //BUILDER END
 

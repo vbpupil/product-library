@@ -5,6 +5,7 @@ namespace vbpupil\Builder;
 
 
 use Vbpupil\Collection\Collection;
+use vbpupil\Collections\OptionCollection;
 
 /**
  * Class ProductDirector
@@ -52,7 +53,6 @@ class ProductDirector
 
         return $p;
     }
-
 
 
     protected function populateData(&$p, $data, $originalObject)
@@ -115,6 +115,47 @@ class ProductDirector
                         'specialPrice' => intval($v['special_price'])
                     ])
                 );
+
+                $tmpVariation->setOptions(new Collection());
+
+                $have_options = false;
+                //if options exists do - look into now
+                foreach ($v['option_categories'] as $cat) {
+                    if (empty($cat['options'])) {
+                        continue;
+                    }
+
+                    $tmp_cat_options = new OptionCollection();
+
+                    foreach ($cat['options'] as $opt) {
+                        $tmp_cat_options->addItem(
+                            new \vbpupil\Option\Option(
+                                $opt['id'],
+                                $opt['title'],
+                                $opt['price_ex_vat'],
+                                $opt['qty'],
+                                $opt['cost_ex_vat'],
+                                $opt['rrp_ex_vat'],
+                                $opt['weight'],
+                                $opt['prod_code'],
+                                $opt['ean']
+                            )
+                        );
+                    }
+
+                    $tmp_opt_cat = new \vbpupil\Option\OptionCategory(
+                        $cat['id'],
+                        $cat['title'],
+                        $tmp_cat_options
+                    );
+
+                    $have_options = true;
+                    $tmpVariation->options->addItem($tmp_opt_cat);
+                }
+
+                if ($have_options) {
+                }
+
 
                 if ($originalObject instanceof GeneralSimpleProductBuilder) {
                     $p->variations->addItem($tmpVariation);
