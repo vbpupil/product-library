@@ -125,20 +125,6 @@ $generalSimpleData =
                         ]
                     ]
                 ]
-            ], [
-                'title' => 'VARIATION 2',
-                'price' => 150,
-                'special_price' => 100,
-                'special_price_expiry' => '2020-03-14 11:53:22',
-                'special_price_active' => false,
-                'vat' => 20,
-            ], [
-                'title' => 'VARIATION 3',
-                'price' => 150,
-                'special_price' => 100,
-                'special_price_expiry' => '2020-03-14 11:53:22',
-                'special_price_active' => false,
-                'vat' => 20,
             ]
         ]
     ];
