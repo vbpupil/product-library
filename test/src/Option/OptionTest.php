@@ -91,13 +91,13 @@ class OptionTest extends TestCase
         $this->assertEquals(5, $this->sut->getQty());
     }
 
-    public function testGetProductCode()
+    public function testGetproduct_code()
     {
-        $this->assertEquals('myprod123', $this->sut->getProductCode());
+        $this->assertEquals('myprod123', $this->sut->getproduct_code());
 
-        $this->sut->setProductCode('myprod246');
+        $this->sut->setproduct_code('myprod246');
 
-        $this->assertEquals('myprod246', $this->sut->getProductCode());
+        $this->assertEquals('myprod246', $this->sut->getproduct_code());
     }
 
     public function testGetEan()

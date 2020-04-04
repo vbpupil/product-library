@@ -27,7 +27,7 @@ class SimpleVariation
     /**
      * @var string
      */
-    protected $ProductCode;
+    protected $product_code;
     /**
      * @var string
      */
@@ -100,23 +100,23 @@ class SimpleVariation
     /**
      * @return string
      */
-    public function getProductCode(): string
+    public function getproduct_code(): string
     {
-        return $this->ProductCode;
+        return $this->product_code;
     }
 
     /**
-     * @param string $ProductCode
+     * @param string $product_code
      * @return SimpleVariation
      * @throws \Exception
      */
-    public function setProductCode(string $ProductCode): SimpleVariation
+    public function setproduct_code(string $product_code): SimpleVariation
     {
-        if(is_null($ProductCode) || $ProductCode == ''){
+        if(is_null($product_code) || $product_code == ''){
             throw new \Exception('Product code cannot be empty.');
         }
 
-        $this->ProductCode = $ProductCode;
+        $this->product_code = $product_code;
         return $this;
     }
 

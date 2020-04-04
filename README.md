@@ -58,7 +58,7 @@ To add a Variation:
     $myVariation = new \vbpupil\Variation\SimpleVariation(
             [
                 'title' => 'FFF',
-                'ProductCode' => 'MYPRODCODE-01'
+                'product_code' => 'MYPRODCODE-01'
             ]
         );
     
