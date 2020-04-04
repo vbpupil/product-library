@@ -71,11 +71,11 @@ class Option
      * @param int|null $rrp_ex_vat
      * @param int|null $weight
      * @param null|string $prod_code
-     * @param int|null $ean
+     * @param string|null $ean
      * @throws \Exception
      */
     public function __construct(?int $id, string $title, int $price, int $qty, ?int $cost_ex_vat,
-                                ?int $rrp_ex_vat, ?int $weight, ?string $prod_code, ?int $ean
+                                ?int $rrp_ex_vat, ?int $weight, ?string $prod_code, ?string $ean
     )
     {
         $this->setId($id);
@@ -230,8 +230,10 @@ class Option
      */
     public function setEan(?string $ean): Option
     {
-        if(!$this->isEan($ean)){
-            throw new \Exception('Invalid EAN.');
+        if (!is_null($ean)) {
+            if (!$this->isEan($ean)) {
+                throw new \Exception('Invalid EAN.');
+            }
         }
 
         $this->ean = $ean;
