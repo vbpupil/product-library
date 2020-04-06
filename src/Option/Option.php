@@ -128,7 +128,7 @@ class Option
     /**
      * @return int
      */
-    public function getPriceExVat(): int
+    public function getPriceExVat()
     {
         return $this->price_ex_vat;
     }
@@ -139,14 +139,14 @@ class Option
      */
     public function setPriceExVat(int $price_ex_vat): Option
     {
-        $this->price_ex_vat = $price_ex_vat;
+        $this->price_ex_vat = ($price_ex_vat / 100);
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getCostExVat(): ?int
+    public function getCostExVat()
     {
         return $this->cost_ex_vat;
     }
@@ -157,14 +157,14 @@ class Option
      */
     public function setCostExVat(?int $cost_ex_vat): Option
     {
-        $this->cost_ex_vat = $cost_ex_vat;
+        $this->cost_ex_vat = ($cost_ex_vat / 100);
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getRrpExVat(): ?int
+    public function getRrpExVat()
     {
         return $this->rrp_ex_vat;
     }
@@ -175,14 +175,14 @@ class Option
      */
     public function setRrpExVat(?int $rrp_ex_vat): Option
     {
-        $this->rrp_ex_vat = $rrp_ex_vat;
+        $this->rrp_ex_vat = ($rrp_ex_vat/100);
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getWeight(): ?int
+    public function getWeight()
     {
         return $this->weight;
     }
@@ -193,7 +193,7 @@ class Option
      */
     public function setWeight(?int $weight): Option
     {
-        $this->weight = $weight;
+        $this->weight = ($weight/100);
         return $this;
     }
 

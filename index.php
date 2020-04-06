@@ -97,7 +97,7 @@ $generalSimpleData =
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
-                'vat' => 20,
+                'vat' => 2000,
                 'option_categories' => [
                     [
                         'id' => 12,
@@ -106,7 +106,7 @@ $generalSimpleData =
                             [
                                 'id' => 74,
                                 'title' => 'red',
-                                'price_ex_vat' => 500,
+                                'price_ex_vat' => 3290,
                                 'qty' => 1,
                                 'cost_ex_vat' => 100,
                                 'rrp_ex_vat' => 700,
