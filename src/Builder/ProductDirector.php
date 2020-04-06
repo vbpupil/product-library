@@ -22,6 +22,7 @@ class ProductDirector
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
+        $p->setType($data['type']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
@@ -42,6 +43,7 @@ class ProductDirector
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
+        $p->setType($data['type']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
