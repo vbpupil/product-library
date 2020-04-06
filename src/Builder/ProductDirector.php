@@ -120,14 +120,14 @@ class ProductDirector
 
                 $have_options = false;
                 //if options exists do - look into now
-                foreach ($v['option_categories'] as $cat) {
-                    if (empty($cat['options'])) {
+                foreach ($v['option_categories'] as $k1 => $v1) {
+                    if (empty($v1['options'])) {
                         continue;
                     }
 
                     $tmp_cat_options = new OptionCollection();
 
-                    foreach ($cat['options'] as $opt) {
+                    foreach ($v1['options'] as $opt) {
                         $tmp_cat_options->addItem(
                             new \vbpupil\Option\Option(
                                 $opt['id'],
@@ -144,8 +144,8 @@ class ProductDirector
                     }
 
                     $tmp_opt_cat = new \vbpupil\Option\OptionCategory(
-                        $cat['id'],
-                        $cat['title'],
+                        $v1['id'],
+                        $v1['title'],
                         $tmp_cat_options
                     );
 
