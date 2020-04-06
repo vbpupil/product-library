@@ -20,6 +20,7 @@ $generalData = [];
 
 $simpleData =
     [
+        'type' => 'simpleProduct',
         'product_name' => 'PS4 1st edition',
         'descriptions' => [
             'long' => 'i am the long desc',
@@ -43,6 +44,7 @@ $simple = $director->buildSimpleProduct(
 
 $generalData =
     [
+        'type' => 'generalProduct',
         'product_name' => 'PS4 v5',
         'descriptions' => [
             'long' => 'i am the long desc',
@@ -82,6 +84,7 @@ $generalData =
 
 $generalSimpleData =
     [
+        'type' => 'generalSimpleProduct',
         'product_name' => 'PS4 v5',
         'descriptions' => [
             'long' => 'i am the long desc',
@@ -148,8 +151,8 @@ $generalSimple = $director->buildGeneralProduct(
 //    $gp->variations->addItem($v);
 
 
-//dump($simple);
-//dump($general);
+dump($simple);
+dump($general);
 dump($generalSimple);
 //BUILDER END
 
