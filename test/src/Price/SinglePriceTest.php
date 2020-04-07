@@ -77,10 +77,10 @@ class SinglePriceTest extends TestCase
         ]);
 
         //sp with vat
-        $this->assertEquals(6.00, number_format($p->getPrice(true), 2, '.', '.'));
+        $this->assertEquals(6.00, number_format($p->getPricing(true), 2, '.', '.'));
 
         //sp without vat
-        $this->assertEquals(5.00, number_format($p->getPrice(), 2, '.', '.'));
+        $this->assertEquals(5.00, number_format($p->getPricing(), 2, '.', '.'));
 
 
         $p = new SinglePrice([
@@ -93,10 +93,10 @@ class SinglePriceTest extends TestCase
         ]);
 
         //with vat
-        $this->assertEquals(14.40, number_format($p->getPrice(true), 2, '.', '.'));
+        $this->assertEquals(14.40, number_format($p->getPricing(true), 2, '.', '.'));
 
         //without vat
-        $this->assertEquals(12.00, number_format($p->getPrice(), 2, '.', '.'));
+        $this->assertEquals(12.00, number_format($p->getPricing(), 2, '.', '.'));
     }
 
 

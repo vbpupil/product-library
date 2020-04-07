@@ -156,7 +156,7 @@ class SinglePrice implements PriceInterface
      * @return float|int|null
      * @throws \Exception
      */
-    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
+    public function getPricing(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
     {
         $price = null;
 
@@ -194,7 +194,7 @@ class SinglePrice implements PriceInterface
         if ($dynamicValue) {
             if ($this->isOnSpecial()) {
                 return $this->getVatElement(
-                    ($this->getPrice() * 100),
+                    ($this->getPricing() * 100),
                     $this->getVatRate()
                 );
             }
@@ -353,7 +353,7 @@ class SinglePrice implements PriceInterface
     public
     function toString()
     {
-        $exVatPrice = $this->getPrice();
+        $exVatPrice = $this->getPricing();
         $exVatPriceString = number_format($exVatPrice, 2, '.', '.');
         $vatRate = $this->getVatRate();
         $vatElement = $this->getVatElement($exVatPrice, $vatRate);
