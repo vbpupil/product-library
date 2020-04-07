@@ -27,7 +27,7 @@ class OptionTest extends TestCase
             1,
             1200,
             4900,
-            1575,
+            150,
             'myprod123',
             '111111111111'
         );
@@ -75,7 +75,7 @@ class OptionTest extends TestCase
 
     public function testGetWeight()
     {
-        $this->assertEquals(15.75, $this->sut->getWeight());
+        $this->assertEquals(1.5, $this->sut->getWeight());
 
         $this->sut->setWeight(null);
 

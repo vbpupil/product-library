@@ -352,7 +352,7 @@ dump($generalSimple);
 //
 //
 //    dump($p);
-//    $price = number_format($p->getPricing(true), 2, '.', '.');
+//    $price = number_format($p->getPrice(true), 2, '.', '.');
 //    $exvat = number_format(($p->getExVat() / 100), 2, '.', '.');
 //
 //    echo <<<EOD

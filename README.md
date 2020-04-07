@@ -70,7 +70,7 @@ To add a Variation:
 ## Pricing
 
 ### SinglePrice
-This handles most use cases when a product variation may have a few prices attributed to it such as price, special price, cost price etc but will only be sold for a single price. When asking the object for its **getPricing()**
+This handles most use cases when a product variation may have a few prices attributed to it such as price, special price, cost price etc but will only be sold for a single price. When asking the object for its **getPrice()**
 method you will be returned a single price. Note the object will run a check to see if the Special price is set/valid and return that if true, if not the sell price will be returned.
 
 ### MatrixPrice

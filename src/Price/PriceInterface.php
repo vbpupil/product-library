@@ -11,5 +11,5 @@ namespace vbpupil\Price;
 
 interface PriceInterface
 {
-    public function getPricing(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1);
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1);
 }

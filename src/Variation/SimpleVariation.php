@@ -195,7 +195,7 @@ class SimpleVariation
      */
     public function getPrice(bool $includingVat, bool $convertToFloat = true, int $qty = 1)
     {
-        return $this->price->getPricing($includingVat, $convertToFloat, $qty);
+        return $this->price->getPrice($includingVat, $convertToFloat, $qty);
     }
 
     /**
