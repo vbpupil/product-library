@@ -110,7 +110,7 @@ class ProductDirector
                 $tmpVariation->setPrice(
                     new \vbpupil\Price\SinglePrice([
                         'vatRate' => ($v['vat'] !== '' ? $v['vat'] : 20),
-                        'exVat' => intval($v['prices']),
+                        'exVat' => intval($v['price']),
                         'currency' => 'GBP',
                         'specialPriceActive' => $v['special_price_active'],
                         'specialPriceActiveUntil' => $v['special_price_expiry'],
