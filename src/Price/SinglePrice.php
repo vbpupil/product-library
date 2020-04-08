@@ -65,6 +65,8 @@ class SinglePrice implements PriceInterface
      */
     protected $timestampNow;
 
+    protected $wasPrice = 0;
+
 
     /**
      * SinglePrice constructor.
@@ -159,12 +161,11 @@ class SinglePrice implements PriceInterface
     public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
     {
         $price = null;
-        $this->was_price = 0;
 
         //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
             $price = $this->getSpecialPrice();
-            $this->was_price = ($includingVat ? $this->addVatByRate($price, $this->getVatRate()) : $this->getExVat());
+            $this->wasPrice = ($includingVat ? $this->addVatByRate($price, $this->getVatRate()) : $this->getExVat());
         }
 
         if (is_null($price)) {
@@ -375,6 +376,7 @@ Price (Inc VAT): {$incVatPriceString}<br><br>
 Special Price Active: {$isSpecialPriceActive}<br>
 *******************************
 EOD;
-
     }
+
+
 }
