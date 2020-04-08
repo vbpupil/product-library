@@ -159,6 +159,7 @@ class SinglePrice implements PriceInterface
     public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
     {
         $price = null;
+        $this->was_price = 0;
 
         //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
