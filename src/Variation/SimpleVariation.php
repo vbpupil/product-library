@@ -36,7 +36,7 @@ class SimpleVariation
     /**
      * @var PriceInterface
      */
-    protected $prices;
+    public $prices;
 
     /**
      * @var Collection
