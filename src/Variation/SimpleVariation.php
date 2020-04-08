@@ -36,7 +36,7 @@ class SimpleVariation
     /**
      * @var PriceInterface
      */
-    protected $price;
+    protected $prices;
 
     /**
      * @var Collection
@@ -180,11 +180,11 @@ class SimpleVariation
 
 
     /**
-     * @param PriceInterface $price
+     * @param PriceInterface $prices
      */
-    public function setPrice(PriceInterface $price)
+    public function setPrice(PriceInterface $prices)
     {
-        $this->price = $price;
+        $this->prices = $prices;
     }
 
     /**
@@ -195,7 +195,7 @@ class SimpleVariation
      */
     public function getPrice(bool $includingVat, bool $convertToFloat = true, int $qty = 1)
     {
-        return $this->price->getPrice($includingVat, $convertToFloat, $qty);
+        return $this->prices->getPrice($includingVat, $convertToFloat, $qty);
     }
 
     /**

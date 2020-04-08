@@ -10,7 +10,7 @@ namespace vbpupil\Price\Traits;
 trait PriceTrait
 {
     /**
-     * adds vat rate to a price
+     * adds vat rate to a prices
      * @param int $value
      * @param float $rate
      * @return float|int

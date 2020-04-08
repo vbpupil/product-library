@@ -175,7 +175,7 @@ Special Price Active: false<br>
                 'specialPrice' => 500
             ]);
         } catch (InvalidProductSetupException $e) {
-            $this->assertEquals('ExVat price must be an INT', $e->getMessage());
+            $this->assertEquals('ExVat prices must be an INT', $e->getMessage());
         }
 
         try {
@@ -188,7 +188,7 @@ Special Price Active: false<br>
                 'specialPrice' => 500
             ]);
         } catch (InvalidProductSetupException $e) {
-            $this->assertEquals('ExVat price must be an INT', $e->getMessage());
+            $this->assertEquals('ExVat prices must be an INT', $e->getMessage());
         }
     }
 

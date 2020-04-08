@@ -61,7 +61,7 @@ class SinglePrice implements PriceInterface
     /**
      * @var string
      *
-     * used in timestamp calculations such as when comparing dates to see if special price is still valid
+     * used in timestamp calculations such as when comparing dates to see if special prices is still valid
      */
     protected $timestampNow;
 
@@ -149,7 +149,7 @@ class SinglePrice implements PriceInterface
     }
 
     /**
-     * filters down what we know about he price and throws out the final price
+     * filters down what we know about he prices and throws out the final prices
      * @param bool $includingVat
      * @param bool $convertToFloat
      * @param int $qty
@@ -160,7 +160,7 @@ class SinglePrice implements PriceInterface
     {
         $price = null;
 
-        //check to see if qualifies for the special price
+        //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
             $price = $this->getSpecialPrice();
         }
@@ -212,7 +212,7 @@ class SinglePrice implements PriceInterface
     function setExVat($exVat): SinglePrice
     {
         if (is_string($exVat) || is_float($exVat)) {
-            throw new InvalidProductSetupException('ExVat price must be an INT');
+            throw new InvalidProductSetupException('ExVat prices must be an INT');
         }
 
         $this->exVat = $exVat;
