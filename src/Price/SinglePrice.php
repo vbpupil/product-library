@@ -359,8 +359,7 @@ class SinglePrice implements PriceInterface
         return $this;
     }
 
-    public
-    function toString()
+    public function toString()
     {
         $exVatPrice = $this->getPrice();
         $exVatPriceString = number_format($exVatPrice, 2, '.', '.');
@@ -382,6 +381,22 @@ Price (Inc VAT): {$incVatPriceString}<br><br>
 Special Price Active: {$isSpecialPriceActive}<br>
 *******************************
 EOD;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWasPrice()
+    {
+        return $this->wasPrice;
+    }
+
+    /**
+     * @param int $wasPrice
+     */
+    public function setWasPrice(int $wasPrice): void
+    {
+        $this->wasPrice = $wasPrice;
     }
 
 
