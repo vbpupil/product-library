@@ -53,21 +53,21 @@ $generalData =
         'variations' => [
             [
                 'title' => 'VARIATION 1',
-                'price' => 150,
+                'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 20,
             ], [
                 'title' => 'VARIATION 2',
-                'price' => 150,
+                'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 20,
             ], [
                 'title' => 'VARIATION 3',
-                'price' => 150,
+                'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
@@ -93,7 +93,7 @@ $generalSimpleData =
         'variations' => [
             [
                 'title' => 'VARIATION 1',
-                'price' => 150,
+                'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
@@ -339,7 +339,7 @@ dump($generalSimple);
 
 //$v = new Vbpupil\Variation\SimpleVariation();
 
-//single price start
+//single prices start
 //try {
 //    $p = new \vbpupil\Price\SinglePrice([
 //        'vatRate' => 20,
@@ -352,12 +352,12 @@ dump($generalSimple);
 //
 //
 //    dump($p);
-//    $price = number_format($p->getPrice(true), 2, '.', '.');
+//    $prices = number_format($p->getPrice(true), 2, '.', '.');
 //    $exvat = number_format(($p->getExVat() / 100), 2, '.', '.');
 //
 //    echo <<<EOD
 //EX VAT: {$p->formatPrice('getExVat')}<br>
-//Price: {$p->getSymbol()}{$price}<br>
+//Price: {$p->getSymbol()}{$prices}<br>
 //Ex Vat (non dynamic): {$p->getSymbol()}{$exvat}<br>
 //EOD;
 //
@@ -369,4 +369,4 @@ dump($generalSimple);
 //} catch (\Exception $e) {
 //    echo $e->getMessage();
 //}
-//single price end
+//single prices end
