@@ -165,7 +165,13 @@ class SinglePrice implements PriceInterface
         //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
             $price = $this->getSpecialPrice();
-            $this->wasPrice = ($includingVat ? $this->addVatByRate($this->getExVat(), $this->getVatRate()) : $this->getExVat());
+            $this->wasPrice = ($includingVat ?
+                intval(
+                    ceil(
+                        $this->addVatByRate($this->getExVat(), $this->getVatRate()
+                        )
+                    )
+                ) : $this->getExVat());
         }
 
         if (is_null($price)) {
