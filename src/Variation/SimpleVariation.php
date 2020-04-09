@@ -20,6 +20,12 @@ class SimpleVariation
     use VariantValidationTrait;
 
     /**
+     * @var int
+     */
+    protected $id;
+
+
+    /**
      * @var array
      */
     protected $required = ['title'];
@@ -96,6 +102,24 @@ class SimpleVariation
             throw new InvalidVariationSetupException("Missing Required Fields: {$err}");
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+
 
     /**
      * @return string
