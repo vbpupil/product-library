@@ -52,12 +52,12 @@ class OptionTest extends TestCase
 
     public function testGetPriceExVat()
     {
-        $this->assertEquals(40, $this->sut->getPriceExVat());
+        $this->assertEquals(4000, $this->sut->getPriceExVat());
     }
 
     public function testGetCostExVat()
     {
-        $this->assertEquals(12, $this->sut->getCostExVat());
+        $this->assertEquals(1200, $this->sut->getCostExVat());
 
         $this->sut->setCostExVat(null);
 
@@ -66,7 +66,7 @@ class OptionTest extends TestCase
 
     public function testGetRrpExVat()
     {
-        $this->assertEquals(49, $this->sut->getRrpExVat());
+        $this->assertEquals(4900, $this->sut->getRrpExVat());
 
         $this->sut->setRrpExVat(null);
 
@@ -75,7 +75,7 @@ class OptionTest extends TestCase
 
     public function testGetWeight()
     {
-        $this->assertEquals(1.5, $this->sut->getWeight());
+        $this->assertEquals(150, $this->sut->getWeight());
 
         $this->sut->setWeight(null);
 
