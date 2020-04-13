@@ -49,6 +49,11 @@ class SimpleVariation
      */
     public $options;
 
+    /**
+     * @var int
+     */
+    protected $packQty, $setReorderLevel, $setBoxQty, $minOrderQty;
+
 
     /**
      * SimpleVariation constructor.
@@ -163,7 +168,7 @@ class SimpleVariation
     }
 
     /**
-     * @param string $packQty
+     * @param int $packQty
      * @return SimpleVariation
      */
     public function setPackQty(int $packQty): SimpleVariation
@@ -173,7 +178,7 @@ class SimpleVariation
     }
 
     /**
-     * @param string $reorderLevel
+     * @param int $reorderLevel
      * @return SimpleVariation
      */
     public function setReorderLevel(int $reorderLevel): SimpleVariation
@@ -183,7 +188,7 @@ class SimpleVariation
     }
 
     /**
-     * @param string $boxQty
+     * @param int $boxQty
      * @return SimpleVariation
      */
     public function setBoxQty(int $boxQty): SimpleVariation
@@ -193,13 +198,45 @@ class SimpleVariation
     }
 
     /**
-     * @param string $minOrderQty
+     * @param int $minOrderQty
      * @return SimpleVariation
      */
     public function setMinOrderQty(int $minOrderQty): SimpleVariation
     {
         $this->minOrderQty = $minOrderQty;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackQty(): int
+    {
+        return $this->packQty;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSetReorderLevel(): int
+    {
+        return $this->setReorderLevel;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSetBoxQty(): int
+    {
+        return $this->setBoxQty;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMinOrderQty(): int
+    {
+        return $this->minOrderQty;
     }
 
 
