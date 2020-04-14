@@ -205,9 +205,16 @@ class ProductTest extends TestCase
         }
     }
 
-    public function setDescription()
+    public function testGetAndSetId()
     {
-        
+        $this->sut->setId(123);
+        $this->assertEquals(123, $this->sut->getId());
+    }
+
+    public function testGetAndSetType()
+    {
+        $this->sut->setType('MyTypeTest');
+        $this->assertEquals('MyTypeTest', $this->sut->getType());
     }
 
 

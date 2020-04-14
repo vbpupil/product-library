@@ -4,11 +4,11 @@
 namespace vbpupil\Variation;
 
 
-
 use Vbpupil\Collection\Collection;
 use vbpupil\Exception\InvalidVariationSetupException;
 use vbpupil\Option\OptionCategory;
 use vbpupil\Price\PriceInterface;
+use vbpupil\Traits\CodeTypes;
 use vbpupil\Variation\Validation\VariantValidationTrait;
 
 /**
@@ -17,7 +17,7 @@ use vbpupil\Variation\Validation\VariantValidationTrait;
  */
 class SimpleVariation
 {
-    use VariantValidationTrait;
+    use VariantValidationTrait, CodeTypes;
 
     /**
      * @var int
@@ -33,11 +33,8 @@ class SimpleVariation
     /**
      * @var string
      */
-    protected $product_code;
-    /**
-     * @var string
-     */
-    protected $title;
+    protected $product_code, $barcode, $title;
+
 
     /**
      * @var PriceInterface
@@ -52,7 +49,7 @@ class SimpleVariation
     /**
      * @var int
      */
-    protected $packQty, $setReorderLevel, $setBoxQty, $minOrderQty;
+    protected $packQty, $reorderLevel, $boxQty, $minOrderQty;
 
 
     /**
@@ -125,7 +122,6 @@ class SimpleVariation
     }
 
 
-
     /**
      * @return string
      */
@@ -141,7 +137,7 @@ class SimpleVariation
      */
     public function setproduct_code(string $product_code): SimpleVariation
     {
-        if(is_null($product_code) || $product_code == ''){
+        if (is_null($product_code) || $product_code == '') {
             throw new \Exception('Product code cannot be empty.');
         }
 
@@ -218,17 +214,17 @@ class SimpleVariation
     /**
      * @return int
      */
-    public function getSetReorderLevel(): int
+    public function getReorderLevel(): int
     {
-        return $this->setReorderLevel;
+        return $this->reorderLevel;
     }
 
     /**
      * @return int
      */
-    public function getSetBoxQty(): int
+    public function getBoxQty(): int
     {
-        return $this->setBoxQty;
+        return $this->boxQty;
     }
 
     /**
@@ -254,7 +250,7 @@ class SimpleVariation
      * @param int $qty
      * @return mixed
      */
-    public function getPrice(bool $includingVat, bool $convertToFloat = true, int $qty = 1)
+    public function getPrice(bool $includingVat, bool $convertToFloat = false, int $qty = 1)
     {
         return $this->prices->getPrice($includingVat, $convertToFloat, $qty);
     }
@@ -275,7 +271,27 @@ class SimpleVariation
         $this->options = $options;
     }
 
+    /**
+     * @return string
+     */
+    public function getBarcode(): string
+    {
+        return $this->barcode;
+    }
 
+    /**
+     * @param string $barcode
+     * @throws \Exception
+     */
+    public function setBarcode(string $barcode): void
+    {
+        if (!$this->isSku($barcode)) {
+            if (!$this->isEan($barcode)) {
+                throw new \Exception('INVALID barcode identified.');
+            }
+        }
+        $this->barcode = $barcode;
+    }
 
 
 }
