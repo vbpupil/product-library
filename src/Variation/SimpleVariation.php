@@ -52,6 +52,7 @@ class SimpleVariation
     protected $packQty, $reorderLevel, $boxQty, $minOrderQty;
 
 
+
     /**
      * SimpleVariation constructor.
      * @param array $values
