@@ -100,6 +100,7 @@ class ProductDirector
             foreach ($data['variations'] as $k => $v) {
                 $tmpVariation = new \vbpupil\Variation\SimpleVariation(
                     [
+                        'id' => $v['id'],
                         'title' => $v['title'],
                         'packQty' => intval($v['pack_qty']),
                         'boxQty' => intval($v['box_qty']),
@@ -109,7 +110,7 @@ class ProductDirector
                 );
                 $tmpVariation->setPrice(
                     new \vbpupil\Price\SinglePrice([
-                        'vatRate' => ($v['vat'] !== '' ? $v['vat'] : 20),
+                        'vatRate' => $v['vat'],
                         'exVat' => intval($v['price']),
                         'currency' => 'GBP',
                         'specialPriceActive' => $v['special_price_active'],

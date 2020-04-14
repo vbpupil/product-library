@@ -217,8 +217,7 @@ class SinglePrice implements PriceInterface
      * @return SinglePrice
      * @throws InvalidProductSetupException
      */
-    public
-    function setExVat($exVat): SinglePrice
+    public function setExVat($exVat): SinglePrice
     {
         if (is_string($exVat) || is_float($exVat)) {
             throw new InvalidProductSetupException('ExVat prices must be an INT');
@@ -231,8 +230,7 @@ class SinglePrice implements PriceInterface
     /**
      * @return string
      */
-    public
-    function getCurrency(): string
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -243,8 +241,7 @@ class SinglePrice implements PriceInterface
      * @param string $currency
      * @return SinglePrice
      */
-    public
-    function setCurrency(string $currency): SinglePrice
+    public function setCurrency(string $currency): SinglePrice
     {
         $this->currency = $currency;
 
@@ -256,18 +253,16 @@ class SinglePrice implements PriceInterface
     /**
      * @return int
      */
-    public
-    function getVatRate(): int
+    public function getVatRate(): int
     {
         return $this->vatRate;
     }
 
     /**
-     * @param float $vatRate
+     * @param int $vatRate
      * @return SinglePrice
      */
-    public
-    function setVatRate(float $vatRate): SinglePrice
+    public function setVatRate(int $vatRate): SinglePrice
     {
         $this->vatRate = $vatRate;
         return $this;
@@ -276,8 +271,7 @@ class SinglePrice implements PriceInterface
     /**
      * @return int
      */
-    public
-    function getSpecialPrice(): int
+    public function getSpecialPrice(): int
     {
         return $this->specialPrice;
     }
@@ -286,8 +280,7 @@ class SinglePrice implements PriceInterface
      * @param int $specialPrice
      * @return SinglePrice
      */
-    public
-    function setSpecialPrice(int $specialPrice): SinglePrice
+    public function setSpecialPrice(int $specialPrice): SinglePrice
     {
         $this->specialPrice = $specialPrice;
         return $this;
@@ -296,8 +289,7 @@ class SinglePrice implements PriceInterface
     /**
      * @return bool
      */
-    public
-    function isSpecialPriceActive(): bool
+    public function isSpecialPriceActive(): bool
     {
         return $this->specialPriceActive;
     }
@@ -306,8 +298,7 @@ class SinglePrice implements PriceInterface
      * @param bool $specialPriceActive
      * @return SinglePrice
      */
-    public
-    function setSpecialPriceActive(bool $specialPriceActive): SinglePrice
+    public function setSpecialPriceActive(bool $specialPriceActive): SinglePrice
     {
         $this->specialPriceActive = $specialPriceActive;
         return $this;
@@ -316,8 +307,7 @@ class SinglePrice implements PriceInterface
     /**
      * @return mixed
      */
-    public
-    function getSpecialPriceActiveUntil()
+    public function getSpecialPriceActiveUntil()
     {
         return $this->specialPriceActiveUntil;
     }
@@ -326,8 +316,7 @@ class SinglePrice implements PriceInterface
      * @param mixed $specialPriceActiveUntil
      * @return SinglePrice
      */
-    public
-    function setSpecialPriceActiveUntil($specialPriceActiveUntil)
+    public function setSpecialPriceActiveUntil($specialPriceActiveUntil)
     {
         $this->specialPriceActiveUntil = $specialPriceActiveUntil;
         return $this;
@@ -336,8 +325,7 @@ class SinglePrice implements PriceInterface
     /**
      * @return string
      */
-    public
-    function getSymbol(): string
+    public function getSymbol(): string
     {
         return $this->symbol;
     }
@@ -346,8 +334,7 @@ class SinglePrice implements PriceInterface
      * @param string $symbol
      * @return SinglePrice
      */
-    public
-    function setSymbol(string $symbol): SinglePrice
+    public function setSymbol(string $symbol): SinglePrice
     {
         switch ($symbol) {
             case 'GBP':

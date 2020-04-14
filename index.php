@@ -52,26 +52,29 @@ $generalData =
         ],
         'variations' => [
             [
+                'id' => 123,
                 'title' => 'VARIATION 1',
                 'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
-                'vat' => 20,
+                'vat' => 2000,
             ], [
+                'id' => 456,
                 'title' => 'VARIATION 2',
                 'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
-                'vat' => 20,
+                'vat' => 2000,
             ], [
+                'id' => 789,
                 'title' => 'VARIATION 3',
                 'prices' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
-                'vat' => 20,
+                'vat' => 2000,
             ]
         ]
     ];
@@ -92,6 +95,7 @@ $generalSimpleData =
         ],
         'variations' => [
             [
+                'id' => 123,
                 'title' => 'VARIATION 1',
                 'prices' => 150,
                 'special_price' => 100,
