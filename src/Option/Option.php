@@ -139,7 +139,7 @@ class Option
      */
     public function setPriceExVat(int $price_ex_vat): Option
     {
-        $this->price_ex_vat = ($price_ex_vat / 100);
+        $this->price_ex_vat = $price_ex_vat;
         return $this;
     }
 
@@ -157,7 +157,7 @@ class Option
      */
     public function setCostExVat(?int $cost_ex_vat): Option
     {
-        $this->cost_ex_vat = ($cost_ex_vat / 100);
+        $this->cost_ex_vat = $cost_ex_vat;
         return $this;
     }
 
@@ -175,7 +175,7 @@ class Option
      */
     public function setRrpExVat(?int $rrp_ex_vat): Option
     {
-        $this->rrp_ex_vat = ($rrp_ex_vat/100);
+        $this->rrp_ex_vat = $rrp_ex_vat;
         return $this;
     }
 
@@ -193,7 +193,7 @@ class Option
      */
     public function setWeight(?int $weight): Option
     {
-        $this->weight = ($weight/100);
+        $this->weight = $weight;
         return $this;
     }
 
