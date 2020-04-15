@@ -85,7 +85,7 @@ class Option
         $this->setCostExVat($cost_ex_vat);
         $this->setRrpExVat($rrp_ex_vat);
         $this->setWeight($weight);
-        $this->setproduct_code($prod_code);
+        $this->setProductCode($prod_code);
         $this->setEan($ean);
     }
 
@@ -200,7 +200,7 @@ class Option
     /**
      * @return string
      */
-    public function getproduct_code(): string
+    public function getProductCode(): string
     {
         return $this->product_code;
     }
@@ -209,7 +209,7 @@ class Option
      * @param null|string $product_code
      * @return Option
      */
-    public function setproduct_code(?string $product_code): Option
+    public function setProductCode(?string $product_code): Option
     {
         $this->product_code = $product_code;
         return $this;

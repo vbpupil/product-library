@@ -50,17 +50,17 @@ class SimpleVariationTest extends TestCase
             ]
         );
 
-        $this->assertEquals('532095', $this->sut->getproduct_code());
+        $this->assertEquals('532095', $this->sut->getProductCode());
         $this->assertEquals('SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB', $this->sut->getTitle());
 
         $this->sut->setTitle('XBOX 1');
         $this->assertEquals('XBOX 1', $this->sut->getTitle());
 
-        $this->sut->setproduct_code('XBX001');
-        $this->assertEquals('XBX001', $this->sut->getproduct_code());
+        $this->sut->setProductCode('XBX001');
+        $this->assertEquals('XBX001', $this->sut->getProductCode());
     }
 
-    public function testproduct_codeSettingThrowsAnException()
+    public function testProductCodeSettingThrowsAnException()
     {
         try {
             $sv = new SimpleVariation([

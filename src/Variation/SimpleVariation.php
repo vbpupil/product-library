@@ -65,7 +65,9 @@ class SimpleVariation
         }
 
         foreach ($values as $k => $v) {
-            $k = ucfirst($k);
+            $k = ucwords(str_replace('_', ' ', $k));
+            $k = str_replace(' ', '', $k);
+
             $methodName = "set{$k}";
             $this->{$methodName}($v);
         }
@@ -126,7 +128,7 @@ class SimpleVariation
     /**
      * @return string
      */
-    public function getproduct_code(): string
+    public function getProductCode(): string
     {
         return $this->product_code;
     }
@@ -136,7 +138,7 @@ class SimpleVariation
      * @return SimpleVariation
      * @throws \Exception
      */
-    public function setproduct_code(string $product_code): SimpleVariation
+    public function setProductCode(string $product_code): SimpleVariation
     {
         if (is_null($product_code) || $product_code == '') {
             throw new \Exception('Product code cannot be empty.');
