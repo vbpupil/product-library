@@ -52,7 +52,6 @@ class SimpleVariation
     protected $packQty, $reorderLevel, $boxQty, $minOrderQty;
 
 
-
     /**
      * SimpleVariation constructor.
      * @param array $values
@@ -130,7 +129,7 @@ class SimpleVariation
      */
     public function getProductCode(): string
     {
-        return $this->product_code;
+        return $this->product_code ? $this->product_code : '';
     }
 
     /**
