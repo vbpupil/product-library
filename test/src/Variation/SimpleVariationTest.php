@@ -203,8 +203,8 @@ class SimpleVariationTest extends TestCase
 
         $this->sut->setWeight(80);
         $this->assertEquals(80, $this->sut->getWeight());
-
         $this->assertEquals(160, $this->sut->getWeight(2));
+        $this->assertEquals(800, $this->sut->getWeight(10));
 
     }
 }
