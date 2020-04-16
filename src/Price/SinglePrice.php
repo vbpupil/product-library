@@ -25,22 +25,7 @@ class SinglePrice implements PriceInterface
     /**
      * @var int
      */
-    protected $exVat;
-
-    /**
-     * @var string
-     */
-    protected $currency;
-
-    /**
-     * @var int
-     */
-    protected $vatRate;
-
-    /**
-     * @var int
-     */
-    protected $specialPrice;
+    protected $exVat, $vatRate, $specialPrice, $qty = 1, $wasPrice = 0;
 
 
     /**
@@ -51,12 +36,7 @@ class SinglePrice implements PriceInterface
     /**
      * @var string
      */
-    protected $specialPriceActiveUntil;
-
-    /**
-     * @var string
-     */
-    protected $symbol;
+    protected $specialPriceActiveUntil, $symbol, $currency;
 
     /**
      * @var string
@@ -64,8 +44,6 @@ class SinglePrice implements PriceInterface
      * used in timestamp calculations such as when comparing dates to see if special prices is still valid
      */
     protected $timestampNow;
-
-    protected $wasPrice = 0;
 
 
     /**
@@ -154,11 +132,10 @@ class SinglePrice implements PriceInterface
      * filters down what we know about he prices and throws out the final prices
      * @param bool $includingVat
      * @param bool $convertToFloat
-     * @param int $qty
      * @return float|int|null
      * @throws \Exception
      */
-    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = false)
     {
         $price = null;
 
@@ -180,6 +157,7 @@ class SinglePrice implements PriceInterface
 
         //add vat if required
         if ($includingVat) {
+            $b = $this->getVatRate();
             $price = $this->addVatByRate($price, $this->getVatRate());
         }
 
@@ -188,11 +166,11 @@ class SinglePrice implements PriceInterface
             return ($price / 100);
         }
 
-        return $price;
+        return ($price * $this->qty);
     }
 
     /**
-     * dynamic value dwill check if there is a special offer set and if so work out the vat element itself
+     * dynamic value will check if there is a special offer set and if so get ex vat of that instead
      *
      * @param bool $dynamicValue
      * @return int
@@ -202,10 +180,7 @@ class SinglePrice implements PriceInterface
     {
         if ($dynamicValue) {
             if ($this->isOnSpecial()) {
-                return $this->getVatElement(
-                    ($this->getPrice() * 100),
-                    $this->getVatRate()
-                );
+                return $this->getPrice(false, false);
             }
         }
 
@@ -285,14 +260,14 @@ class SinglePrice implements PriceInterface
         $this->specialPrice = $specialPrice;
         return $this;
     }
-
-    /**
-     * @return bool
-     */
-    public function isSpecialPriceActive(): bool
-    {
-        return $this->specialPriceActive;
-    }
+//
+//    /**
+//     * @return bool
+//     */
+//    public function isSpecialPriceActive(): bool
+//    {
+//        return $this->specialPriceActive;
+//    }
 
     /**
      * @param bool $specialPriceActive
@@ -346,9 +321,13 @@ class SinglePrice implements PriceInterface
         return $this;
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function toString()
     {
-        $exVatPrice = $this->getPrice();
+        $exVatPrice = $this->getPrice(false, true);
         $exVatPriceString = number_format($exVatPrice, 2, '.', '.');
         $vatRate = $this->getVatRate();
         $vatElement = $this->getVatElement($exVatPrice, $vatRate);

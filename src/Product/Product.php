@@ -26,12 +26,7 @@ class Product
     /**
      * @var Collection
      */
-    public $product_images;
-
-    /**
-     * @var Collection
-     */
-    public $descriptions;
+    public $product_images, $descriptions,$variations;
 
     /**
      * @var bool
@@ -42,11 +37,6 @@ class Product
      * @var string
      */
     protected $slug = '';
-
-    /**
-     * @var Collection
-     */
-    public $variations;
 
     /**
      * @var bool

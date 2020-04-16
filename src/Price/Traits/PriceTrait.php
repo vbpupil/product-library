@@ -12,28 +12,32 @@ trait PriceTrait
     /**
      * adds vat rate to a prices
      * @param int $value
-     * @param float $rate
+     * @param int $rate
      * @return float|int
      */
-    public function addVatByRate(int $value, float $rate)
+    public function addVatByRate(int $value, int $rate)
     {
-        return ($value * (($rate / 100) + 1));
+        $rate = ((round(($rate/100), 2) / 100) + 1);
+        return $value * $rate;
     }
 
     /**
      * returns just the VAT element
      * @param int $value
-     * @param float $rate
+     * @param int $rate
      * @return float|int
      */
-    public function getVatElement(int $value, float $rate)
+    public function getVatElement(int $value, int $rate)
     {
-        return (($value * (($rate / 100) + 1)) - $value);
+        $rate = ((round(($rate/100), 2) / 100) + 1);
+
+        return (($value * $rate) - $value);
     }
 
     /**
-     * @param string $valueName
+     * @param string $getterName
      * @param bool $includeSymbol
+     * @param int $decPlaces
      * @param string $decPoint
      * @param string $thousandsSeperator
      * @return string
