@@ -49,7 +49,7 @@ class SimpleVariation
     /**
      * @var int
      */
-    protected $packQty, $reorderLevel, $boxQty, $minOrderQty;
+    protected $packQty, $reorderLevel, $boxQty, $minOrderQty, $weight = 0;
 
 
     /**
@@ -293,6 +293,24 @@ class SimpleVariation
             }
         }
         $this->barcode = $barcode;
+    }
+
+    /**
+     * this weight is for one item - if someone is buying 5 then we times this by 5
+     *
+     * @return int
+     */
+    public function getWeight(int $qty = 1): int
+    {
+        return $this->weight * $qty;
+    }
+
+    /**
+     * @param int $weight
+     */
+    public function setWeight(int $weight): void
+    {
+        $this->weight = $weight;
     }
 
 
