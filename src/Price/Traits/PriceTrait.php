@@ -15,10 +15,10 @@ trait PriceTrait
      * @param int $rate
      * @return float|int
      */
-    public function addVatByRate(int $value, int $rate)
+    public function addVatByRate(int $value, int $rate, int $qty = 1)
     {
-        $rate = ((round(($rate/100), 2) / 100) + 1);
-        return $value * $rate;
+        $rate = ((round(($rate / 100), 2) / 100) + 1);
+        return (($value * $rate) * $qty);
     }
 
     /**
@@ -27,11 +27,11 @@ trait PriceTrait
      * @param int $rate
      * @return float|int
      */
-    public function getVatElement(int $value, int $rate)
+    public function getVatElement(int $value, int $rate, int $qty = 1)
     {
-        $rate = ((round(($rate/100), 2) / 100) + 1);
+        $rate = ((round(($rate / 100), 2) / 100) + 1);
 
-        return (($value * $rate) - $value);
+        return ((($value * $rate) - $value) * $qty);
     }
 
     /**
