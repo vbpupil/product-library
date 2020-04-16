@@ -102,6 +102,7 @@ class ProductDirector
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],
+                        'weight' => intval($v['weight']),
                         'packQty' => intval($v['pack_qty']),
                         'boxQty' => intval($v['box_qty']),
                         'reorderLevel' => intval($v['reorder_level']),

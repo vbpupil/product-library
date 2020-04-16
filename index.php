@@ -96,6 +96,7 @@ $generalSimpleData =
         'variations' => [
             [
                 'id' => 123,
+                'weight' => 3600,
                 'title' => 'VARIATION 1',
                 'prices' => 150,
                 'special_price' => 100,
