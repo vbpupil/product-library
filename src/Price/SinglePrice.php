@@ -365,5 +365,19 @@ EOD;
         $this->wasPrice = $wasPrice;
     }
 
+    /**
+     * @return int
+     */
+    public function getQty(): int
+    {
+        return $this->qty;
+    }
 
+    /**
+     * @param int $qty
+     */
+    public function setQty(int $qty): void
+    {
+        $this->qty = $qty;
+    }
 }
