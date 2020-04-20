@@ -31,7 +31,7 @@ class SinglePrice implements PriceInterface
     /**
      * @var bool
      */
-    protected $specialPriceActive = false;
+    protected $specialPriceActive = false, $showSpecialOfferCountdown = false;
 
     /**
      * @var string
@@ -360,6 +360,24 @@ EOD;
         $this->wasPrice = $wasPrice;
     }
 
+    /**
+     * @return bool
+     */
+    public function showSpecialOfferCountdown(): bool
+    {
+        return $this->showSpecialOfferCountdown;
+    }
+
+    /**
+     * @param bool $showSpecialOfferCountdown
+     */
+    public function setShowSpecialOfferCountdown(bool $showSpecialOfferCountdown): void
+    {
+        $this->showSpecialOfferCountdown = $showSpecialOfferCountdown;
+    }
+
+
+
 //    public function calculateWasPrice(bool $includingVat = false, int $qty = 1)
 //    {
 //        $this->wasPrice = ($includingVat ?
@@ -373,4 +391,6 @@ EOD;
 //                )
 //            ) : $this->getExVat(true, $qty));
 //    }
+
+
 }

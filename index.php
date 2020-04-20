@@ -100,8 +100,8 @@ $generalSimpleData =
                 'title' => 'VARIATION 1',
                 'price' => 150,
                 'special_price' => 100,
-                'special_price_expiry' => '2020-09-14 11:53:22',
-                'special_price_active' => false,
+                'special_price_expiry' => '2070-09-14 11:53:22',
+                'special_price_active' => true,
                 'vat' => 2000,
                 'option_categories' => [
                     [
@@ -159,6 +159,7 @@ $generalSimple = $director->buildGeneralProduct(
 //dump($simple);
 //dump($general);
 dump($generalSimple);
+dump($generalSimple->variations->getItem(0)->prices->isOnSpecial());
 //BUILDER END
 
 

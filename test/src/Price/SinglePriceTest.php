@@ -284,6 +284,23 @@ Special Price Active: false<br>
 
         $this->assertEquals(500, $p->getPrice(false, false));
         $this->assertEquals(6000, $p->getWasPrice(5));
+    }
 
+    public function testShowSpecialOfferCountdown()
+    {
+        $p = new SinglePrice([
+            'vatRate' => 2000,
+            'exVat' => 1200,
+            'currency' => 'GBP',
+            'specialPriceActive' => true,
+            'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+            'specialPrice' => 500,
+        ]);
+
+        $this->assertFalse($p->showSpecialOfferCountdown());
+
+        $p->setShowSpecialOfferCountdown(true);
+
+        $this->assertTrue($p->showSpecialOfferCountdown());
     }
 }
