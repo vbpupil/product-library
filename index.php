@@ -156,8 +156,8 @@ $generalSimple = $director->buildGeneralProduct(
 //    $gp->variations->addItem($v);
 
 
-dump($simple);
-dump($general);
+//dump($simple);
+//dump($general);
 dump($generalSimple);
 //BUILDER END
 

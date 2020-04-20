@@ -211,7 +211,7 @@ Special Price Active: false<br>
         $this->assertEquals('GBP', $p->getCurrency());
     }
 
-    public function testIsOnSepcial()
+    public function testIsOnSpecial()
     {
         $p = new SinglePrice([
             'vatRate' => 2000,
@@ -271,5 +271,19 @@ Special Price Active: false<br>
         $this->assertEquals(6000, $p->getPrice(false, false,5));
     }
 
+    public function testWasPrice()
+    {
+        $p = new SinglePrice([
+            'vatRate' => 2000,
+            'exVat' => 1200,
+            'currency' => 'GBP',
+            'specialPriceActive' => true,
+            'specialPriceActiveUntil' => '2070-09-09 11:41:00',
+            'specialPrice' => 500
+        ]);
 
+        $this->assertEquals(500, $p->getPrice(false, false));
+        $this->assertEquals(6000, $p->getWasPrice(5));
+
+    }
 }

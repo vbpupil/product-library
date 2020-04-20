@@ -340,11 +340,10 @@ EOD;
     }
 
     /**
-     * @param bool $includingVat
      * @param int $qty
      * @return int
      */
-    public function getWasPrice(bool $includingVat = false, int $qty = 1)
+    public function getWasPrice(int $qty = 1)
     {
 //        if (is_null($this->wasPrice)) {
 //            $this->calculateWasPrice($includingVat, $qty);
