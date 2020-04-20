@@ -72,6 +72,8 @@ class SinglePrice implements PriceInterface
 
         $this->verifyRequired();
         $this->timestampNow = strtotime('now');
+
+        $this->setWasPrice($this->exVat);
     }
 
     /**
@@ -344,11 +346,11 @@ EOD;
      */
     public function getWasPrice(bool $includingVat = false, int $qty = 1)
     {
-        if (is_null($this->wasPrice)) {
-            $this->calculateWasPrice($includingVat, $qty);
-        }
+//        if (is_null($this->wasPrice)) {
+//            $this->calculateWasPrice($includingVat, $qty);
+//        }
 
-        return $this->wasPrice;
+        return $this->wasPrice * $qty;
     }
 
     /**
@@ -359,17 +361,17 @@ EOD;
         $this->wasPrice = $wasPrice;
     }
 
-    public function calculateWasPrice(bool $includingVat = false, int $qty = 1)
-    {
-        $this->wasPrice = ($includingVat ?
-            intval(
-                ceil(
-                    $this->addVatByRate(
-                        $this->getExVat(),
-                        $this->getVatRate(),
-                        $qty
-                    )
-                )
-            ) : $this->getExVat(true, $qty));
-    }
+//    public function calculateWasPrice(bool $includingVat = false, int $qty = 1)
+//    {
+//        $this->wasPrice = ($includingVat ?
+//            intval(
+//                ceil(
+//                    $this->addVatByRate(
+//                        $this->getExVat(),
+//                        $this->getVatRate(),
+//                        $qty
+//                    )
+//                )
+//            ) : $this->getExVat(true, $qty));
+//    }
 }
