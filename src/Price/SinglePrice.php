@@ -144,9 +144,9 @@ class SinglePrice implements PriceInterface
         //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
             $price = $this->getSpecialPrice($qty);
-            if ($evaluateWasPrice) {
-                $this->calculateWasPrice($includingVat, $qty);
-            }
+//            if ($evaluateWasPrice) {
+//                $this->calculateWasPrice($includingVat, $qty);
+//            }
         }
 
         if (is_null($price)) {
