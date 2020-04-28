@@ -59,6 +59,7 @@ $generalData =
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
             ], [
                 'id' => 456,
                 'title' => 'VARIATION 2',
@@ -67,6 +68,8 @@ $generalData =
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
+
             ], [
                 'id' => 789,
                 'title' => 'VARIATION 3',
@@ -75,6 +78,8 @@ $generalData =
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
+
             ]
         ]
     ];
@@ -102,7 +107,10 @@ $generalSimpleData =
                 'special_price' => 100,
                 'special_price_expiry' => '2070-09-14 11:53:22',
                 'special_price_active' => true,
+
                 'vat' => 2000,
+                'vat_rate_id' => 1,
+
                 'option_categories' => [
                     [
                         'id' => 12,

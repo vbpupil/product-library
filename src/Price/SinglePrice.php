@@ -39,6 +39,11 @@ class SinglePrice implements PriceInterface
     protected $specialPriceActiveUntil, $symbol, $currency;
 
     /**
+     * @var int
+     */
+    protected $vatRateId;
+
+    /**
      * @var string
      *
      * used in timestamp calculations such as when comparing dates to see if special prices is still valid
@@ -244,6 +249,24 @@ class SinglePrice implements PriceInterface
     /**
      * @return int
      */
+    public function getVatRateId(): int
+    {
+        return $this->vatRateId;
+    }
+
+    /**
+     * @param int $vatRateId
+     */
+    public function setVatRateId(int $vatRateId): void
+    {
+        $this->vatRateId = $vatRateId;
+    }
+
+
+
+    /**
+     * @return int
+     */
     public function getSpecialPrice(int $qty = 1): int
     {
         return ($this->specialPrice * $qty);
@@ -345,10 +368,6 @@ EOD;
      */
     public function getWasPrice(int $qty = 1)
     {
-//        if (is_null($this->wasPrice)) {
-//            $this->calculateWasPrice($includingVat, $qty);
-//        }
-
         return $this->wasPrice * $qty;
     }
 
@@ -375,22 +394,5 @@ EOD;
     {
         $this->showSpecialOfferCountdown = $showSpecialOfferCountdown;
     }
-
-
-
-//    public function calculateWasPrice(bool $includingVat = false, int $qty = 1)
-//    {
-//        $this->wasPrice = ($includingVat ?
-//            intval(
-//                ceil(
-//                    $this->addVatByRate(
-//                        $this->getExVat(),
-//                        $this->getVatRate(),
-//                        $qty
-//                    )
-//                )
-//            ) : $this->getExVat(true, $qty));
-//    }
-
 
 }
