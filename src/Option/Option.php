@@ -126,11 +126,12 @@ class Option
     }
 
     /**
+     * @param int $qty
      * @return int
      */
-    public function getPriceExVat()
+    public function getPriceExVat(int $qty = 1)
     {
-        return $this->price_ex_vat;
+        return $this->price_ex_vat * $qty;
     }
 
     /**
@@ -144,11 +145,12 @@ class Option
     }
 
     /**
-     * @return int
+     * @param int $qty
+     * @return float|int
      */
-    public function getCostExVat()
+    public function getCostExVat(int $qty = 1)
     {
-        return $this->cost_ex_vat;
+        return $this->cost_ex_vat * $qty;
     }
 
     /**
@@ -162,11 +164,12 @@ class Option
     }
 
     /**
-     * @return int
+     * @param int $qty
+     * @return float|int
      */
-    public function getRrpExVat()
+    public function getRrpExVat(int $qty = 1)
     {
-        return $this->rrp_ex_vat;
+        return $this->rrp_ex_vat * $qty;
     }
 
     /**
@@ -180,11 +183,12 @@ class Option
     }
 
     /**
+     * @param int $qty
      * @return int
      */
-    public function getWeight()
+    public function getWeight(int $qty = 1)
     {
-        return $this->weight;
+        return intval($this->weight * $qty);
     }
 
     /**
@@ -249,6 +253,10 @@ class Option
     }
 
     /**
+     * this instance qty should NOT be confused with passed in qty on some methods - this qty is the amount of products
+     * you will get ie pack of 2 - where as the passed in qty is how many the client is buying so if product a
+     * price is for 2 and the client wants 2 they will be getting 4
+     *
      * @param int $qty
      * @return Option
      */

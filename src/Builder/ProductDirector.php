@@ -102,6 +102,7 @@ class ProductDirector
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],
+                        'weight' => intval($v['weight']),
                         'packQty' => intval($v['pack_qty']),
                         'boxQty' => intval($v['box_qty']),
                         'reorderLevel' => intval($v['reorder_level']),
@@ -111,11 +112,13 @@ class ProductDirector
                 $tmpVariation->setPrice(
                     new \vbpupil\Price\SinglePrice([
                         'vatRate' => $v['vat'],
+                        'vatRateId' => $v['vat_rate_id'],
                         'exVat' => intval($v['price']),
                         'currency' => 'GBP',
                         'specialPriceActive' => $v['special_price_active'],
                         'specialPriceActiveUntil' => $v['special_price_expiry'],
-                        'specialPrice' => intval($v['special_price'])
+                        'specialPrice' => intval($v['special_price']),
+                        'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
                     ])
                 );
 

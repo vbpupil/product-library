@@ -189,6 +189,22 @@ class SimpleVariationTest extends TestCase
         }catch(\Exception $e){
             $this->assertEquals('INVALID barcode identified.', $e->getMessage());
         }
+    }
+
+
+    public function testGettingWeight()
+    {
+        $this->sut = new SimpleVariation(
+            [
+                'product_code' => '532095',
+                'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
+            ]
+        );
+
+        $this->sut->setWeight(80);
+        $this->assertEquals(80, $this->sut->getWeight());
+        $this->assertEquals(160, $this->sut->getWeight(2));
+        $this->assertEquals(800, $this->sut->getWeight(10));
 
     }
 }

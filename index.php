@@ -54,27 +54,32 @@ $generalData =
             [
                 'id' => 123,
                 'title' => 'VARIATION 1',
-                'prices' => 150,
+                'price' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
             ], [
                 'id' => 456,
                 'title' => 'VARIATION 2',
-                'prices' => 150,
+                'price' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
+
             ], [
                 'id' => 789,
                 'title' => 'VARIATION 3',
-                'prices' => 150,
+                'price' => 150,
                 'special_price' => 100,
                 'special_price_expiry' => '2020-03-14 11:53:22',
                 'special_price_active' => false,
                 'vat' => 2000,
+                'vat_rate_id' => 1
+
             ]
         ]
     ];
@@ -96,12 +101,16 @@ $generalSimpleData =
         'variations' => [
             [
                 'id' => 123,
+                'weight' => 3600,
                 'title' => 'VARIATION 1',
-                'prices' => 150,
+                'price' => 150,
                 'special_price' => 100,
-                'special_price_expiry' => '2020-03-14 11:53:22',
-                'special_price_active' => false,
+                'special_price_expiry' => '2070-09-14 11:53:22',
+                'special_price_active' => true,
+
                 'vat' => 2000,
+                'vat_rate_id' => 1,
+
                 'option_categories' => [
                     [
                         'id' => 12,
@@ -155,9 +164,10 @@ $generalSimple = $director->buildGeneralProduct(
 //    $gp->variations->addItem($v);
 
 
-dump($simple);
-dump($general);
+//dump($simple);
+//dump($general);
 dump($generalSimple);
+dump($generalSimple->variations->getItem(0)->prices->isOnSpecial());
 //BUILDER END
 
 

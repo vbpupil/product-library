@@ -25,38 +25,23 @@ class SinglePrice implements PriceInterface
     /**
      * @var int
      */
-    protected $exVat;
-
-    /**
-     * @var string
-     */
-    protected $currency;
-
-    /**
-     * @var int
-     */
-    protected $vatRate;
-
-    /**
-     * @var int
-     */
-    protected $specialPrice;
+    protected $exVat, $vatRate, $specialPrice, $wasPrice = null;
 
 
     /**
      * @var bool
      */
-    protected $specialPriceActive = false;
+    protected $specialPriceActive = false, $showSpecialOfferCountdown = false;
 
     /**
      * @var string
      */
-    protected $specialPriceActiveUntil;
+    protected $specialPriceActiveUntil, $symbol, $currency;
 
     /**
-     * @var string
+     * @var int
      */
-    protected $symbol;
+    protected $vatRateId;
 
     /**
      * @var string
@@ -64,8 +49,6 @@ class SinglePrice implements PriceInterface
      * used in timestamp calculations such as when comparing dates to see if special prices is still valid
      */
     protected $timestampNow;
-
-    protected $wasPrice = 0;
 
 
     /**
@@ -94,6 +77,8 @@ class SinglePrice implements PriceInterface
 
         $this->verifyRequired();
         $this->timestampNow = strtotime('now');
+
+        $this->setWasPrice($this->exVat);
     }
 
     /**
@@ -154,33 +139,28 @@ class SinglePrice implements PriceInterface
      * filters down what we know about he prices and throws out the final prices
      * @param bool $includingVat
      * @param bool $convertToFloat
-     * @param int $qty
      * @return float|int|null
      * @throws \Exception
      */
-    public function getPrice(bool $includingVat = false, bool $convertToFloat = true, int $qty = 1)
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = false, int $qty = 1, bool $evaluateWasPrice = true)
     {
         $price = null;
 
         //check to see if qualifies for the special prices
         if ($this->isOnSpecial()) {
-            $price = $this->getSpecialPrice();
-            $this->wasPrice = ($includingVat ?
-                intval(
-                    ceil(
-                        $this->addVatByRate($this->getExVat(), $this->getVatRate()
-                        )
-                    )
-                ) : $this->getExVat());
+            $price = $this->getSpecialPrice($qty);
+//            if ($evaluateWasPrice) {
+//                $this->calculateWasPrice($includingVat, $qty);
+//            }
         }
 
         if (is_null($price)) {
-            $price = $this->getExVat();
+            $price = $this->getExVat(false, $qty);
         }
 
         //add vat if required
         if ($includingVat) {
-            $price = $this->addVatByRate($price, $this->getVatRate());
+            $price = $this->addVatByRate($price, $this->getVatRate(), $qty);
         }
 
         //leave as int or return human readable float?
@@ -191,25 +171,23 @@ class SinglePrice implements PriceInterface
         return $price;
     }
 
+
     /**
-     * dynamic value dwill check if there is a special offer set and if so work out the vat element itself
+     * dynamic value will check if there is a special offer set and if so get ex vat of that instead
      *
      * @param bool $dynamicValue
      * @return int
      * @throws \Exception
      */
-    public function getExVat(bool $dynamicValue = false): int
+    public function getExVat(bool $dynamicValue = false, int $qty = 1): int
     {
         if ($dynamicValue) {
             if ($this->isOnSpecial()) {
-                return $this->getVatElement(
-                    ($this->getPrice() * 100),
-                    $this->getVatRate()
-                );
+                return $this->getPrice(false, false, $qty, false);
             }
         }
 
-        return $this->exVat;
+        return $this->exVat * $qty;
     }
 
     /**
@@ -271,9 +249,27 @@ class SinglePrice implements PriceInterface
     /**
      * @return int
      */
-    public function getSpecialPrice(): int
+    public function getVatRateId(): int
     {
-        return $this->specialPrice;
+        return $this->vatRateId;
+    }
+
+    /**
+     * @param int $vatRateId
+     */
+    public function setVatRateId(int $vatRateId): void
+    {
+        $this->vatRateId = $vatRateId;
+    }
+
+
+
+    /**
+     * @return int
+     */
+    public function getSpecialPrice(int $qty = 1): int
+    {
+        return ($this->specialPrice * $qty);
     }
 
     /**
@@ -284,14 +280,6 @@ class SinglePrice implements PriceInterface
     {
         $this->specialPrice = $specialPrice;
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSpecialPriceActive(): bool
-    {
-        return $this->specialPriceActive;
     }
 
     /**
@@ -346,9 +334,13 @@ class SinglePrice implements PriceInterface
         return $this;
     }
 
-    public function toString()
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function toString(int $qty = 1)
     {
-        $exVatPrice = $this->getPrice();
+        $exVatPrice = $this->getPrice(false, true, $qty);
         $exVatPriceString = number_format($exVatPrice, 2, '.', '.');
         $vatRate = $this->getVatRate();
         $vatElement = $this->getVatElement($exVatPrice, $vatRate);
@@ -371,11 +363,12 @@ EOD;
     }
 
     /**
+     * @param int $qty
      * @return int
      */
-    public function getWasPrice()
+    public function getWasPrice(int $qty = 1)
     {
-        return $this->wasPrice;
+        return $this->wasPrice * $qty;
     }
 
     /**
@@ -386,5 +379,20 @@ EOD;
         $this->wasPrice = $wasPrice;
     }
 
+    /**
+     * @return bool
+     */
+    public function showSpecialOfferCountdown(): bool
+    {
+        return $this->showSpecialOfferCountdown;
+    }
+
+    /**
+     * @param bool $showSpecialOfferCountdown
+     */
+    public function setShowSpecialOfferCountdown(bool $showSpecialOfferCountdown): void
+    {
+        $this->showSpecialOfferCountdown = $showSpecialOfferCountdown;
+    }
 
 }
