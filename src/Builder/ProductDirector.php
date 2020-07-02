@@ -23,7 +23,6 @@ class ProductDirector
     {
         $p = $product->getProduct();
         $p->setType($data['type']);
-        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
@@ -45,7 +44,6 @@ class ProductDirector
     {
         $p = $product->getProduct();
         $p->setType($data['type']);
-        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
@@ -100,7 +98,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new \vbpupil\Variation\AbstractVariation(
+                $tmpVariation = new \vbpupil\ProductLibrary\Variation\SingleVariation(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],

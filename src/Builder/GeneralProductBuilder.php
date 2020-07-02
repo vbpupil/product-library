@@ -6,6 +6,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\Product\AbstractProduct;
+use vbpupil\ProductLibrary\Product\GeneralProduct;
 
 /**
  * A GENERAL PRODUCT IS A PRODUCT WITH MULTIPLE VARIATIONS
@@ -35,14 +36,14 @@ class GeneralProductBuilder implements ProductBuilderInterface
      */
     public function reset()
     {
-        $this->product = new AbstractProduct();
+        $this->product = new GeneralProduct();
     }
 
     /**
      * @return AbstractProduct
      * @throws \Exception
      */
-    public function getProduct(): AbstractProduct
+    public function getProduct(): GeneralProduct
     {
         try {
             $result = $this->product;
