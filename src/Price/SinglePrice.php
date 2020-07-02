@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vbpupil\Price;
+namespace vbpupil\ProductLibrary\Price;
 
 
 use vbpupil\Exception\InvalidProductSetupException;

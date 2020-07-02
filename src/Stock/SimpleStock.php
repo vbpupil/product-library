@@ -5,7 +5,7 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Stock;
+namespace vbpupil\ProductLibrary\Stock;
 
 /**
  * Class SimpleStock

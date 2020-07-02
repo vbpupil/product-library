@@ -5,7 +5,7 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Option;
+namespace vbpupil\ProductLibrary\Option;
 
 
 use vbpupil\Collections\OptionCollection;

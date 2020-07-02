@@ -1,7 +1,7 @@
 <?php
 
 
-namespace vbpupil\Builder;
+namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
@@ -16,13 +16,14 @@ class ProductDirector
     /**
      * @param SimpleProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\Product
+     * @return \vbpupil\Product\AbstractProduct
      * @throws \Exception
      */
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
         $p->setType($data['type']);
+        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
@@ -37,13 +38,14 @@ class ProductDirector
     /**
      * @param GeneralProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\Product
+     * @return \vbpupil\Product\AbstractProduct
      * @throws \Exception
      */
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
     {
         $p = $product->getProduct();
         $p->setType($data['type']);
+        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
@@ -98,7 +100,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new \vbpupil\Variation\SimpleVariation(
+                $tmpVariation = new \vbpupil\Variation\AbstractVariation(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],

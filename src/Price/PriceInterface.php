@@ -6,7 +6,7 @@
  */
 
 
-namespace vbpupil\Price;
+namespace vbpupil\ProductLibrary\Price;
 
 
 interface PriceInterface

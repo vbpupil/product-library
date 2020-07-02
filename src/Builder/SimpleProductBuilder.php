@@ -1,11 +1,11 @@
 <?php
 
 
-namespace vbpupil\Builder;
+namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
+use vbpupil\Product\SimpleProduct;
 
 /**
  * A SIMPLE PRODUCT IS JUST THE PRODUCT - IE NO VARIANTS
@@ -35,14 +35,14 @@ class SimpleProductBuilder implements ProductBuilderInterface
      */
     public function reset()
     {
-        $this->product = new Product();
+        $this->product = new SimpleProduct();
     }
 
     /**
-     * @return Product
+     * @return SimpleProduct
      * @throws \Exception
      */
-    public function getProduct(): Product
+    public function getProduct(): SimpleProduct
     {
         try {
             $result = $this->product;

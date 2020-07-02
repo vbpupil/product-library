@@ -15,7 +15,7 @@ use vbpupil\Exception\InvalidVariationSetupException;
 use vbpupil\Price\SinglePrice;
 use vbpupil\Stock\Auditables\Auditable;
 use vbpupil\Stock\AuditableStock;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\Variation\AbstractVariation;
 
 class SimpleVariationTest extends TestCase
 {
@@ -24,17 +24,17 @@ class SimpleVariationTest extends TestCase
 
     public function testNewingUpAVariation()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
             ]
         );
 
-        $this->assertTrue($this->sut instanceof SimpleVariation);
+        $this->assertTrue($this->sut instanceof AbstractVariation);
 
         try {
-            $sv = new SimpleVariation([]);
+            $sv = new AbstractVariation([]);
         } catch (InvalidVariationSetupException $e) {
             $this->assertEquals('Required Values must be provided', $e->getMessage());
         }
@@ -43,7 +43,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGetAttributes()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -63,16 +63,16 @@ class SimpleVariationTest extends TestCase
     public function testProductCodeSettingThrowsAnException()
     {
         try {
-            $sv = new SimpleVariation([
+            $sv = new AbstractVariation([
                 'product_code' => '',
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
-            $this->assertEquals('Product code cannot be empty.', $e->getMessage());
+            $this->assertEquals('AbstractProduct code cannot be empty.', $e->getMessage());
         }
 
         try {
-            $sv = new SimpleVariation([
+            $sv = new AbstractVariation([
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
@@ -82,7 +82,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingandSettingQuantities()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -104,7 +104,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingandSettingOfVariantId()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -124,7 +124,7 @@ class SimpleVariationTest extends TestCase
 
         $this->price->method('getPrice')->willReturn(1000);
 
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -141,7 +141,7 @@ class SimpleVariationTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -155,7 +155,7 @@ class SimpleVariationTest extends TestCase
     public function testRequiredFieldsInconstrucor()
     {
         try {
-            $this->sut = new SimpleVariation(
+            $this->sut = new AbstractVariation(
                 [
                     'product_code' => '532095',
                 ]
@@ -167,7 +167,7 @@ class SimpleVariationTest extends TestCase
 
     public function testSettingAValidBarcode()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -194,7 +194,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingWeight()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new AbstractVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'

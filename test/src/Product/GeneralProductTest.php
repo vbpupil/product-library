@@ -12,8 +12,8 @@ namespace src\Product;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\Product\AbstractProduct;
+use vbpupil\Variation\AbstractVariation;
 
 class GeneralProductTest extends TestCase
 {
@@ -31,12 +31,12 @@ class GeneralProductTest extends TestCase
             ->getMock();
 
 
-        $this->simpleVariation = $this->getMockBuilder(SimpleVariation::class)
+        $this->simpleVariation = $this->getMockBuilder(AbstractVariation::class)
             ->disableOriginalConstructor()
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'Sony PS4 With 1 Controller',
             $this->description,
             true
@@ -45,7 +45,7 @@ class GeneralProductTest extends TestCase
 
     public function testNewingUpAProduct()
     {
-        $this->assertTrue($this->sut instanceof Product);
+        $this->assertTrue($this->sut instanceof AbstractProduct);
     }
 
     public function testAddingVariations()
@@ -77,7 +77,7 @@ class GeneralProductTest extends TestCase
             );
         }catch(\Exception $e){
 //            echo $e->getMessage();
-            $this->assertEquals('Incompatible type, must be/extend from SimpleVariation', $e->getMessage());
+            $this->assertEquals('Incompatible type, must be/extend from AbstractVariation', $e->getMessage());
         }
     }
 }

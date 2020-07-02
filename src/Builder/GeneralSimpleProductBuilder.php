@@ -1,11 +1,11 @@
 <?php
 
 
-namespace vbpupil\Builder;
+namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
+use vbpupil\Product\AbstractProduct;
 
 /**
  * A GENERAL SIMPLE PRODUCT HAS ONE VARIATION

@@ -1,6 +1,6 @@
 <?php
 
-namespace vbpupil\Stock\Auditables;
+namespace vbpupil\ProductLibrary\Stock\Auditables;
 
 
 use vbpupil\Traits\DateTrait;

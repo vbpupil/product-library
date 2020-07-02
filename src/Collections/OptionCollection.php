@@ -1,6 +1,6 @@
 <?php
 
-namespace vbpupil\Collections;
+namespace vbpupil\ProductLibrary\Collections;
 
 use vbpupil\Option\Option;
 

@@ -11,8 +11,8 @@ namespace test\vbpupil\Product;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\Product\AbstractProduct;
+use vbpupil\Variation\AbstractVariation;
 
 class ProductTest extends TestCase
 {
@@ -29,27 +29,27 @@ class ProductTest extends TestCase
             ->getMock();
 
 
-        $this->simpleVariation = $this->getMockBuilder(SimpleVariation::class)
+        $this->simpleVariation = $this->getMockBuilder(AbstractVariation::class)
             ->disableOriginalConstructor()
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new Product();
+        $this->sut = new AbstractProduct();
     }
 
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new Product(
+            $this->sut = new AbstractProduct(
                 'ball',
                 new Collection()
             );
-            $this->assertTrue($this->sut instanceof Product);
+            $this->assertTrue($this->sut instanceof AbstractProduct);
 
 
-            $this->sut = new Product(null, new Collection());
+            $this->sut = new AbstractProduct(null, new Collection());
         } catch (\Exception $e) {
-            $this->assertEquals('Product name required.', $e->getMessage());
+            $this->assertEquals('AbstractProduct name required.', $e->getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class ProductTest extends TestCase
 
     public function testLive()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -74,7 +74,7 @@ class ProductTest extends TestCase
 
     public function testSlug()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -88,7 +88,7 @@ class ProductTest extends TestCase
 
     public function testFeatured()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -101,7 +101,7 @@ class ProductTest extends TestCase
 
     public function testIsBestSeller()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -114,7 +114,7 @@ class ProductTest extends TestCase
 
     public function testIsNewProduct()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -127,7 +127,7 @@ class ProductTest extends TestCase
 
     public function testSettingAndGettingDescriptions()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -150,7 +150,7 @@ class ProductTest extends TestCase
     }
     public function testProductImages()
     {
-        $this->sut = new Product(
+        $this->sut = new AbstractProduct(
             'ball',
             new Collection()
         );
@@ -201,7 +201,7 @@ class ProductTest extends TestCase
                 $this->variations
             );
         }catch(\Exception $e){
-            $this->assertEquals('Incompatible type, must be/extend from SimpleVariation', $e->getMessage());
+            $this->assertEquals('Incompatible type, must be/extend from AbstractVariation', $e->getMessage());
         }
     }
 

@@ -6,7 +6,7 @@
  */
 
 
-namespace vbpupil\Traits;
+namespace vbpupil\ProductLibrary\Traits;
 
 
 /**

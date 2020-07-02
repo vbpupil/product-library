@@ -1,17 +1,17 @@
 <?php
 
 
-namespace vbpupil\Product;
+namespace vbpupil\ProductLibrary\Product;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\Variation\AbstractVariation;
 
 /**
- * Class Product
- * @package vbpupil\Product
+ * Class AbstractProduct
+ * @package vbpupil\AbstractProduct
  */
-class Product
+abstract class AbstractProduct
 {
     /**
      * @var string
@@ -21,12 +21,17 @@ class Product
     /**
      * @var string
      */
+    protected $style;
+
+    /**
+     * @var string
+     */
     protected $name = null;
 
     /**
      * @var Collection
      */
-    public $product_images, $descriptions,$variations;
+    public $product_images, $descriptions, $variations;
 
     /**
      * @var bool
@@ -68,9 +73,9 @@ class Product
 
     /**
      * @param string $name
-     * @return Product
+     * @return AbstractProduct
      */
-    public function setName(string $name): Product
+    public function setName(string $name): AbstractProduct
     {
         $this->name = $name;
         return $this;
@@ -78,9 +83,9 @@ class Product
 
     /**
      * @param Collection $descriptions
-     * @return Product
+     * @return AbstractProduct
      */
-    public function setDescriptions(Collection $descriptions): Product
+    public function setDescriptions(Collection $descriptions): AbstractProduct
     {
         $this->descriptions = $descriptions;
         return $this;
@@ -88,27 +93,12 @@ class Product
 
     /**
      * @param Collection $product_images
-     * @return Product
+     * @return AbstractProduct
      */
-    public function setProductImages(Collection $product_images): Product
+    public function setProductImages(Collection $product_images): AbstractProduct
     {
         $this->product_images = $product_images;
         return $this;
-    }
-
-    /**
-     * @param Collection $variations
-     * @throws \Exception
-     */
-    public function setVariations(Collection $variations): void
-    {
-        foreach ($variations->getItems() as $v) {
-            if (!is_a($v, SimpleVariation::class)) {
-                throw new \Exception('Incompatible type, must be/extend from SimpleVariation');
-            }
-        }
-
-        $this->variations = $variations;
     }
 
     /**
@@ -121,9 +111,9 @@ class Product
 
     /**
      * @param bool $live
-     * @return Product
+     * @return AbstractProduct
      */
-    public function setLive(bool $live): Product
+    public function setLive(bool $live): AbstractProduct
     {
         $this->live = $live;
         return $this;
@@ -225,5 +215,11 @@ class Product
         $this->type = $type;
     }
 
-
+    /**
+     * @return string
+     */
+    public function getStyle(): string
+    {
+        return $this->style;
+    }
 }
