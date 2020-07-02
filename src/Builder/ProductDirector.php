@@ -6,6 +6,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\Collections\OptionCollection;
+use \vbpupil\ProductLibrary\Variation\SingleVariation;
 
 /**
  * Class ProductDirector
@@ -16,7 +17,7 @@ class ProductDirector
     /**
      * @param SimpleProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\AbstractProduct
+     * @return \vbpupil\Product\SimpleProduct
      * @throws \Exception
      */
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
@@ -37,7 +38,7 @@ class ProductDirector
     /**
      * @param GeneralProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\AbstractProduct
+     * @return \vbpupil\Product\GeneralProduct
      * @throws \Exception
      */
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
@@ -98,7 +99,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new \vbpupil\ProductLibrary\Variation\SingleVariation(
+                $tmpVariation = new SingleVariation(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],
