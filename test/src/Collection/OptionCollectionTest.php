@@ -11,8 +11,8 @@ namespace src\Collection;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Collections\OptionCollection;
-use vbpupil\Option\Option;
+use vbpupil\ProductLibrary\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Option\Option;
 
 class OptionCollectionTest extends TestCase
 {

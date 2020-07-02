@@ -9,7 +9,6 @@
 namespace vbpupil\ProductLibrary\Collections;
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Exception\InvalidSortMember;
 
 class SortableCollection extends Collection
 {

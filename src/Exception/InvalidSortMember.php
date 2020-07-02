@@ -11,5 +11,4 @@ namespace vbpupil\ProductLibrary\Exception;
 
 class InvalidSortMember extends \Exception
 {
-
 }
