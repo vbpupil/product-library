@@ -17,7 +17,7 @@ class SimpleProduct extends AbstractProduct
      */
     public function __construct()
     {
-        $this->style = 'single';
+        $this->style = 'simple';
     }
 
 

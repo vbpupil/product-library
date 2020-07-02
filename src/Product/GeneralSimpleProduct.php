@@ -10,7 +10,7 @@
 namespace vbpupil\ProductLibrary\Product;
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Variation\AbstractVariation;
+use vbpupil\ProductLibrary\Variation\AbstractVariation;
 
 class GeneralSimpleProduct extends AbstractProduct
 {
