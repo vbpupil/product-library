@@ -4,10 +4,6 @@
 namespace vbpupil\ProductLibrary\Price;
 
 
-use vbpupil\Exception\InvalidProductSetupException;
-use vbpupil\Price\Traits\PriceTrait;
-use vbpupil\Variation\Validation\VariantValidationTrait;
-
 /**
  * Class SinglePrice
  * @package vbpupil\Price
@@ -15,7 +11,7 @@ use vbpupil\Variation\Validation\VariantValidationTrait;
 class SinglePrice implements PriceInterface
 {
 
-    use VariantValidationTrait, PriceTrait;
+    use PriceTrait;
 
     /**
      * @var array
@@ -261,7 +257,6 @@ class SinglePrice implements PriceInterface
     {
         $this->vatRateId = $vatRateId;
     }
-
 
 
     /**

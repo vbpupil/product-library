@@ -6,7 +6,8 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\Collections\OptionCollection;
-use \vbpupil\ProductLibrary\Variation\SingleVariation;
+use vbpupil\ProductLibrary\Price\SinglePrice;
+use vbpupil\ProductLibrary\Variation\SingleVariation;
 
 /**
  * Class ProductDirector
@@ -111,7 +112,7 @@ class ProductDirector
                     ]
                 );
                 $tmpVariation->setPrice(
-                    new \vbpupil\Price\SinglePrice([
+                    new SinglePrice([
                         'vatRate' => $v['vat'],
                         'vatRateId' => $v['vat_rate_id'],
                         'exVat' => intval($v['price']),

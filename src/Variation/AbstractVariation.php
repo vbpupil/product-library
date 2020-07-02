@@ -5,11 +5,10 @@ namespace vbpupil\ProductLibrary\Variation;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Exception\InvalidVariationSetupException;
-use vbpupil\Option\OptionCategory;
-use vbpupil\Price\PriceInterface;
-use vbpupil\Traits\CodeTypes;
-use vbpupil\Variation\Validation\VariantValidationTrait;
+use vbpupil\ProductLibrary\Exception\InvalidVariationSetupException;
+use vbpupil\ProductLibrary\Option\OptionCategory;
+use vbpupil\ProductLibrary\Price\PriceInterface;
+use vbpupil\ProductLibrary\Traits\CodeTypes;
 
 /**
  * Class AbstractVariation
@@ -17,7 +16,7 @@ use vbpupil\Variation\Validation\VariantValidationTrait;
  */
 abstract class AbstractVariation
 {
-    use VariantValidationTrait, CodeTypes;
+    use \vbpupil\ProductLibrary\Variation\Validation\VariantValidationTrait, CodeTypes;
 
     /**
      * @var int
