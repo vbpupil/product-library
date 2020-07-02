@@ -5,7 +5,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Collections\OptionCollection;
 use vbpupil\ProductLibrary\Price\SinglePrice;
 use vbpupil\ProductLibrary\Variation\SingleVariation;
 
@@ -133,11 +133,11 @@ class ProductDirector
                         continue;
                     }
 
-                    $tmp_cat_options = new OptionCollection();
+                    $tmp_cat_options = new \vbpupil\ProductLibrary\Collections\OptionCollection();
 
                     foreach ($v1['options'] as $opt) {
                         $tmp_cat_options->addItem(
-                            new \vbpupil\Option\Option(
+                            new \vbpupil\ProductLibrary\Option\Option(
                                 $opt['id'],
                                 $opt['title'],
                                 $opt['price_ex_vat'],
@@ -151,7 +151,7 @@ class ProductDirector
                         );
                     }
 
-                    $tmp_opt_cat = new \vbpupil\Option\OptionCategory(
+                    $tmp_opt_cat = new \vbpupil\ProductLibrary\Option\OptionCategory(
                         $v1['id'],
                         $v1['title'],
                         $tmp_cat_options

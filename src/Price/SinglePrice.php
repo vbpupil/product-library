@@ -4,13 +4,14 @@
 namespace vbpupil\ProductLibrary\Price;
 
 
+use vbpupil\ProductLibrary\Price\Traits\PriceTrait;
+
 /**
  * Class SinglePrice
  * @package vbpupil\Price
  */
 class SinglePrice implements PriceInterface
 {
-
     use PriceTrait;
 
     /**

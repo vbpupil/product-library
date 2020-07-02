@@ -8,7 +8,7 @@
 namespace vbpupil\ProductLibrary\Option;
 
 
-use vbpupil\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Collections\OptionCollection;
 
 /**
  * Class OptionCategory
