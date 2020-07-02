@@ -7,7 +7,7 @@ namespace vbpupil\ProductLibrary\Builder;
 use Vbpupil\Collection\Collection;
 use vbpupil\ProductLibrary\Collections\OptionCollection;
 use vbpupil\ProductLibrary\Price\SinglePrice;
-use vbpupil\ProductLibrary\Variation\SingleVariation;
+use vbpupil\ProductLibrary\Variation\PhysicalVariant;
 
 /**
  * Class ProductDirector
@@ -100,7 +100,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new SingleVariation(
+                $tmpVariation = new PhysicalVariant(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],

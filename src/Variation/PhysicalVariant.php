@@ -1,6 +1,6 @@
 <?php
 /**
- * SingleVariation.php.
+ * \vbpupil\ProductLibrary\Variation\PhysicalVariant.php.
  * Version: 1.0.0 (02/07/2020)
  * Copyright: Freetimers Internet
  * Author:   Dean Haines
@@ -10,7 +10,7 @@
 namespace vbpupil\ProductLibrary\Variation;
 
 
-class SingleVariation extends AbstractVariation
+class PhysicalVariant extends AbstractVariation
 {
     /**
      * @var int
@@ -19,9 +19,9 @@ class SingleVariation extends AbstractVariation
 
     /**
      * @param int $packQty
-     * @return SingleVariation
+     * @return PhysicalVariant
      */
-    public function setPackQty(int $packQty): SingleVariation
+    public function setPackQty(int $packQty): PhysicalVariant
     {
         $this->packQty = $packQty;
         return $this;
@@ -29,9 +29,9 @@ class SingleVariation extends AbstractVariation
 
     /**
      * @param int $reorderLevel
-     * @return SingleVariation
+     * @return PhysicalVariant
      */
-    public function setReorderLevel(int $reorderLevel): SingleVariation
+    public function setReorderLevel(int $reorderLevel): PhysicalVariant
     {
         $this->reorderLevel = $reorderLevel;
         return $this;
@@ -39,9 +39,9 @@ class SingleVariation extends AbstractVariation
 
     /**
      * @param int $boxQty
-     * @return SingleVariation
+     * @return PhysicalVariant
      */
-    public function setBoxQty(int $boxQty): SingleVariation
+    public function setBoxQty(int $boxQty): PhysicalVariant
     {
         $this->boxQty = $boxQty;
         return $this;
@@ -49,9 +49,9 @@ class SingleVariation extends AbstractVariation
 
     /**
      * @param int $minOrderQty
-     * @return SingleVariation
+     * @return PhysicalVariant
      */
-    public function setMinOrderQty(int $minOrderQty): SingleVariation
+    public function setMinOrderQty(int $minOrderQty): PhysicalVariant
     {
         $this->minOrderQty = $minOrderQty;
         return $this;
