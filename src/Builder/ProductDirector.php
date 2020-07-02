@@ -98,7 +98,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new \vbpupil\ProductLibrary\Variation\SingleVariation(
+                $tmpVariation = new vbpupil\ProductLibrary\Variation\SingleVariation(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],
