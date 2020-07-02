@@ -4,6 +4,7 @@
 namespace vbpupil\ProductLibrary\Price;
 
 
+use vbpupil\ProductLibrary\Exception\InvalidProductSetupException;
 use vbpupil\ProductLibrary\Price\Traits\PriceTrait;
 
 /**

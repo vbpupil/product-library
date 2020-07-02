@@ -9,8 +9,8 @@
 namespace src\Price;
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Exception\InvalidProductSetupException;
-use vbpupil\Price\SinglePrice;
+use vbpupil\ProductLibrary\Exception\InvalidProductSetupException;
+use vbpupil\ProductLibrary\Price\SinglePrice;
 
 class SinglePriceTest extends TestCase
 {
@@ -118,7 +118,7 @@ class SinglePriceTest extends TestCase
 
     public function testToString()
     {
-        $p = new \vbpupil\Price\SinglePrice([
+        $p = new \vbpupil\ProductLibrary\Price\SinglePrice([
             'vatRate' => 2000,
             'exVat' => 1200,
             'currency' => 'GBP',
@@ -140,7 +140,7 @@ Special Price Active: true<br>
 
             $p->toString());
 
-        $p = new \vbpupil\Price\SinglePrice([
+        $p = new SinglePrice([
             'vatRate' => 2000,
             'exVat' => 1200,
             'currency' => 'GBP',

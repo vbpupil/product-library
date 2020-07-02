@@ -3,7 +3,7 @@
 namespace vbpupil\ProductLibrary\Stock\Auditables;
 
 
-use vbpupil\Traits\DateTrait;
+use vbpupil\ProductLibrary\Traits\DateTrait;
 
 /**
  * Class Auditables

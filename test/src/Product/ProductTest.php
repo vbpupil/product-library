@@ -11,10 +11,10 @@ namespace test\vbpupil\Product;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\AbstractProduct;
-use vbpupil\Variation\AbstractVariation;
+use vbpupil\ProductLibrary\Product\GeneralProduct;
+use vbpupil\ProductLibrary\Variation\AbstractVariation;
 
-class ProductTest extends TestCase
+class GeneralProductTest extends TestCase
 {
     protected $sut;
 
@@ -34,22 +34,22 @@ class ProductTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new AbstractProduct();
+        $this->sut = new GeneralProduct();
     }
 
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new AbstractProduct(
+            $this->sut = new GeneralProduct(
                 'ball',
                 new Collection()
             );
-            $this->assertTrue($this->sut instanceof AbstractProduct);
+            $this->assertTrue($this->sut instanceof GeneralProduct);
 
 
-            $this->sut = new AbstractProduct(null, new Collection());
+            $this->sut = new GeneralProduct(null, new Collection());
         } catch (\Exception $e) {
-            $this->assertEquals('AbstractProduct name required.', $e->getMessage());
+            $this->assertEquals('GeneralProduct name required.', $e->getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class ProductTest extends TestCase
 
     public function testLive()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -74,7 +74,7 @@ class ProductTest extends TestCase
 
     public function testSlug()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -88,7 +88,7 @@ class ProductTest extends TestCase
 
     public function testFeatured()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -101,7 +101,7 @@ class ProductTest extends TestCase
 
     public function testIsBestSeller()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -114,7 +114,7 @@ class ProductTest extends TestCase
 
     public function testIsNewProduct()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -127,7 +127,7 @@ class ProductTest extends TestCase
 
     public function testSettingAndGettingDescriptions()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
@@ -150,7 +150,7 @@ class ProductTest extends TestCase
     }
     public function testProductImages()
     {
-        $this->sut = new AbstractProduct(
+        $this->sut = new GeneralProduct(
             'ball',
             new Collection()
         );
