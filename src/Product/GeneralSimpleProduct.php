@@ -20,7 +20,7 @@ class GeneralSimpleProduct extends AbstractProduct
      */
     public function __construct()
     {
-        $this->style = 'general_simple';
+        $this->type = 'general_simple';
     }
 
     /**
