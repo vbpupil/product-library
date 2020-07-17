@@ -5,7 +5,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\SimpleProduct;
+use vbpupil\ProductLibrary\Product\SimpleProduct;
 
 /**
  * A SIMPLE PRODUCT IS JUST THE PRODUCT - IE NO VARIANTS
