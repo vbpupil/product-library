@@ -100,6 +100,7 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
+                // TODO use product style to fetch variation
                 $tmpVariation = new PhysicalVariation(
                     [
                         'id' => $v['id'],
@@ -111,6 +112,7 @@ class ProductDirector
                         'minOrderQty' => intval($v['min_order_qty']),
                     ]
                 );
+                $tmpVariation->setStyleOptions($v['style_options']);
                 $tmpVariation->setPrice(
                     new SinglePrice([
                         'vatRate' => $v['vat'],

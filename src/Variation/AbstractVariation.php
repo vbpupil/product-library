@@ -44,6 +44,11 @@ abstract class AbstractVariation
     public $options;
 
     /**
+     * @var array
+     */
+    protected $style_options = [];
+
+    /**
      * AbstractVariation constructor.
      * @param array $values
      * @throws \Exception
@@ -212,5 +217,15 @@ abstract class AbstractVariation
             }
         }
         $this->barcode = $barcode;
+    }
+
+    public function getStyleOptions(): array
+    {
+        return $this->style_options;
+    }
+
+    public function setStyleOptions(array $options): void
+    {
+        $this->style_options = $options;
     }
 }
