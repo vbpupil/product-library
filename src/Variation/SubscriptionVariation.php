@@ -10,7 +10,7 @@
 namespace vbpupil\ProductLibrary\Variation;
 
 
-class SubscriptionVariation extends AbstractVariation
+class SubscriptionVariation extends VirtualVariation
 {
     /**
      * @var string How ofter payments are taken i.e. montly.
