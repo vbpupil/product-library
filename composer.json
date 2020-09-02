@@ -20,7 +20,7 @@
   },
   "require": {
     "php": ">=7.2",
-    "vbpupil/collection": "dev-bug/namespaces",
+    "vbpupil/collection": "^1.0",
     "myclabs/php-enum": "^1.7"
   },
   "require-dev": {

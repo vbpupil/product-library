@@ -10,10 +10,6 @@
 namespace vbpupil\ProductLibrary\Variation;
 
 
-class VirtualVariation extends AbstractVariation
+abstract class VirtualVariation extends AbstractVariation
 {
-    /**
-     * @var string Downloadable resoure.
-     */
-    protected $resources;
 }
