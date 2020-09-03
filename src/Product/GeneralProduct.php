@@ -23,6 +23,23 @@ class GeneralProduct extends AbstractProduct
     }
 
     /**
+     * Get product price (lowest variant).
+     * @return int|null
+     */
+    public function getPriceExVat(): ?int
+    {
+        $price = null;
+        foreach ($this->variations->getItems() as $variation) {
+            if ($price !== null && $price <= $variation->prices->getExVat()) {
+                continue;
+            }
+            $price = $variation->prices->getExVat();
+        }
+
+        return $price;
+    }
+
+    /**
      * @param Collection $variations
      * @throws \Exception
      */
@@ -36,5 +53,4 @@ class GeneralProduct extends AbstractProduct
 
         $this->variations = $variations;
     }
-
 }

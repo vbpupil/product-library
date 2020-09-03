@@ -46,6 +46,7 @@ class ProductDirector
     {
         $p = $product->getProduct();
         $p->setType($data['type']);
+        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());

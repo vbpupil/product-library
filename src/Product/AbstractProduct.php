@@ -222,4 +222,12 @@ abstract class AbstractProduct
     {
         return $this->style;
     }
+
+    /**
+     * @return string
+     */
+    public function setStyle(string $style): void
+    {
+        $this->style = $style;
+    }
 }
