@@ -23,7 +23,25 @@ class GeneralProduct extends AbstractProduct
     }
 
     /**
-     * Get product price (lowest variant).
+     * Get product price (cheapest variation).
+     * @return int|float|null
+     */
+    public function getPrice(bool $includingVat = false, bool $convertToFloat = false, int $qty = 1, bool $evaluateWasPrice = true)
+    {
+        $price = null;
+        foreach ($this->variations->getItems() as $variation) {
+            $new_price = $variation->prices->getPrice($includingVat, $convertToFloat, $qty, $evaluateWasPrice);
+            if ($price !== null && $price <= $new_price) {
+                continue;
+            }
+            $price = $new_price;
+        }
+
+        return $price;
+    }
+
+    /**
+     * Get product price (cheapest variation).
      * @return int|null
      */
     public function getPriceExVat(): ?int
