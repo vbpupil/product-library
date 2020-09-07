@@ -3,7 +3,7 @@
 namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\AbstractProduct;
+use vbpupil\ProductLibrary\Product\AbstractProduct;
 
 /**
  * Interface ProductBuilderInterface

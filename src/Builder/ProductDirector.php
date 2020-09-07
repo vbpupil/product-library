@@ -18,7 +18,7 @@ class ProductDirector
     /**
      * @param SimpleProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\SimpleProduct
+     * @return \vbpupil\ProductLibrary\Product\SimpleProduct
      * @throws \Exception
      */
     public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
@@ -39,7 +39,7 @@ class ProductDirector
     /**
      * @param GeneralProductBuilder $product
      * @param array $data
-     * @return \vbpupil\Product\GeneralProduct
+     * @return \vbpupil\ProductLibrary\Product\GeneralProduct
      * @throws \Exception
      */
     public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
