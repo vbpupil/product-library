@@ -36,24 +36,17 @@ class GeneralProductTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new GeneralProduct(
-            'Sony PS4 With 1 Controller',
-            $this->description,
-            true
-        );
+        $this->sut = new GeneralProduct('physical');
     }
 
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new GeneralProduct(
-                'ball',
-                new Collection()
-            );
+            $this->sut = new GeneralProduct('physical');
             $this->assertTrue($this->sut instanceof GeneralProduct);
 
 
-            $this->sut = new GeneralProduct(null, new Collection());
+            $this->sut = new GeneralProduct('physical');
         } catch (\Exception $e) {
             $this->assertEquals('GeneralProduct name required.', $e->getMessage());
         }
@@ -256,8 +249,6 @@ class GeneralProductTest extends TestCase
 
     public function testGetAndSetStyle()
     {
-        // TODO should not allow to change style
-        $this->sut->setStyle('MyStyleTest');
-        $this->assertEquals('MyStyleTest', $this->sut->getStyle());
+        $this->assertEquals('physical', $this->sut->getStyle());
     }
 }

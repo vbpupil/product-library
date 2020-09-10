@@ -14,14 +14,7 @@ use vbpupil\ProductLibrary\Variation\AbstractVariation;
 
 class GeneralSimpleProduct extends AbstractProduct
 {
-
-    /**
-     * GeneralSimpleProduct constructor.
-     */
-    public function __construct()
-    {
-        $this->type = 'general_simple';
-    }
+    protected $type = 'general_simple';
 
     /**
      * @param Collection $variations

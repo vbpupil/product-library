@@ -36,24 +36,17 @@ class GeneralSimpleProductTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new GeneralSimpleProduct(
-            'Sony PS4 With 1 Controller',
-            $this->description,
-            true
-        );
+        $this->sut = new GeneralSimpleProduct('physical');
     }
 
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new GeneralSimpleProduct(
-                'ball',
-                new Collection()
-            );
+            $this->sut = new GeneralSimpleProduct('physical');
             $this->assertTrue($this->sut instanceof GeneralSimpleProduct);
 
 
-            $this->sut = new GeneralSimpleProduct(null, new Collection());
+            $this->sut = new GeneralSimpleProduct('physical');
         } catch (\Exception $e) {
             $this->assertEquals('GeneralSimpleProduct name required.', $e->getMessage());
         }
@@ -223,6 +216,6 @@ class GeneralSimpleProductTest extends TestCase
 
     public function testGettingStyle()
     {
-        $this->assertEquals('general_simple', $this->sut->getStyle());
+        $this->assertEquals('physical', $this->sut->getStyle());
     }
 }

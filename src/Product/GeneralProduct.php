@@ -14,13 +14,7 @@ use vbpupil\ProductLibrary\Variation\AbstractVariation;
 
 class GeneralProduct extends AbstractProduct
 {
-    /**
-     * GeneralProduct constructor.
-     */
-    public function __construct()
-    {
-        $this->type = 'general';
-    }
+    protected $type = 'general';
 
     /**
      * Get product price (cheapest variation).

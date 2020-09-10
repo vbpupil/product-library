@@ -12,11 +12,5 @@ namespace vbpupil\ProductLibrary\Product;
 
 class SimpleProduct extends AbstractProduct
 {
-    /**
-     * SimpleProduct constructor.
-     */
-    public function __construct()
-    {
-        $this->type = 'simple';
-    }
+    protected $type = 'simple';
 }

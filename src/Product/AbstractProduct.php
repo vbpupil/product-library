@@ -64,6 +64,15 @@ abstract class AbstractProduct
     protected $id;
 
     /**
+     * SimpleProduct constructor.
+     */
+    public function __construct(string $style)
+    {
+        $this->style = $style;
+        $this->type = 'simple';
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -221,13 +230,5 @@ abstract class AbstractProduct
     public function getStyle(): string
     {
         return $this->style;
-    }
-
-    /**
-     * @return string
-     */
-    public function setStyle(string $style): void
-    {
-        $this->style = $style;
     }
 }
