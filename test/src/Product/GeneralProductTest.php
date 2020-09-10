@@ -254,8 +254,10 @@ class GeneralProductTest extends TestCase
         }
     }
 
-    public function testGettingStyle()
+    public function testGetAndSetStyle()
     {
-        $this->assertEquals('general', $this->sut->getStyle());
+        // TODO should not allow to change style
+        $this->sut->setStyle('MyStyleTest');
+        $this->assertEquals('MyStyleTest', $this->sut->getStyle());
     }
 }
