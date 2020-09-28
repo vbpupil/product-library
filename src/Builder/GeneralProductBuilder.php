@@ -22,21 +22,12 @@ class GeneralProductBuilder implements ProductBuilderInterface
      */
     public $product;
 
-
-    /**
-     * GeneralProductBuilder constructor.
-     */
-    public function __construct()
-    {
-        $this->reset();
-    }
-
     /**
      *
      */
-    public function reset()
+    public function initProduct(string $style)
     {
-        $this->product = new GeneralProduct();
+        $this->product = new GeneralProduct($style);
     }
 
     /**
@@ -46,10 +37,7 @@ class GeneralProductBuilder implements ProductBuilderInterface
     public function getProduct(): GeneralProduct
     {
         try {
-            $result = $this->product;
-            $this->reset();
-
-            return $result;
+            return $this->product;
         } catch (\Exception $e) {
             throw new \Exception("Unable to build GeneralProduct: {$e->getMessage()}");
         }

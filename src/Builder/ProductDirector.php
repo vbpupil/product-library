@@ -16,20 +16,21 @@ use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 class ProductDirector
 {
     /**
-     * @param SimpleProductBuilder $product
+     * @param SimpleProductBuilder $builder
      * @param array $data
      * @return \vbpupil\ProductLibrary\Product\SimpleProduct
      * @throws \Exception
      */
-    public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
+    public function buildSimpleProduct(SimpleProductBuilder $builder, array $data = [])
     {
-        $p = $product->getProduct();
+        $builder->initProduct($data['style']);
+        $p = $builder->getProduct();
         $p->setType($data['type']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
 
-        $this->populateData($p, $data, $product);
+        $this->populateData($p, $data, $builder);
 
         unset($p->variations);
 
@@ -37,23 +38,24 @@ class ProductDirector
     }
 
     /**
-     * @param GeneralProductBuilder $product
+     * @param GeneralProductBuilder $builder
      * @param array $data
      * @return \vbpupil\ProductLibrary\Product\GeneralProduct
      * @throws \Exception
      */
-    public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
+    public function buildGeneralProduct(GeneralProductBuilder $builder, array $data = [])
     {
-        $p = $product->getProduct();
+        $builder->initProduct($data['style']);
+        $builder->getProduct();
+        $p = $builder->getProduct();
         $p->setType($data['type']);
-        $p->setStyle($data['style']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
         $p->setProductImages(new Collection());
 
 
-        $this->populateData($p, $data, $product);
+        $this->populateData($p, $data, $builder);
 
 
         return $p;

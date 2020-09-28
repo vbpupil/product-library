@@ -21,21 +21,12 @@ class SimpleProductBuilder implements ProductBuilderInterface
      */
     public $product;
 
-
-    /**
-     * SimpleProductBuilder constructor.
-     */
-    public function __construct()
-    {
-        $this->reset();
-    }
-
     /**
      *
      */
-    public function reset()
+    public function initProduct(string $style)
     {
-        $this->product = new SimpleProduct();
+        $this->product = new SimpleProduct($style);
     }
 
     /**
@@ -45,10 +36,7 @@ class SimpleProductBuilder implements ProductBuilderInterface
     public function getProduct(): SimpleProduct
     {
         try {
-            $result = $this->product;
-            $this->reset();
-
-            return $result;
+            return $this->product;
         } catch (\Exception $e) {
             throw new \Exception("Unable to build SimpleProduct: {$e->getMessage()}");
         }
