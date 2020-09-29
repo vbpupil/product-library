@@ -1,11 +1,13 @@
 <?php
 
 
-namespace vbpupil\Builder;
+namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Price\SinglePrice;
+use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 
 /**
  * Class ProductDirector
@@ -14,20 +16,21 @@ use vbpupil\Collections\OptionCollection;
 class ProductDirector
 {
     /**
-     * @param SimpleProductBuilder $product
+     * @param SimpleProductBuilder $builder
      * @param array $data
-     * @return \vbpupil\Product\Product
+     * @return \vbpupil\ProductLibrary\Product\SimpleProduct
      * @throws \Exception
      */
-    public function buildSimpleProduct(SimpleProductBuilder $product, array $data = [])
+    public function buildSimpleProduct(SimpleProductBuilder $builder, array $data = [])
     {
-        $p = $product->getProduct();
+        $builder->initProduct($data['style']);
+        $p = $builder->getProduct();
         $p->setType($data['type']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
         $p->setProductImages(new Collection());
 
-        $this->populateData($p, $data, $product);
+        $this->populateData($p, $data, $builder);
 
         unset($p->variations);
 
@@ -35,14 +38,16 @@ class ProductDirector
     }
 
     /**
-     * @param GeneralProductBuilder $product
+     * @param GeneralProductBuilder $builder
      * @param array $data
-     * @return \vbpupil\Product\Product
+     * @return \vbpupil\ProductLibrary\Product\GeneralProduct
      * @throws \Exception
      */
-    public function buildGeneralProduct(GeneralProductBuilder $product, array $data = [])
+    public function buildGeneralProduct(GeneralProductBuilder $builder, array $data = [])
     {
-        $p = $product->getProduct();
+        $builder->initProduct($data['style']);
+        $builder->getProduct();
+        $p = $builder->getProduct();
         $p->setType($data['type']);
         $p->setName($data['product_name']);
         $p->setDescriptions(new Collection());
@@ -50,7 +55,7 @@ class ProductDirector
         $p->setProductImages(new Collection());
 
 
-        $this->populateData($p, $data, $product);
+        $this->populateData($p, $data, $builder);
 
 
         return $p;
@@ -98,7 +103,8 @@ class ProductDirector
 
         if (!empty($data['variations'])) {
             foreach ($data['variations'] as $k => $v) {
-                $tmpVariation = new \vbpupil\Variation\SimpleVariation(
+                // TODO use product style to fetch variation
+                $tmpVariation = new PhysicalVariation(
                     [
                         'id' => $v['id'],
                         'title' => $v['title'],
@@ -109,8 +115,9 @@ class ProductDirector
                         'minOrderQty' => intval($v['min_order_qty']),
                     ]
                 );
+                $tmpVariation->setStyleOptions($v['style_options']);
                 $tmpVariation->setPrice(
-                    new \vbpupil\Price\SinglePrice([
+                    new SinglePrice([
                         'vatRate' => $v['vat'],
                         'vatRateId' => $v['vat_rate_id'],
                         'exVat' => intval($v['price']),
@@ -131,11 +138,11 @@ class ProductDirector
                         continue;
                     }
 
-                    $tmp_cat_options = new OptionCollection();
+                    $tmp_cat_options = new \vbpupil\ProductLibrary\Collections\OptionCollection();
 
                     foreach ($v1['options'] as $opt) {
                         $tmp_cat_options->addItem(
-                            new \vbpupil\Option\Option(
+                            new \vbpupil\ProductLibrary\Option\Option(
                                 $opt['id'],
                                 $opt['title'],
                                 $opt['price_ex_vat'],
@@ -149,7 +156,7 @@ class ProductDirector
                         );
                     }
 
-                    $tmp_opt_cat = new \vbpupil\Option\OptionCategory(
+                    $tmp_opt_cat = new \vbpupil\ProductLibrary\Option\OptionCategory(
                         $v1['id'],
                         $v1['title'],
                         $tmp_cat_options

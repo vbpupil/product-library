@@ -11,7 +11,7 @@ namespace src\Option;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Option\Option;
+use vbpupil\ProductLibrary\Option\Option;
 
 class OptionTest extends TestCase
 {

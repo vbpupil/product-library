@@ -55,7 +55,7 @@ Once you have created the Collection simply use it as you would any other Collec
 To add a Variation:
 
 ```php
-    $myVariation = new \vbpupil\Variation\SimpleVariation(
+    $myVariation = new \vbpupil\Variation\AbstractVariation(
             [
                 'title' => 'FFF',
                 'product_code' => 'MYPRODCODE-01'

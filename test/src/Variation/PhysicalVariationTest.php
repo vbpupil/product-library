@@ -1,6 +1,6 @@
 <?php
 /**
- * SimpleVariationTest.phpst.php Class
+ * PhysicalVariationTest.phpst.php Class
  *
  * @author    Dean Haines
  * @copyright 2019, UK
@@ -11,30 +11,28 @@ namespace test\vbpupil\Variation;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Exception\InvalidVariationSetupException;
-use vbpupil\Price\SinglePrice;
-use vbpupil\Stock\Auditables\Auditable;
-use vbpupil\Stock\AuditableStock;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\ProductLibrary\Exception\InvalidVariationSetupException;
+use vbpupil\ProductLibrary\Price\SinglePrice;
+use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 
-class SimpleVariationTest extends TestCase
+class PhysicalVariationTest extends TestCase
 {
     protected $sut;
 
 
     public function testNewingUpAVariation()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
             ]
         );
 
-        $this->assertTrue($this->sut instanceof SimpleVariation);
+        $this->assertTrue($this->sut instanceof PhysicalVariation);
 
         try {
-            $sv = new SimpleVariation([]);
+            $sv = new PhysicalVariation([]);
         } catch (InvalidVariationSetupException $e) {
             $this->assertEquals('Required Values must be provided', $e->getMessage());
         }
@@ -43,7 +41,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGetAttributes()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -63,16 +61,16 @@ class SimpleVariationTest extends TestCase
     public function testProductCodeSettingThrowsAnException()
     {
         try {
-            $sv = new SimpleVariation([
+            $sv = new PhysicalVariation([
                 'product_code' => '',
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
-            $this->assertEquals('Product code cannot be empty.', $e->getMessage());
+            $this->assertEquals('AbstractProduct code cannot be empty.', $e->getMessage());
         }
 
         try {
-            $sv = new SimpleVariation([
+            $sv = new PhysicalVariation([
                 'title' => 'SONY PlayStation 4'
             ]);
         } catch (\Exception $e) {
@@ -82,7 +80,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingandSettingQuantities()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -104,7 +102,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingandSettingOfVariantId()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -124,7 +122,7 @@ class SimpleVariationTest extends TestCase
 
         $this->price->method('getPrice')->willReturn(1000);
 
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -141,7 +139,7 @@ class SimpleVariationTest extends TestCase
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -155,7 +153,7 @@ class SimpleVariationTest extends TestCase
     public function testRequiredFieldsInconstrucor()
     {
         try {
-            $this->sut = new SimpleVariation(
+            $this->sut = new PhysicalVariation(
                 [
                     'product_code' => '532095',
                 ]
@@ -167,7 +165,7 @@ class SimpleVariationTest extends TestCase
 
     public function testSettingAValidBarcode()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
@@ -194,7 +192,7 @@ class SimpleVariationTest extends TestCase
 
     public function testGettingWeight()
     {
-        $this->sut = new SimpleVariation(
+        $this->sut = new PhysicalVariation(
             [
                 'product_code' => '532095',
                 'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'

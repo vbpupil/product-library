@@ -6,10 +6,10 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Stock;
+namespace vbpupil\ProductLibrary\Stock;
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Stock\Auditables\Auditable;
+use vbpupil\ProductLibrary\Stock\Auditables\Auditable;
 
 
 /**

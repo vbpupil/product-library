@@ -1,22 +1,24 @@
 <?php
 /**
- * ProductTest.php Class
- *
- * @author    Dean Haines
- * @copyright 2019, UK
- * @license   Proprietary See LICENSE.md
+ * GeneralSimpleProductTest.php.
+ * Version: 1.0.0 (11/09/19)
+
+ * Author:   Dean Haines
  */
 
-namespace test\vbpupil\Product;
+
+namespace src\Product;
+
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
-use vbpupil\Variation\SimpleVariation;
+use vbpupil\ProductLibrary\Product\GeneralSimpleProduct;
+use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 
-class ProductTest extends TestCase
+class GeneralSimpleProductTest extends TestCase
 {
     protected $sut;
+
 
     public function setUp()
     {
@@ -29,27 +31,24 @@ class ProductTest extends TestCase
             ->getMock();
 
 
-        $this->simpleVariation = $this->getMockBuilder(SimpleVariation::class)
+        $this->physicalVariation = $this->getMockBuilder(PhysicalVariation::class)
             ->disableOriginalConstructor()
             ->setMethods(['addItem', 'getItems'])
             ->getMock();
 
-        $this->sut = new Product();
+        $this->sut = new GeneralSimpleProduct('physical');
     }
 
     public function testNewingUpAProduct()
     {
         try {
-            $this->sut = new Product(
-                'ball',
-                new Collection()
-            );
-            $this->assertTrue($this->sut instanceof Product);
+            $this->sut = new GeneralSimpleProduct('physical');
+            $this->assertTrue($this->sut instanceof GeneralSimpleProduct);
 
 
-            $this->sut = new Product(null, new Collection());
+            $this->sut = new GeneralSimpleProduct('physical');
         } catch (\Exception $e) {
-            $this->assertEquals('Product name required.', $e->getMessage());
+            $this->assertEquals('GeneralSimpleProduct name required.', $e->getMessage());
         }
     }
 
@@ -61,7 +60,7 @@ class ProductTest extends TestCase
 
     public function testLive()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -74,7 +73,7 @@ class ProductTest extends TestCase
 
     public function testSlug()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -88,7 +87,7 @@ class ProductTest extends TestCase
 
     public function testFeatured()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -101,7 +100,7 @@ class ProductTest extends TestCase
 
     public function testIsBestSeller()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -114,7 +113,7 @@ class ProductTest extends TestCase
 
     public function testIsNewProduct()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -127,7 +126,7 @@ class ProductTest extends TestCase
 
     public function testSettingAndGettingDescriptions()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -150,7 +149,7 @@ class ProductTest extends TestCase
     }
     public function testProductImages()
     {
-        $this->sut = new Product(
+        $this->sut = new GeneralSimpleProduct(
             'ball',
             new Collection()
         );
@@ -168,24 +167,33 @@ class ProductTest extends TestCase
         //delete a description
         $this->sut->product_images->deleteItem(0);
         $this->assertEquals(1, $this->sut->product_images->getLength());
-
-//        $this->assertTrue($this->sut->descriptions->keyExists('long'));
     }
 
+    public function testGetAndSetId()
+    {
+        $this->sut->setId(123);
+        $this->assertEquals(123, $this->sut->getId());
+    }
 
-//    public function testAddingVariations()
-//    {
-//        $this->variations
-//            ->expects($this->once())
-//            ->method('getItems')
-//            ->will($this->returnValue(
-//                [$this->simpleVariation]
-//            ));
-//
-//        $this->sut->setVariations(
-//            $this->variations
-//        );
-//    }
+    public function testGetAndSetType()
+    {
+        $this->sut->setType('MyTypeTest');
+        $this->assertEquals('MyTypeTest', $this->sut->getType());
+    }
+
+    public function testAddingVariations()
+    {
+        $this->variations
+            ->expects($this->once())
+            ->method('getItems')
+            ->will($this->returnValue(
+                [$this->physicalVariation]
+            ));
+
+        $this->sut->setVariations(
+            $this->variations
+        );
+    }
 
     public function testWrongTypeAdded()
     {
@@ -201,21 +209,13 @@ class ProductTest extends TestCase
                 $this->variations
             );
         }catch(\Exception $e){
-            $this->assertEquals('Incompatible type, must be/extend from SimpleVariation', $e->getMessage());
+//            echo $e->getMessage();
+            $this->assertEquals('Incompatible type, must be/extend from AbstractVariation', $e->getMessage());
         }
     }
 
-    public function testGetAndSetId()
+    public function testGettingStyle()
     {
-        $this->sut->setId(123);
-        $this->assertEquals(123, $this->sut->getId());
+        $this->assertEquals('physical', $this->sut->getStyle());
     }
-
-    public function testGetAndSetType()
-    {
-        $this->sut->setType('MyTypeTest');
-        $this->assertEquals('MyTypeTest', $this->sut->getType());
-    }
-
-
 }

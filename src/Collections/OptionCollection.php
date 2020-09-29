@@ -1,8 +1,9 @@
 <?php
 
-namespace vbpupil\Collections;
+namespace vbpupil\ProductLibrary\Collections;
 
-use vbpupil\Option\Option;
+
+use vbpupil\ProductLibrary\Option\Option;
 
 /**
  * OptionCollection.php

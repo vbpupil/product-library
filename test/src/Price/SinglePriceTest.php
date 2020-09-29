@@ -9,21 +9,25 @@
 namespace src\Price;
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Exception\InvalidProductSetupException;
-use vbpupil\Price\SinglePrice;
+use vbpupil\ProductLibrary\Exception\InvalidProductSetupException;
+use vbpupil\ProductLibrary\Price\SinglePrice;
 
 class SinglePriceTest extends TestCase
 {
     protected $sut;
 
-
-    public function testNewingUpASinglePrice()
+    public function setUp()
     {
         $this->sut = new SinglePrice([
             'vatRate' => 2000,
             'exVat' => 1200,
             'currency' => 'GBP',
         ]);
+    }
+
+    public function testNewingUpASinglePrice()
+    {
+
 
         $this->assertTrue($this->sut instanceof SinglePrice);
     }
@@ -118,7 +122,7 @@ class SinglePriceTest extends TestCase
 
     public function testToString()
     {
-        $p = new \vbpupil\Price\SinglePrice([
+        $p = new \vbpupil\ProductLibrary\Price\SinglePrice([
             'vatRate' => 2000,
             'exVat' => 1200,
             'currency' => 'GBP',
@@ -140,7 +144,7 @@ Special Price Active: true<br>
 
             $p->toString());
 
-        $p = new \vbpupil\Price\SinglePrice([
+        $p = new SinglePrice([
             'vatRate' => 2000,
             'exVat' => 1200,
             'currency' => 'GBP',
@@ -255,8 +259,8 @@ Special Price Active: false<br>
 
         //test getting price with qty 1,2, 5 - this will also return special price
         $this->assertEquals(500, $p->getPrice(false, false, 1));
-        $this->assertEquals(1000, $p->getPrice(false, false,2));
-        $this->assertEquals(2500, $p->getPrice(false, false,5));
+        $this->assertEquals(1000, $p->getPrice(false, false, 2));
+        $this->assertEquals(2500, $p->getPrice(false, false, 5));
 
 
         $p = new SinglePrice([
@@ -267,8 +271,8 @@ Special Price Active: false<br>
 
         //test getting price with qty 1,2, 5 - this will return regular price
         $this->assertEquals(1200, $p->getPrice(false, false, 1));
-        $this->assertEquals(2400, $p->getPrice(false, false,2));
-        $this->assertEquals(6000, $p->getPrice(false, false,5));
+        $this->assertEquals(2400, $p->getPrice(false, false, 2));
+        $this->assertEquals(6000, $p->getPrice(false, false, 5));
     }
 
     public function testWasPrice()
@@ -302,5 +306,11 @@ Special Price Active: false<br>
         $p->setShowSpecialOfferCountdown(true);
 
         $this->assertTrue($p->showSpecialOfferCountdown());
+    }
+
+    public function testSetVatRateId()
+    {
+        $this->sut->setVatRateId(123);
+        $this->assertEquals(123, $this->sut->getVatRateId(123));
     }
 }

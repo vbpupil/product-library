@@ -6,7 +6,7 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Traits;
+namespace vbpupil\ProductLibrary\Traits;
 
 /**
  * Trait DateTrait

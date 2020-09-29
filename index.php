@@ -3,7 +3,7 @@
 use Vbpupil\Collection\Collection;
 use vbpupil\Collections\OptionCollection;
 use vbpupil\Product\GeneralProduct;
-use vbpupil\Product\Product;
+use vbpupil\Product\AbstractProduct;
 use vbpupil\Stock\Auditable;
 use vbpupil\Stock\AuditableAssociatedDocumentType;
 use vbpupil\Stock\AuditableStock;
@@ -150,7 +150,7 @@ $generalSimple = $director->buildGeneralProduct(
     $generalSimpleData
 );
 
-//$v = new \vbpupil\Variation\SimpleVariation(
+//$v = new \vbpupil\Variation\AbstractVariation(
 //    [
 //        'title' => 'FFF',
 //    ]
@@ -308,7 +308,7 @@ dump($generalSimple->variations->getItem(0)->prices->isOnSpecial());
 //        new Collection()
 //    );
 //
-//    $v = new \vbpupil\Variation\SimpleVariation(
+//    $v = new \vbpupil\Variation\AbstractVariation(
 //        [
 //            'title' => 'FFF',
 //            'product_code' => 'MYPRODCODE-01'
@@ -328,7 +328,7 @@ dump($generalSimple->variations->getItem(0)->prices->isOnSpecial());
 
 
 //SIMPLE PRODUCT START
-//$sp = new Product(
+//$sp = new AbstractProduct(
 //    'Iphone X',
 //    new Collections()
 //);
@@ -351,7 +351,7 @@ dump($generalSimple->variations->getItem(0)->prices->isOnSpecial());
 //SIMPLE PRODUCT END
 
 
-//$v = new Vbpupil\Variation\SimpleVariation();
+//$v = new Vbpupil\Variation\AbstractVariation();
 
 //single prices start
 //try {

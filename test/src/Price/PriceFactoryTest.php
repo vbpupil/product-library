@@ -11,8 +11,8 @@ namespace src\Price;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Price\PriceFactory;
-use vbpupil\Price\SinglePrice;
+use vbpupil\ProductLibrary\Price\PriceFactory;
+use vbpupil\ProductLibrary\Price\SinglePrice;
 
 class PriceFactoryTest extends TestCase
 {

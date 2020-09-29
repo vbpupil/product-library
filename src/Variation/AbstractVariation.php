@@ -1,29 +1,27 @@
 <?php
 
 
-namespace vbpupil\Variation;
+namespace vbpupil\ProductLibrary\Variation;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Exception\InvalidVariationSetupException;
-use vbpupil\Option\OptionCategory;
-use vbpupil\Price\PriceInterface;
-use vbpupil\Traits\CodeTypes;
-use vbpupil\Variation\Validation\VariantValidationTrait;
+use vbpupil\ProductLibrary\Exception\InvalidVariationSetupException;
+use vbpupil\ProductLibrary\Option\OptionCategory;
+use vbpupil\ProductLibrary\Price\PriceInterface;
+use vbpupil\ProductLibrary\Traits\CodeTypes;
 
 /**
- * Class SimpleVariation
- * @package vbpupil\Product
+ * Class AbstractVariation
+ * @package vbpupil\AbstractProduct
  */
-class SimpleVariation
+abstract class AbstractVariation
 {
-    use VariantValidationTrait, CodeTypes;
+    use \vbpupil\ProductLibrary\Variation\Validation\VariantValidationTrait, CodeTypes;
 
     /**
      * @var int
      */
     protected $id;
-
 
     /**
      * @var array
@@ -34,7 +32,6 @@ class SimpleVariation
      * @var string
      */
     protected $product_code, $barcode, $title;
-
 
     /**
      * @var PriceInterface
@@ -47,13 +44,12 @@ class SimpleVariation
     public $options;
 
     /**
-     * @var int
+     * @var array
      */
-    protected $packQty, $reorderLevel, $boxQty, $minOrderQty, $weight = 0;
-
+    protected $style_options = [];
 
     /**
-     * SimpleVariation constructor.
+     * AbstractVariation constructor.
      * @param array $values
      * @throws \Exception
      */
@@ -134,13 +130,13 @@ class SimpleVariation
 
     /**
      * @param string $product_code
-     * @return SimpleVariation
+     * @return AbstractVariation
      * @throws \Exception
      */
-    public function setProductCode(string $product_code): SimpleVariation
+    public function setProductCode(string $product_code): AbstractVariation
     {
         if (is_null($product_code) || $product_code == '') {
-            throw new \Exception('Product code cannot be empty.');
+            throw new \Exception('AbstractProduct code cannot be empty.');
         }
 
         $this->product_code = $product_code;
@@ -157,84 +153,12 @@ class SimpleVariation
 
     /**
      * @param string $title
-     * @return SimpleVariation
+     * @return AbstractVariation
      */
-    public function setTitle(string $title): SimpleVariation
+    public function setTitle(string $title): AbstractVariation
     {
         $this->title = $title;
         return $this;
-    }
-
-    /**
-     * @param int $packQty
-     * @return SimpleVariation
-     */
-    public function setPackQty(int $packQty): SimpleVariation
-    {
-        $this->packQty = $packQty;
-        return $this;
-    }
-
-    /**
-     * @param int $reorderLevel
-     * @return SimpleVariation
-     */
-    public function setReorderLevel(int $reorderLevel): SimpleVariation
-    {
-        $this->reorderLevel = $reorderLevel;
-        return $this;
-    }
-
-    /**
-     * @param int $boxQty
-     * @return SimpleVariation
-     */
-    public function setBoxQty(int $boxQty): SimpleVariation
-    {
-        $this->boxQty = $boxQty;
-        return $this;
-    }
-
-    /**
-     * @param int $minOrderQty
-     * @return SimpleVariation
-     */
-    public function setMinOrderQty(int $minOrderQty): SimpleVariation
-    {
-        $this->minOrderQty = $minOrderQty;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPackQty(): int
-    {
-        return $this->packQty;
-    }
-
-    /**
-     * @return int
-     */
-    public function getReorderLevel(): int
-    {
-        return $this->reorderLevel;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBoxQty(): int
-    {
-        return $this->boxQty;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMinOrderQty(): int
-    {
-        return $this->minOrderQty;
     }
 
 
@@ -295,23 +219,13 @@ class SimpleVariation
         $this->barcode = $barcode;
     }
 
-    /**
-     * this weight is for one item - if someone is buying 5 then we times this by 5
-     *
-     * @return int
-     */
-    public function getWeight(int $qty = 1): int
+    public function getStyleOptions(): array
     {
-        return $this->weight * $qty;
+        return $this->style_options;
     }
 
-    /**
-     * @param int $weight
-     */
-    public function setWeight(int $weight): void
+    public function setStyleOptions(array $options): void
     {
-        $this->weight = $weight;
+        $this->style_options = $options;
     }
-
-
 }

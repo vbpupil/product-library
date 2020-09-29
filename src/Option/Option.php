@@ -5,10 +5,11 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Option;
+namespace vbpupil\ProductLibrary\Option;
 
 
-use vbpupil\Traits\CodeTypes;
+
+use vbpupil\ProductLibrary\Traits\CodeTypes;
 
 class Option
 {

@@ -5,7 +5,7 @@
  * Author:   Dean Haines
  */
 
-namespace vbpupil\Price\Traits;
+namespace vbpupil\ProductLibrary\Price\Traits;
 
 trait PriceTrait
 {
