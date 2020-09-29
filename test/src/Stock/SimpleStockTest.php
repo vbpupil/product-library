@@ -11,7 +11,7 @@ namespace src\Stock;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Stock\SimpleStock;
+use vbpupil\ProductLibrary\Stock\SimpleStock;
 
 class SimpleStockTest extends TestCase
 {

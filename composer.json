@@ -10,12 +10,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "vbpupil\\": "src"
+      "vbpupil\\ProductLibrary\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "test\\vbpupil\\": "test/src"
+      "test\\vbpupil\\ProductLibrary\\": "test/src"
     }
   },
   "require": {

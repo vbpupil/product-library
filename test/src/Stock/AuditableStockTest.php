@@ -12,8 +12,8 @@ namespace src\Stock;
 
 use PHPUnit\Framework\TestCase;
 use Vbpupil\Collection\Collection;
-use vbpupil\Stock\Auditables\Auditable;
-use vbpupil\Stock\AuditableStock;
+use vbpupil\ProductLibrary\Stock\Auditables\Auditable;
+use vbpupil\ProductLibrary\Stock\AuditableStock;
 
 class AuditableStockTest extends TestCase
 {

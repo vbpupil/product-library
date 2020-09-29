@@ -11,8 +11,8 @@ namespace src\Option;
 
 
 use PHPUnit\Framework\TestCase;
-use vbpupil\Collections\OptionCollection;
-use vbpupil\Option\OptionCategory;
+use vbpupil\ProductLibrary\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Option\OptionCategory;
 
 class OptionCategoryTest extends TestCase
 {

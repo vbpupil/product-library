@@ -1,11 +1,12 @@
 <?php
 
 
-namespace vbpupil\Builder;
+namespace vbpupil\ProductLibrary\Builder;
 
 
 use Vbpupil\Collection\Collection;
-use vbpupil\Product\Product;
+use vbpupil\ProductLibrary\Product\AbstractProduct;
+use vbpupil\ProductLibrary\Product\GeneralProduct;
 
 /**
  * A GENERAL PRODUCT IS A PRODUCT WITH MULTIPLE VARIATIONS
@@ -21,34 +22,22 @@ class GeneralProductBuilder implements ProductBuilderInterface
      */
     public $product;
 
-
-    /**
-     * GeneralProductBuilder constructor.
-     */
-    public function __construct()
-    {
-        $this->reset();
-    }
-
     /**
      *
      */
-    public function reset()
+    public function initProduct(string $style)
     {
-        $this->product = new Product();
+        $this->product = new GeneralProduct($style);
     }
 
     /**
-     * @return Product
+     * @return AbstractProduct
      * @throws \Exception
      */
-    public function getProduct(): Product
+    public function getProduct(): GeneralProduct
     {
         try {
-            $result = $this->product;
-            $this->reset();
-
-            return $result;
+            return $this->product;
         } catch (\Exception $e) {
             throw new \Exception("Unable to build GeneralProduct: {$e->getMessage()}");
         }
