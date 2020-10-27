@@ -113,10 +113,10 @@ class ProductDirector
                         'boxQty' => intval($v['box_qty']),
                         'reorderLevel' => intval($v['reorder_level']),
                         'minOrderQty' => intval($v['min_order_qty']),
-                        'productCode' => $v['product_code'],
-                        'barcode' => $v['barcode'],
-                        'ean' => $v['ean'],
-                        'mpn' => $v['mpn'],
+                        'productCode' => ($v['product_code'] ?: ''),
+                        'barcode' => ($v['barcode'] ?: ''),
+                        'ean' => ($v['ean'] ?: ''),
+                        'mpn' => ($v['mpn'] ?: ''),
                     ]
                 );
 
