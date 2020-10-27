@@ -135,10 +135,6 @@ abstract class AbstractVariation
      */
     public function setProductCode(string $product_code): AbstractVariation
     {
-        if (is_null($product_code) || $product_code == '') {
-            throw new \Exception('AbstractProduct code cannot be empty.');
-        }
-
         $this->product_code = $product_code;
         return $this;
     }
