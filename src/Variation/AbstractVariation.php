@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $title;
+    protected $product_code, $barcode, $ean, $mpn, $title;
 
     /**
      * @var PriceInterface
@@ -207,15 +207,9 @@ abstract class AbstractVariation
 
     /**
      * @param string $barcode
-     * @throws \Exception
      */
     public function setBarcode(string $barcode): void
     {
-        if (!$this->isSku($barcode)) {
-            if (!$this->isEan($barcode)) {
-                throw new \Exception('INVALID barcode identified.');
-            }
-        }
         $this->barcode = $barcode;
     }
 
@@ -227,5 +221,37 @@ abstract class AbstractVariation
     public function setStyleOptions(array $options): void
     {
         $this->style_options = $options;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEan()
+    {
+        return $this->ean;
+    }
+
+    /**
+     * @param string $ean
+     */
+    public function setEan($ean)
+    {
+        $this->ean = $ean;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMpn()
+    {
+        return $this->mpn;
+    }
+
+    /**
+     * @param string $mpn
+     */
+    public function setMpn($mpn)
+    {
+        $this->mpn = $mpn;
     }
 }
