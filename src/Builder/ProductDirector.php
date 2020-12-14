@@ -6,7 +6,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\ProductLibrary\Collections\OptionCollection;
-use vbpupil\ProductLibrary\Price\MatrixPrice;
+use vbpupil\ProductLibrary\Price\PivotPrice;
 use vbpupil\ProductLibrary\Price\SinglePrice;
 use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
 use vbpupil\ProductLibrary\Variation\PhysicalVariation;
@@ -121,6 +121,7 @@ class ProductDirector
                         'barcode' => ($v['barcode'] ?: ''),
                         'ean' => ($v['ean'] ?: ''),
                         'mpn' => ($v['mpn'] ?: ''),
+                        'price_type' => $v['price_type']
                     ]
                 );
 
@@ -141,22 +142,13 @@ class ProductDirector
                             ])
                         );
                         break;
-                    case 'matrix':
-                        if(!$this->isJson($v['price_matrix'])){
-                            throw new \Exception('Invalid JSON string for matrix prices');
-                        }
-
+                    case 'pivot':
                         $tmpVariation->setPrice(
-                            new MatrixPrice([
-                                'matrix' => json_decode($v['price_matrix'], true),
+                            new PivotPrice([
+                                'pivot' => $v['price_pivot'],
                                 'vatRate' => $v['vat'],
                                 'vatRateId' => $v['vat_rate_id'],
-                                'currency' => 'GBP',
-//                                'specialPriceActive' => $v['special_price_active'],
-//                                'specialPriceActiveUntil' => $v['special_price_expiry'],
-//                                'specialPrice' => intval($v['special_price']),
-//                                'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
-//                                'exVat' => intval($v['price']),
+                                'currency' => 'GBP'
                             ])
                         );
                         break;

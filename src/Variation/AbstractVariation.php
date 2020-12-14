@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type;
 
     /**
      * @var PriceInterface
@@ -250,4 +250,22 @@ abstract class AbstractVariation
     {
         $this->mpn = $mpn;
     }
+
+    /**
+     * @return string
+     */
+    public function getPriceType(): string
+    {
+        return $this->price_type;
+    }
+
+    /**
+     * @param string $price_type
+     */
+    public function setPriceType(string $price_type): void
+    {
+        $this->price_type = $price_type;
+    }
+
+
 }
