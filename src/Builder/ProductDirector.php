@@ -6,7 +6,9 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\ProductLibrary\Collections\OptionCollection;
+use vbpupil\ProductLibrary\Price\MatrixPrice;
 use vbpupil\ProductLibrary\Price\SinglePrice;
+use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
 use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 
 /**
@@ -15,6 +17,8 @@ use vbpupil\ProductLibrary\Variation\PhysicalVariation;
  */
 class ProductDirector
 {
+    use JsonValidateTrait;
+
     /**
      * @param SimpleProductBuilder $builder
      * @param array $data
@@ -121,18 +125,43 @@ class ProductDirector
                 );
 
                 $tmpVariation->setStyleOptions($v['style_options']);
-                $tmpVariation->setPrice(
-                    new SinglePrice([
-                        'vatRate' => $v['vat'],
-                        'vatRateId' => $v['vat_rate_id'],
-                        'exVat' => intval($v['price']),
-                        'currency' => 'GBP',
-                        'specialPriceActive' => $v['special_price_active'],
-                        'specialPriceActiveUntil' => $v['special_price_expiry'],
-                        'specialPrice' => intval($v['special_price']),
-                        'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
-                    ])
-                );
+
+                switch ($v['price_type']) {
+                    case 'single':
+                        $tmpVariation->setPrice(
+                            new SinglePrice([
+                                'vatRate' => $v['vat'],
+                                'vatRateId' => $v['vat_rate_id'],
+                                'exVat' => intval($v['price']),
+                                'currency' => 'GBP',
+                                'specialPriceActive' => $v['special_price_active'],
+                                'specialPriceActiveUntil' => $v['special_price_expiry'],
+                                'specialPrice' => intval($v['special_price']),
+                                'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
+                            ])
+                        );
+                        break;
+                    case 'matrix':
+                        if(!$this->isJson($v['price_matrix'])){
+                            throw new \Exception('Invalid JSON string for matrix prices');
+                        }
+
+                        $tmpVariation->setPrice(
+                            new MatrixPrice([
+                                'matrix' => json_decode($v['price_matrix'], true),
+                                'vatRate' => $v['vat'],
+                                'vatRateId' => $v['vat_rate_id'],
+                                'currency' => 'GBP',
+//                                'specialPriceActive' => $v['special_price_active'],
+//                                'specialPriceActiveUntil' => $v['special_price_expiry'],
+//                                'specialPrice' => intval($v['special_price']),
+//                                'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
+//                                'exVat' => intval($v['price']),
+                            ])
+                        );
+                        break;
+                }
+
 
                 $tmpVariation->setOptions(new Collection());
 
