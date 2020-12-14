@@ -212,7 +212,7 @@ class PivotPrice implements PriceInterface
             throw new \Exception('No price found');
         }
 
-        return $price * $qty;
+        return $price;
     }
 
     /**
