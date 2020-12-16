@@ -6,6 +6,7 @@ namespace vbpupil\ProductLibrary\Price;
 
 use vbpupil\ProductLibrary\Exception\InvalidProductSetupException;
 use vbpupil\ProductLibrary\Price\Traits\PriceTrait;
+use vbpupil\ProductLibrary\Traits\ClassTrait;
 use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
 
 /**
@@ -14,7 +15,7 @@ use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
  */
 class PivotPrice implements PriceInterface
 {
-    use PriceTrait, JsonValidateTrait;
+    use PriceTrait, JsonValidateTrait, ClassTrait;
 
     /**
      * @var array
@@ -24,7 +25,7 @@ class PivotPrice implements PriceInterface
     /**
      * @var int
      */
-    protected $exVat, $vatRate, $specialPrice, $wasPrice = null;
+    protected $exVat, $vatRate, $specialPrice, $wasPrice = null, $unitPrice;
 
     /**
      * @var bool
@@ -50,7 +51,6 @@ class PivotPrice implements PriceInterface
      * @var array
      */
     protected $pivot;
-
 
     /**
      * PivotPrice constructor.
@@ -177,6 +177,7 @@ class PivotPrice implements PriceInterface
             return ($price / 100);
         }
 
+        $this->setUnitPrice($price / $qty);
         return $price;
     }
 
@@ -212,7 +213,7 @@ class PivotPrice implements PriceInterface
             throw new \Exception('No price found');
         }
 
-        return $price;
+        return $price * $qty;
     }
 
     /**
@@ -353,4 +354,22 @@ EOD;
     {
         return false;
     }
+
+    /**
+     * @return int
+     */
+    public function getUnitPrice(): int
+    {
+        return $this->unitPrice;
+    }
+
+    /**
+     * @param int $unitPrice
+     */
+    public function setUnitPrice(int $unitPrice): void
+    {
+        $this->unitPrice = $unitPrice;
+    }
+
+
 }
