@@ -25,7 +25,7 @@ class PivotPrice implements PriceInterface
     /**
      * @var int
      */
-    protected $exVat, $vatRate, $specialPrice, $wasPrice = null, $unitPrice;
+    protected $exVat, $vatRate, $specialPrice, $wasPrice = null, $unitPrice, $cheapest;
 
     /**
      * @var bool
@@ -181,6 +181,17 @@ class PivotPrice implements PriceInterface
         return $price;
     }
 
+
+    public function getCheapest()
+    {
+        $pivots = $this->getPivot();
+
+        usort($pivots, function ($a, $b) {
+            return $a['price'] > $b['price'];
+        });
+
+        return $pivots[0];
+    }
 
     /**
      * @param bool $dynamicValue

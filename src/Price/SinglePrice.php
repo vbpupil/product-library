@@ -409,5 +409,4 @@ EOD;
     {
         $this->unitPrice = $unitPrice;
     }
-
 }

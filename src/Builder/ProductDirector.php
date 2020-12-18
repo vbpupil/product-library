@@ -61,6 +61,7 @@ class ProductDirector
 
         $this->populateData($p, $data, $builder);
 
+        $this->setCheapestVariantDetails($p);
 
         return $p;
     }
@@ -68,6 +69,8 @@ class ProductDirector
 
     protected function populateData(&$p, $data, $originalObject)
     {
+        $kill_variation = false; //something serious has gone wrong - remove this variant
+
         if (isset($data['id']) && $data['id'] !== '') {
             $p->setId($data['id']);
         }
@@ -106,6 +109,8 @@ class ProductDirector
         }
 
         if (!empty($data['variations'])) {
+            $abort = false; //allows us to exit loop - somehting has gone wrong
+
             foreach ($data['variations'] as $k => $v) {
                 // TODO use product style to fetch variation
                 $tmpVariation = new PhysicalVariation(
@@ -143,15 +148,25 @@ class ProductDirector
                         );
                         break;
                     case 'pivot':
-                        $tmpVariation->setPrice(
-                            new PivotPrice([
-                                'pivot' => $v['price_pivot'],
-                                'vatRate' => $v['vat'],
-                                'vatRateId' => $v['vat_rate_id'],
-                                'currency' => 'GBP'
-                            ])
-                        );
+                        try {
+                            $tmpVariation->setPrice(
+                                new PivotPrice([
+                                    'pivot' => $v['price_pivot'],
+                                    'vatRate' => $v['vat'],
+                                    'vatRateId' => $v['vat_rate_id'],
+                                    'currency' => 'GBP'
+                                ])
+                            );
+                        } catch (\Exception $e) {
+                            //variant price has gone wrong in some way lets kill this variant
+                            $abort = true;
+                            $kill_variation = true;
+                        }
                         break;
+                }
+
+                if ($abort) {
+                    continue;
                 }
 
 
@@ -203,6 +218,10 @@ class ProductDirector
 
                 $p->variations->addItem($tmpVariation);
             }
+
+            if ($kill_variation) {
+                unset($p);
+            }
         }
 
 
@@ -211,5 +230,41 @@ class ProductDirector
                 $p->descriptions->addItem($v, $k);
             }
         }
+    }
+
+
+    /**
+     * loops through all variant details and gives details on the cheapest variant
+     * helpful eh!
+     * @param $p
+     */
+    public function setCheapestVariantDetails($p)
+    {
+        $cheapestPrice = null;
+        $cheapestVariantId = null;
+
+        foreach ($p->variations->getItems() as $item) {
+            switch ($item->getPriceType()) {
+                case 'pivot':
+                    if (is_null($cheapestPrice) || $cheapestPrice > $item->prices->getCheapest()['price']) {
+                        $cheapestPrice = $item->prices->getCheapest()['price'];
+                        $cheapestVariantId = $item->getId();
+                    }
+                    break;
+                case 'single':
+                    if (is_null($cheapestPrice) || $cheapestPrice > $item->prices->getPrice()) {
+                        $cheapestPrice = $item->prices->getPrice();
+                        $cheapestVariantId = $item->getId();
+                    }
+                    break;
+            }
+        }
+
+        $p->setCheapestVariantiD($cheapestVariantId);
+        $p->setCheapestVariantPrice($cheapestPrice);
+
+//        echo $p->getCheapestVariantPrice();
+//        var_dump($p);
+//        die();
     }
 }

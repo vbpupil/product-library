@@ -58,25 +58,6 @@ class PhysicalVariationTest extends TestCase
         $this->assertEquals('XBX001', $this->sut->getProductCode());
     }
 
-    public function testProductCodeSettingThrowsAnException()
-    {
-        try {
-            $sv = new PhysicalVariation([
-                'product_code' => '',
-                'title' => 'SONY PlayStation 4'
-            ]);
-        } catch (\Exception $e) {
-            $this->assertEquals('AbstractProduct code cannot be empty.', $e->getMessage());
-        }
-
-        try {
-            $sv = new PhysicalVariation([
-                'title' => 'SONY PlayStation 4'
-            ]);
-        } catch (\Exception $e) {
-            $this->assertEquals('Missing Required Fields: product_code', $e->getMessage());
-        }
-    }
 
     public function testGettingandSettingQuantities()
     {
