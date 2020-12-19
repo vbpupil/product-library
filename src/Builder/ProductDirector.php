@@ -242,6 +242,7 @@ class ProductDirector
     {
         $cheapestPrice = null;
         $cheapestVariantId = null;
+        $variantPriceTypes = []; //outlines what types of variants a product contains - ie singlePrice and/or pivot
 
         foreach ($p->variations->getItems() as $item) {
             switch ($item->getPriceType()) {
@@ -250,21 +251,29 @@ class ProductDirector
                         $cheapestPrice = $item->prices->getCheapest()['price'];
                         $cheapestVariantId = $item->getId();
                     }
+
+                    if (!in_array('pivot', $variantPriceTypes)) {
+                        $variantPriceTypes[] = 'pivot';
+                    }
                     break;
                 case 'single':
                     if (is_null($cheapestPrice) || $cheapestPrice > $item->prices->getPrice()) {
                         $cheapestPrice = $item->prices->getPrice();
                         $cheapestVariantId = $item->getId();
                     }
+
+                    if (!in_array('single', $variantPriceTypes)) {
+                        $variantPriceTypes[] = 'single';
+                    }
                     break;
             }
         }
 
-        $p->setCheapestVariantiD($cheapestVariantId);
-        $p->setCheapestVariantPrice($cheapestPrice);
+        if (!is_null($cheapestVariantId) && !is_null($cheapestPrice)) {
+            $p->setCheapestVariantiD($cheapestVariantId);
+            $p->setCheapestVariantPrice($cheapestPrice);
+        }
 
-//        echo $p->getCheapestVariantPrice();
-//        var_dump($p);
-//        die();
+        $p->setVariantPriceTypes($variantPriceTypes);
     }
 }
