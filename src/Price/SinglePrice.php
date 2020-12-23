@@ -159,7 +159,7 @@ class SinglePrice implements PriceInterface
 
         //add vat if required
         if ($includingVat) {
-            $price = $this->addVatByRate($price, $this->getVatRate(), $qty);
+            $price = $this->addVatByRate($price, $this->getVatRate());
         }
 
         //leave as int or return human readable float?
