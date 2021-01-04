@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title, $price_type;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale;
 
     /**
      * @var PriceInterface
@@ -265,6 +265,22 @@ abstract class AbstractVariation
     public function setPriceType(string $price_type): void
     {
         $this->price_type = $price_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnitOfSale(): string
+    {
+        return $this->unit_of_sale;
+    }
+
+    /**
+     * @param string $unit_of_sale
+     */
+    public function setUnitOfSale(string $unit_of_sale): void
+    {
+        $this->unit_of_sale = $unit_of_sale;
     }
 
 

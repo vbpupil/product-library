@@ -126,7 +126,8 @@ class ProductDirector
                         'barcode' => ($v['barcode'] ?: ''),
                         'ean' => ($v['ean'] ?: ''),
                         'mpn' => ($v['mpn'] ?: ''),
-                        'price_type' => $v['price_type']
+                        'price_type' => $v['price_type'],
+                        'unit_of_sale' => $v['unit_of_sale']
                     ]
                 );
 
