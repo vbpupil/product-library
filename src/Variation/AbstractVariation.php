@@ -49,6 +49,11 @@ abstract class AbstractVariation
     protected $style_options = [];
 
     /**
+     * @var int
+     */
+    protected $min_del_qty, $max_del_qty;
+
+    /**
      * AbstractVariation constructor.
      * @param array $values
      * @throws \Exception
@@ -281,6 +286,38 @@ abstract class AbstractVariation
     public function setUnitOfSale(string $unit_of_sale): void
     {
         $this->unit_of_sale = $unit_of_sale;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMinDelQty(): int
+    {
+        return $this->min_del_qty;
+    }
+
+    /**
+     * @param int $min_del_qty
+     */
+    public function setMinDelQty(int $min_del_qty): void
+    {
+        $this->min_del_qty = $min_del_qty;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxDelQty(): int
+    {
+        return $this->max_del_qty;
+    }
+
+    /**
+     * @param int $max_del_qty
+     */
+    public function setMaxDelQty(int $max_del_qty): void
+    {
+        $this->max_del_qty = $max_del_qty;
     }
 
 
