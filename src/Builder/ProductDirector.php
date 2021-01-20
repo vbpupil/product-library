@@ -128,8 +128,8 @@ class ProductDirector
                         'mpn' => ($v['mpn'] ?: ''),
                         'price_type' => $v['price_type'],
                         'unit_of_sale' => $v['unit_of_sale'],
-                        'min_del_qty' => ($v['min_delivery_qty'] ?: 1),
-                        'max_del_qty' => ($v['max_delivery_qty'] ?: 999)
+                        'min_del_qty' => intval($v['min_delivery_qty']),
+                        'max_del_qty' => intval($v['max_delivery_qty'])
                     ]
                 );
 
