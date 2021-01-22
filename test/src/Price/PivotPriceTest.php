@@ -192,4 +192,36 @@ Price (Inc VAT): 12.00<br><br>
 
             $p->getExVat();
     }
+
+    /**
+     * @test
+     * @expectedException Exception
+     * @expectedExceptionMessage min qty required for price lookup is 1
+     */
+    public function setting_exvat_with_qty_less_than_one()
+    {
+            $p = new PivotPrice([
+                'pivot' => '[{"qty":"1","price":"1000"},{"qty":"10","price":500},{"qty":"20","price":100}]',
+                'vatRate' => 2000,
+                'vatRateId' => 1,
+                'currency' => 'GBP'
+            ]);
+
+            $p->getExVat(0);
+    }
+
+    /**
+     * @test
+     */
+    public function get_cheapest()
+    {
+            $p = new PivotPrice([
+                'pivot' => '[{"qty":"1","price":"1000"},{"qty":"10","price":500},{"qty":"20","price":100}]',
+                'vatRate' => 2000,
+                'vatRateId' => 1,
+                'currency' => 'GBP'
+            ]);
+
+            $this->assertEquals(100, $p->getCheapest()['price']);
+    }
 }

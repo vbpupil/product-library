@@ -236,7 +236,7 @@ class PivotPrice implements PriceInterface
      * @return PivotPrice
      * @throws InvalidProductSetupException
      */
-    public function setExVat($exVat): PivotPrice
+    public function setExVat(int $exVat): PivotPrice
     {
         if (is_string($exVat) || is_float($exVat)) {
             throw new InvalidProductSetupException('ExVat prices must be an INT');
