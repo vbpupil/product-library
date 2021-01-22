@@ -214,6 +214,10 @@ class PivotPrice implements PriceInterface
                 break;
             }
 
+            if(!is_int($pivot['price'])){
+                throw new InvalidProductSetupException('ExVat prices must be an INT');
+            }
+
             if ($qty >= $pivot['qty']) {
                 $highstQty = $pivot['qty'];
                 $price = $pivot['price'];
@@ -345,7 +349,6 @@ Vat Rate: {$vatRate}<br><br>
 Price (Ex VAT): {$exVatPriceString}<br>
 Vat Element: {$vatElementSting}<br>
 Price (Inc VAT): {$incVatPriceString}<br><br>
-Special Price Active: {$isSpecialPriceActive}<br>
 *******************************
 EOD;
     }
