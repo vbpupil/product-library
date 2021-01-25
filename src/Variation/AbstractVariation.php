@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id;
 
     /**
      * @var PriceInterface
@@ -47,6 +47,11 @@ abstract class AbstractVariation
      * @var array
      */
     protected $style_options = [];
+
+    /**
+     * @var int
+     */
+    protected $min_del_qty, $max_del_qty;
 
     /**
      * AbstractVariation constructor.
@@ -250,4 +255,101 @@ abstract class AbstractVariation
     {
         $this->mpn = $mpn;
     }
+
+    /**
+     * @return string
+     */
+    public function getPriceType(): string
+    {
+        return $this->price_type;
+    }
+
+    /**
+     * @param string $price_type
+     */
+    public function setPriceType(string $price_type): void
+    {
+        $this->price_type = $price_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnitOfSale(): string
+    {
+        return $this->unit_of_sale;
+    }
+
+    /**
+     * @param string $unit_of_sale
+     */
+    public function setUnitOfSale(string $unit_of_sale): void
+    {
+        $this->unit_of_sale = $unit_of_sale;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMinDelQty(): int
+    {
+        return $this->min_del_qty;
+    }
+
+    /**
+     * @param int $min_del_qty
+     */
+    public function setMinDelQty(int $min_del_qty): void
+    {
+        $this->min_del_qty = $min_del_qty;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxDelQty(): int
+    {
+        return $this->max_del_qty;
+    }
+
+    /**
+     * @param int $max_del_qty
+     */
+    public function setMaxDelQty(int $max_del_qty): void
+    {
+        $this->max_del_qty = $max_del_qty;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandName(): string
+    {
+        return $this->brand_name;
+    }
+
+    /**
+     * @param string $brand_name
+     */
+    public function setBrandName(string $brand_name): void
+    {
+        $this->brand_name = $brand_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandId(): string
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * @param string $brand_id
+     */
+    public function setBrandId(string $brand_id): void
+    {
+        $this->brand_id = $brand_id;
+    }
+    
 }

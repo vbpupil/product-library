@@ -58,25 +58,6 @@ class PhysicalVariationTest extends TestCase
         $this->assertEquals('XBX001', $this->sut->getProductCode());
     }
 
-    public function testProductCodeSettingThrowsAnException()
-    {
-        try {
-            $sv = new PhysicalVariation([
-                'product_code' => '',
-                'title' => 'SONY PlayStation 4'
-            ]);
-        } catch (\Exception $e) {
-            $this->assertEquals('AbstractProduct code cannot be empty.', $e->getMessage());
-        }
-
-        try {
-            $sv = new PhysicalVariation([
-                'title' => 'SONY PlayStation 4'
-            ]);
-        } catch (\Exception $e) {
-            $this->assertEquals('Missing Required Fields: product_code', $e->getMessage());
-        }
-    }
 
     public function testGettingandSettingQuantities()
     {
@@ -204,5 +185,37 @@ class PhysicalVariationTest extends TestCase
         $this->assertEquals(160, $this->sut->getWeight(2));
         $this->assertEquals(800, $this->sut->getWeight(10));
 
+    }
+
+    public function testSettingAndGettingBrandId()
+    {
+        $this->sut = new PhysicalVariation(
+            [
+                'product_code' => '532095',
+                'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
+            ]
+        );
+
+        $this->sut->setBrandId('12');
+        $this->assertEquals('12', $this->sut->getBrandId());
+
+        $this->sut->setBrandId('');
+        $this->assertEquals('', $this->sut->getBrandId());
+    }
+
+    public function testSettingAndGettingBrandName()
+    {
+        $this->sut = new PhysicalVariation(
+            [
+                'product_code' => '532095',
+                'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
+            ]
+        );
+
+        $this->sut->setBrandName('Nike');
+        $this->assertEquals('Nike', $this->sut->getBrandName());
+
+        $this->sut->setBrandName('');
+        $this->assertEquals('', $this->sut->getBrandName());
     }
 }

@@ -6,6 +6,7 @@ namespace vbpupil\ProductLibrary\Price;
 
 use vbpupil\ProductLibrary\Exception\InvalidProductSetupException;
 use vbpupil\ProductLibrary\Price\Traits\PriceTrait;
+use vbpupil\ProductLibrary\Traits\ClassTrait;
 
 /**
  * Class SinglePrice
@@ -13,7 +14,7 @@ use vbpupil\ProductLibrary\Price\Traits\PriceTrait;
  */
 class SinglePrice implements PriceInterface
 {
-    use PriceTrait;
+    use PriceTrait, ClassTrait;
 
     /**
      * @var array
@@ -23,7 +24,7 @@ class SinglePrice implements PriceInterface
     /**
      * @var int
      */
-    protected $exVat, $vatRate, $specialPrice, $wasPrice = null;
+    protected $exVat, $vatRate, $specialPrice, $wasPrice = null, $unitPrice;
 
 
     /**
@@ -158,7 +159,7 @@ class SinglePrice implements PriceInterface
 
         //add vat if required
         if ($includingVat) {
-            $price = $this->addVatByRate($price, $this->getVatRate(), $qty);
+            $price = $this->addVatByRate($price, $this->getVatRate());
         }
 
         //leave as int or return human readable float?
@@ -166,6 +167,7 @@ class SinglePrice implements PriceInterface
             return ($price / 100);
         }
 
+        $this->setUnitPrice($price / $qty);
         return $price;
     }
 
@@ -392,4 +394,19 @@ EOD;
         $this->showSpecialOfferCountdown = $showSpecialOfferCountdown;
     }
 
+    /**
+     * @return int
+     */
+    public function getUnitPrice(): int
+    {
+        return $this->unitPrice;
+    }
+
+    /**
+     * @param int $unitPrice
+     */
+    public function setUnitPrice(int $unitPrice): void
+    {
+        $this->unitPrice = $unitPrice;
+    }
 }
