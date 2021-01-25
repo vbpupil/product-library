@@ -182,4 +182,20 @@ class SimpleProductTest extends TestCase
     {
         $this->assertEquals('physical', $this->sut->getStyle());
     }
+
+
+    public function testGetAndSetBrandDetails()
+    {
+        $this->sut->setBrandId('55');
+        $this->assertEquals('55', $this->sut->getBrandId());
+
+        $this->sut->setBrandName('Nike');
+        $this->assertEquals('Nike', $this->sut->getBrandName());
+
+
+        //note we are only interested in a string - we dont care if the slugs are incorrect - we do not validate
+        //as its not our responsibility
+        $this->sut->setBrandSlug('Nike-Trainers');
+        $this->assertEquals('Nike-Trainers', $this->sut->getBrandSlug());
+    }
 }

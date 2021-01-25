@@ -128,7 +128,7 @@ A **AuditableType::SALE()** is passed into to represent a SALE item. This class 
 
 
 ### AuditableAssociatesDocumentType
-This class allows you to specify what supporting document accompanies the stock change, for instance a SALES_ORDER (with 
+This class allows you to specify what supporting document accompanies the stock change, for instance a SALES_ORDER (with
 accompanying SALES ORDER ID) would support a sale which resulted in the stock being reduced by 1. Below shows this code in action.
 
 ```php
@@ -142,6 +142,6 @@ $a = new Auditable(
         )
 ```
 
-An **AuditableAssociatedDocumentType::SALES_ORDER()** is passed in to represent a SALES_ORDER. This class is governed by Enums which outlines what 
+An **AuditableAssociatedDocumentType::SALES_ORDER()** is passed in to represent a SALES_ORDER. This class is governed by Enums which outlines what
 supporting document types are available.
 

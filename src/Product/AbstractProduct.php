@@ -16,7 +16,7 @@ abstract class AbstractProduct
     /**
      * @var string
      */
-    protected $type;
+    protected $type, $brand_id, $brand_name, $brand_slug;
 
     /**
      * @var string
@@ -290,6 +290,54 @@ abstract class AbstractProduct
     public function setVariantPriceTypes(array $variantPriceTypes): void
     {
         $this->variantPriceTypes = $variantPriceTypes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandId(): string
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * @param string $brand_id
+     */
+    public function setBrandId(string $brand_id): void
+    {
+        $this->brand_id = $brand_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandName(): string
+    {
+        return $this->brand_name;
+    }
+
+    /**
+     * @param string $brand_name
+     */
+    public function setBrandName(string $brand_name): void
+    {
+        $this->brand_name = $brand_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandSlug(): string
+    {
+        return $this->brand_slug;
+    }
+
+    /**
+     * @param string $brand_slug
+     */
+    public function setBrandSlug(string $brand_slug): void
+    {
+        $this->brand_slug = $brand_slug;
     }
 
 
