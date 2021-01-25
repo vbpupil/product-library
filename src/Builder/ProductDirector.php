@@ -101,6 +101,10 @@ class ProductDirector
             }
         }
 
+        $p->setBrandId($data['brand_id']);
+        $p->setBrandName($data['brand_name']);
+        $p->setBrandSlug($data['brand_slug']);
+
         //
         if (!empty($data['product_images'])) {
             foreach ($data['product_images'] as $k => $v) {
