@@ -186,4 +186,36 @@ class PhysicalVariationTest extends TestCase
         $this->assertEquals(800, $this->sut->getWeight(10));
 
     }
+
+    public function testSettingAndGettingBrandId()
+    {
+        $this->sut = new PhysicalVariation(
+            [
+                'product_code' => '532095',
+                'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
+            ]
+        );
+
+        $this->sut->setBrandId('12');
+        $this->assertEquals('12', $this->sut->getBrandId());
+
+        $this->sut->setBrandId('');
+        $this->assertEquals('', $this->sut->getBrandId());
+    }
+
+    public function testSettingAndGettingBrandName()
+    {
+        $this->sut = new PhysicalVariation(
+            [
+                'product_code' => '532095',
+                'title' => 'SONY PlayStation 4 with Fortnite Neo Versa & Two Wireless Controllers - 500 GB'
+            ]
+        );
+
+        $this->sut->setBrandName('Nike');
+        $this->assertEquals('Nike', $this->sut->getBrandName());
+
+        $this->sut->setBrandName('');
+        $this->assertEquals('', $this->sut->getBrandName());
+    }
 }

@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id;
 
     /**
      * @var PriceInterface
@@ -320,5 +320,36 @@ abstract class AbstractVariation
         $this->max_del_qty = $max_del_qty;
     }
 
+    /**
+     * @return string
+     */
+    public function getBrandName(): string
+    {
+        return $this->brand_name;
+    }
 
+    /**
+     * @param string $brand_name
+     */
+    public function setBrandName(string $brand_name): void
+    {
+        $this->brand_name = $brand_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrandId(): string
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * @param string $brand_id
+     */
+    public function setBrandId(string $brand_id): void
+    {
+        $this->brand_id = $brand_id;
+    }
+    
 }

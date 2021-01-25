@@ -129,7 +129,10 @@ class ProductDirector
                         'price_type' => $v['price_type'],
                         'unit_of_sale' => $v['unit_of_sale'],
                         'min_del_qty' => intval($v['min_delivery_qty']),
-                        'max_del_qty' => intval($v['max_delivery_qty'])
+                        'max_del_qty' => intval($v['max_delivery_qty']),
+                        'brand_id' => ($v['brand_id'] ?: ''),
+                        'brand_name' => ($v['brand_name'] ?: '')
+
                     ]
                 );
 
