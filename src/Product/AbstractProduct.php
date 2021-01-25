@@ -61,6 +61,18 @@ abstract class AbstractProduct
     /**
      * @var int
      */
+    protected $cheapest_variant_id, $cheapest_variant_price;
+
+    /**
+     * preview of what types of price types are contained within a variant
+     * @var array
+     */
+    protected $variantPriceTypes = [];
+
+
+    /**
+     * @var int
+     */
     protected $id;
 
     /**
@@ -231,4 +243,54 @@ abstract class AbstractProduct
     {
         return $this->style;
     }
+
+    /**
+     * @return int
+     */
+    public function getCheapestVariantId(): int
+    {
+        return $this->cheapest_variant_id;
+    }
+
+    /**
+     * @param int $cheapest_variant_id
+     */
+    public function setCheapestVariantId(int $cheapest_variant_id): void
+    {
+        $this->cheapest_variant_id = $cheapest_variant_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCheapestVariantPrice(): int
+    {
+        return $this->cheapest_variant_price;
+    }
+
+    /**
+     * @param int $cheapest_variant_price
+     */
+    public function setCheapestVariantPrice(int $cheapest_variant_price): void
+    {
+        $this->cheapest_variant_price = $cheapest_variant_price;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVariantPriceTypes(): array
+    {
+        return $this->variantPriceTypes;
+    }
+
+    /**
+     * @param array $variantPriceTypes
+     */
+    public function setVariantPriceTypes(array $variantPriceTypes): void
+    {
+        $this->variantPriceTypes = $variantPriceTypes;
+    }
+
+
 }

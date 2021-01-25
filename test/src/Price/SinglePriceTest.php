@@ -25,10 +25,14 @@ class SinglePriceTest extends TestCase
         ]);
     }
 
+    public function testGetUnitPrice()
+    {
+        $this->sut->getPrice();
+        $this->assertEquals(1200, $this->sut->getUnitPrice());
+    }
+
     public function testNewingUpASinglePrice()
     {
-
-
         $this->assertTrue($this->sut instanceof SinglePrice);
     }
 

@@ -6,7 +6,7 @@ namespace vbpupil\ProductLibrary\Builder;
 
 use Vbpupil\Collection\Collection;
 use vbpupil\ProductLibrary\Collections\OptionCollection;
-use vbpupil\ProductLibrary\Price\MatrixPrice;
+use vbpupil\ProductLibrary\Price\PivotPrice;
 use vbpupil\ProductLibrary\Price\SinglePrice;
 use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
 use vbpupil\ProductLibrary\Variation\PhysicalVariation;
@@ -61,6 +61,7 @@ class ProductDirector
 
         $this->populateData($p, $data, $builder);
 
+        $this->setCheapestVariantDetails($p);
 
         return $p;
     }
@@ -68,6 +69,8 @@ class ProductDirector
 
     protected function populateData(&$p, $data, $originalObject)
     {
+        $kill_variation = false; //something serious has gone wrong - remove this variant
+
         if (isset($data['id']) && $data['id'] !== '') {
             $p->setId($data['id']);
         }
@@ -106,6 +109,8 @@ class ProductDirector
         }
 
         if (!empty($data['variations'])) {
+            $abort = false; //allows us to exit loop - somehting has gone wrong
+
             foreach ($data['variations'] as $k => $v) {
                 // TODO use product style to fetch variation
                 $tmpVariation = new PhysicalVariation(
@@ -121,6 +126,13 @@ class ProductDirector
                         'barcode' => ($v['barcode'] ?: ''),
                         'ean' => ($v['ean'] ?: ''),
                         'mpn' => ($v['mpn'] ?: ''),
+                        'price_type' => $v['price_type'],
+                        'unit_of_sale' => $v['unit_of_sale'],
+                        'min_del_qty' => intval($v['min_delivery_qty']),
+                        'max_del_qty' => intval($v['max_delivery_qty']),
+                        'brand_id' => ($v['brand_id'] ?: ''),
+                        'brand_name' => ($v['brand_name'] ?: '')
+
                     ]
                 );
 
@@ -141,25 +153,26 @@ class ProductDirector
                             ])
                         );
                         break;
-                    case 'matrix':
-                        if(!$this->isJson($v['price_matrix'])){
-                            throw new \Exception('Invalid JSON string for matrix prices');
+                    case 'pivot':
+                        try {
+                            $tmpVariation->setPrice(
+                                new PivotPrice([
+                                    'pivot' => $v['price_pivot'],
+                                    'vatRate' => $v['vat'],
+                                    'vatRateId' => $v['vat_rate_id'],
+                                    'currency' => 'GBP'
+                                ])
+                            );
+                        } catch (\Exception $e) {
+                            //variant price has gone wrong in some way lets kill this variant
+                            $abort = true;
+                            $kill_variation = true;
                         }
-
-                        $tmpVariation->setPrice(
-                            new MatrixPrice([
-                                'matrix' => json_decode($v['price_matrix'], true),
-                                'vatRate' => $v['vat'],
-                                'vatRateId' => $v['vat_rate_id'],
-                                'currency' => 'GBP',
-//                                'specialPriceActive' => $v['special_price_active'],
-//                                'specialPriceActiveUntil' => $v['special_price_expiry'],
-//                                'specialPrice' => intval($v['special_price']),
-//                                'showSpecialOfferCountdown' => intval($v['special_price_countdown']),
-//                                'exVat' => intval($v['price']),
-                            ])
-                        );
                         break;
+                }
+
+                if ($abort) {
+                    continue;
                 }
 
 
@@ -211,6 +224,10 @@ class ProductDirector
 
                 $p->variations->addItem($tmpVariation);
             }
+
+            if ($kill_variation) {
+                unset($p);
+            }
         }
 
 
@@ -219,5 +236,50 @@ class ProductDirector
                 $p->descriptions->addItem($v, $k);
             }
         }
+    }
+
+
+    /**
+     * loops through all variant details and gives details on the cheapest variant
+     * helpful eh!
+     * @param $p
+     */
+    public function setCheapestVariantDetails($p)
+    {
+        $cheapestPrice = null;
+        $cheapestVariantId = null;
+        $variantPriceTypes = []; //outlines what types of variants a product contains - ie singlePrice and/or pivot
+
+        foreach ($p->variations->getItems() as $item) {
+            switch ($item->getPriceType()) {
+                case 'pivot':
+                    if (is_null($cheapestPrice) || $cheapestPrice > $item->prices->getCheapest()['price']) {
+                        $cheapestPrice = $item->prices->getCheapest()['price'];
+                        $cheapestVariantId = $item->getId();
+                    }
+
+                    if (!in_array('pivot', $variantPriceTypes)) {
+                        $variantPriceTypes[] = 'pivot';
+                    }
+                    break;
+                case 'single':
+                    if (is_null($cheapestPrice) || $cheapestPrice > $item->prices->getPrice()) {
+                        $cheapestPrice = $item->prices->getPrice();
+                        $cheapestVariantId = $item->getId();
+                    }
+
+                    if (!in_array('single', $variantPriceTypes)) {
+                        $variantPriceTypes[] = 'single';
+                    }
+                    break;
+            }
+        }
+
+        if (!is_null($cheapestVariantId) && !is_null($cheapestPrice)) {
+            $p->setCheapestVariantiD($cheapestVariantId);
+            $p->setCheapestVariantPrice($cheapestPrice);
+        }
+
+        $p->setVariantPriceTypes($variantPriceTypes);
     }
 }
