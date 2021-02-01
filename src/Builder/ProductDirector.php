@@ -8,6 +8,8 @@ use Vbpupil\Collection\Collection;
 use vbpupil\ProductLibrary\Collections\OptionCollection;
 use vbpupil\ProductLibrary\Price\PivotPrice;
 use vbpupil\ProductLibrary\Price\SinglePrice;
+use vbpupil\ProductLibrary\Seo\Product\BasicProductSeo;
+use vbpupil\ProductLibrary\Seo\Variant\BasicVariantSeo;
 use vbpupil\ProductLibrary\Traits\JsonValidateTrait;
 use vbpupil\ProductLibrary\Variation\PhysicalVariation;
 
@@ -57,15 +59,24 @@ class ProductDirector
         $p->setDescriptions(new Collection());
         $p->setVariations(new Collection());
         $p->setProductImages(new Collection());
-
+        $p->setSeo($this->populateSeo($data));
 
         $this->populateData($p, $data, $builder);
-
         $this->setCheapestVariantDetails($p);
 
         return $p;
     }
 
+    public function populateSeo($data)
+    {
+        $seo = new BasicProductSeo();
+
+        $seo->setGoogleProductStrategy($data['google_shopping_strategy']);
+        $seo->setGoogleProductCategory($data['google_product_category']);
+        $seo->setGoogleProductType($data['google_product_type']);
+
+        return $seo;
+    }
 
     protected function populateData(&$p, $data, $originalObject)
     {
@@ -104,7 +115,7 @@ class ProductDirector
         $p->setBrandId($data['brand_id']);
         $p->setBrandName($data['brand_name']);
         $p->setBrandSlug($data['brand_slug']);
-        
+
 
         //
         if (!empty($data['product_images'])) {
@@ -130,18 +141,34 @@ class ProductDirector
                         'productCode' => ($v['product_code'] ?: ''),
                         'barcode' => ($v['barcode'] ?: ''),
                         'ean' => ($v['ean'] ?: ''),
-                        'mpn' => ($v['mpn'] ?: ''),
+                        'gtin' => ($v['ean'] ?: ''),
+                        'mpn' => ($v['product_code'] ?: ''),
                         'price_type' => $v['price_type'],
                         'unit_of_sale' => $v['unit_of_sale'],
                         'min_del_qty' => intval($v['min_delivery_qty']),
                         'max_del_qty' => intval($v['max_delivery_qty']),
                         'brand_id' => ($v['brand_id'] ?: ''),
-                        'brand_name' => ($v['brand_name'] ?: '')
-
+                        'brand_name' => ($v['brand_name'] ?: ''),
                     ]
                 );
 
                 $tmpVariation->setStyleOptions($v['style_options']);
+
+                $tmpVariationSeo = new BasicVariantSeo();
+
+                if (isset($v['condition']) && !empty($v['condition']))
+                    $tmpVariationSeo->setCondition($v['condition']);
+
+                if (isset($v['available']) && !empty($v['available']))
+                    $tmpVariationSeo->setAvailability($v['available']);
+
+                if (isset($v['size']) && !empty($v['size']))
+                    $tmpVariationSeo->setSize($v['size']);
+
+                if (isset($v['colour']) && !empty($v['colour']))
+                    $tmpVariationSeo->setColor($v['colour']);
+
+                $tmpVariation->setSeo($tmpVariationSeo);
 
                 switch ($v['price_type']) {
                     case 'single':
