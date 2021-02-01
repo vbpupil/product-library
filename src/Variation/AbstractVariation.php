@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id, $gtin;
 
     /**
      * @var PriceInterface
@@ -52,6 +52,8 @@ abstract class AbstractVariation
      * @var int
      */
     protected $min_del_qty, $max_del_qty;
+    
+    protected $seo;
 
     /**
      * AbstractVariation constructor.
@@ -351,5 +353,38 @@ abstract class AbstractVariation
     {
         $this->brand_id = $brand_id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSeo()
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @param mixed $seo
+     */
+    public function setSeo($seo): void
+    {
+        $this->seo = $seo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGtin(): string
+    {
+        return $this->gtin;
+    }
+
+    /**
+     * @param string $gtin
+     */
+    public function setGtin(string $gtin): void
+    {
+        $this->gtin = $gtin;
+    }
+    
     
 }
