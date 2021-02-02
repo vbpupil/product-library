@@ -75,6 +75,11 @@ class ProductDirector
         $seo->setGoogleProductCategory($data['google_product_category']);
         $seo->setGoogleProductType($data['google_product_type']);
 
+        $seo->setGoogleProductCustomLabel0($data['google_shopping_custom_label_0']);
+        $seo->setGoogleProductCustomLabel1($data['google_shopping_custom_label_1']);
+        $seo->setGoogleProductCustomLabel2($data['google_shopping_custom_label_2']);
+        $seo->setGoogleProductCustomLabel3($data['google_shopping_custom_label_3']);
+
         return $seo;
     }
 
@@ -116,6 +121,8 @@ class ProductDirector
         $p->setBrandName($data['brand_name']);
         $p->setBrandSlug($data['brand_slug']);
 
+        $p->setSupplierId($data['supplier_id']);
+        $p->setSupplierName($data['supplier_name']);
 
         //
         if (!empty($data['product_images'])) {
