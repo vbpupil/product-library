@@ -121,9 +121,6 @@ class ProductDirector
         $p->setBrandName($data['brand_name']);
         $p->setBrandSlug($data['brand_slug']);
 
-        $p->setSupplierId($data['supplier_id']);
-        $p->setSupplierName($data['supplier_name']);
-
         //
         if (!empty($data['product_images'])) {
             foreach ($data['product_images'] as $k => $v) {
@@ -156,6 +153,8 @@ class ProductDirector
                         'max_del_qty' => intval($v['max_delivery_qty']),
                         'brand_id' => ($v['brand_id'] ?: ''),
                         'brand_name' => ($v['brand_name'] ?: ''),
+                        'supplier_id' => ($v['supplier_id'] ?: ''),
+                        'supplier_name' => ($data['suppliers_list'][$v['supplier_id']]['title'] ?: ''),
                     ]
                 );
 
