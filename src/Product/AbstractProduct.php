@@ -16,7 +16,7 @@ abstract class AbstractProduct
     /**
      * @var string
      */
-    protected $type, $brand_id, $brand_name, $brand_slug,$supplier_name, $supplier_id;
+    protected $type, $brand_id, $brand_name, $brand_slug;
 
     /**
      * @var string
@@ -357,38 +357,5 @@ abstract class AbstractProduct
     {
         $this->seo = $seo;
     }
-
-    /**
-     * @return string
-     */
-    public function getSupplierName(): string
-    {
-        return $this->supplier_name;
-    }
-
-    /**
-     * @param string $supplier_name
-     */
-    public function setSupplierName(string $supplier_name): void
-    {
-        $this->supplier_name = $supplier_name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSupplierId(): string
-    {
-        return $this->supplier_id;
-    }
-
-    /**
-     * @param string $supplier_id
-     */
-    public function setSupplierId(string $supplier_id): void
-    {
-        $this->supplier_id = $supplier_id;
-    }
-
 
 }
