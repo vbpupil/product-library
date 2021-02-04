@@ -6,19 +6,40 @@ namespace vbpupil\ProductLibrary\Seo\Product;
 
 class AbstractProductSeo
 {
-    public string $google_product_strategy;
+    /**
+     * @var string
+     */
+    public $google_product_strategy;
 
-    public string $google_product_category = '';
+    /**
+     * @var string
+     */
+    public $google_product_category = '';
 
-    public string $google_product_type = '';
+    /**
+     * @var string
+     */
+    public $google_product_type = '';
 
-    public string $google_product_custom_label_0 = '';
+    /**
+     * @var string
+     */
+    public $google_product_custom_label_0 = '';
 
-    public string $google_product_custom_label_1 = '';
+    /**
+     * @var string
+     */
+    public $google_product_custom_label_1 = '';
 
-    public string $google_product_custom_label_2 = '';
+    /**
+     * @var string
+     */
+    public $google_product_custom_label_2 = '';
 
-    public string $google_product_custom_label_3 = '';
+    /**
+     * @var string
+     */
+    public $google_product_custom_label_3 = '';
 
 
     /**
