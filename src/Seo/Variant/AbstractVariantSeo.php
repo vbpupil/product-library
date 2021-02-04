@@ -6,13 +6,25 @@ namespace vbpupil\ProductLibrary\Seo\Variant;
 
 class AbstractVariantSeo
 {
-    public string $condition = '';
+    /**
+     * @var string
+     */
+    public $condition = '';
 
-    public string $availability = '';
-    
-    public string $color = '';
-    
-    public string $size = '';
+    /**
+     * @var string
+     */
+    public $availability = '';
+
+    /**
+     * @var string
+     */
+    public $color = '';
+
+    /**
+     * @var string
+     */
+    public $size = '';
 
     /**
      * @return string
