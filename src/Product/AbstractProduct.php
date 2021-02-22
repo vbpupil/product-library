@@ -75,6 +75,8 @@ abstract class AbstractProduct
      */
     protected $id;
 
+    public $seo;
+
     /**
      * SimpleProduct constructor.
      */
@@ -303,7 +305,7 @@ abstract class AbstractProduct
     /**
      * @param string $brand_id
      */
-    public function setBrandId(string $brand_id=''): void
+    public function setBrandId(string $brand_id = ''): void
     {
         $this->brand_id = $brand_id;
     }
@@ -319,7 +321,7 @@ abstract class AbstractProduct
     /**
      * @param string $brand_name
      */
-    public function setBrandName(string $brand_name=''): void
+    public function setBrandName(string $brand_name = ''): void
     {
         $this->brand_name = $brand_name;
     }
@@ -335,10 +337,25 @@ abstract class AbstractProduct
     /**
      * @param string $brand_slug
      */
-    public function setBrandSlug(string $brand_slug=''): void
+    public function setBrandSlug(string $brand_slug = ''): void
     {
         $this->brand_slug = $brand_slug;
     }
 
+    /**
+     * @return AbstractSeo
+     */
+    public function getSeo()
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @param AbstractSeo $seo
+     */
+    public function setSeo( $seo): void
+    {
+        $this->seo = $seo;
+    }
 
 }

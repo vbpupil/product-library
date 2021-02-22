@@ -31,7 +31,7 @@ abstract class AbstractVariation
     /**
      * @var string
      */
-    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id;
+    protected $product_code, $barcode, $ean, $mpn, $title, $price_type, $unit_of_sale, $brand_name, $brand_id, $gtin,$supplier_name, $supplier_id;
 
     /**
      * @var PriceInterface
@@ -52,6 +52,8 @@ abstract class AbstractVariation
      * @var int
      */
     protected $min_del_qty, $max_del_qty;
+    
+    protected $seo;
 
     /**
      * AbstractVariation constructor.
@@ -351,5 +353,69 @@ abstract class AbstractVariation
     {
         $this->brand_id = $brand_id;
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function getSeo()
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @param mixed $seo
+     */
+    public function setSeo($seo): void
+    {
+        $this->seo = $seo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGtin(): string
+    {
+        return $this->gtin;
+    }
+
+    /**
+     * @param string $gtin
+     */
+    public function setGtin(string $gtin): void
+    {
+        $this->gtin = $gtin;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSupplierName(): string
+    {
+        return $this->supplier_name;
+    }
+
+    /**
+     * @param string $supplier_name
+     */
+    public function setSupplierName(string $supplier_name): void
+    {
+        $this->supplier_name = $supplier_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSupplierId(): string
+    {
+        return $this->supplier_id;
+    }
+
+    /**
+     * @param string $supplier_id
+     */
+    public function setSupplierId(string $supplier_id): void
+    {
+        $this->supplier_id = $supplier_id;
+    }
 }
